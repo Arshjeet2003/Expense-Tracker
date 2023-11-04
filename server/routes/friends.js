@@ -20,7 +20,7 @@ try {
 
     // Step 2: Retrieve friend details from the User model for each friend
     const friendDetails = await Promise.all(friends.map(async (friendRel) => {
-        const friendUserId = friendRel.userid1.equals(userId) ? friendRel.userid2 : friendRel.userid1;
+        const friendUserId = friendRel.userid1===userId ? friendRel.userid2 : friendRel.userid1;
         const friendUser = await User.findById(friendUserId);
         return friendUser;
     }));

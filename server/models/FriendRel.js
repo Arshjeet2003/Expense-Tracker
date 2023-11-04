@@ -4,11 +4,11 @@ const {Schema} = mongoose;
 const FriendRelSchema = new mongoose.Schema(
     {
         userid1:{
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: 'user'
         },
         userid2:{
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: 'user'
         },
     }
