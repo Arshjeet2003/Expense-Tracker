@@ -1,14 +1,14 @@
 import React,{useContext,useState} from 'react'
 import transactionContext from '../context/transactions/transactionContext';
 
-const AddTransaction = (props) => {
+const AddTransaction = () => {
     const context = useContext(transactionContext);
-    const {AddTransaction} = context;
-    const [transaction,setTransaction] = useState({name: "", description: "",category: "",recurring: 0,
+    const {addTransactions} = context;
+    const [transaction,setTransaction] = useState({name: "", description: "",category: "",recurring: "",
     repeat: ""})
     const handleClick = (e)=>{
         e.preventDefault(); //So that page does not reload
-        AddTransaction(transaction.name,transaction.description,transaction.category,transaction.recurring,transaction.repeat);
+        addTransactions(transaction.name,transaction.description,transaction.category,transaction.recurring,transaction.repeat);
         setTransaction({name: "", description: "",category:"",recurring:"",repeat:""})
         // props.showAlert("Note Added successfully","success");
     }

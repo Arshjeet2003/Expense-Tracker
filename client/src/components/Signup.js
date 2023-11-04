@@ -1,20 +1,22 @@
 import React,{useState,useContext} from 'react'
-import { Await, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import authContext from '../context/auth/authContext';
 
-const Signup = (props) => {
+const Signup = () => {
 
     const context = useContext(authContext);
     const { signupUser } = context;
-    const [credentials,setCredentials] = useState({name:"",email:"",password:"",cpassword:""});
+    const [credentials,setCredentials] = useState({username:"",name:"",email:"",password:"",cpassword:""});
     let navigate = useNavigate();
     const handleSubmit = async (e)=>{
         e.preventDefault();
         if(credentials.cpassword===credentials.password){
-            console.log(credentials.password);
-           await signupUser(credentials.name,credentials.email,credentials.password);
+            await signupUser(credentials.username,credentials.name,credentials.email,credentials.password);
+            navigate("/login");
         }
-        navigate("/login");
+        else{
+            
+        }
     }
         
     const onChange = (e)=>{
@@ -25,6 +27,10 @@ const Signup = (props) => {
     <div className='container mt-3'>
         <h2 className='mt-3'>Create an account</h2>
         <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+            <label htmlFor="username" className="form-label">Username</label>
+            <input type="text" className="form-control" id="username" name="username" onChange={onChange} aria-describedby="emailHelp"/>
+        </div>
         <div className="mb-3">
             <label htmlFor="name" className="form-label">Name</label>
             <input type="text" className="form-control" id="name" name="name" onChange={onChange} aria-describedby="emailHelp"/>

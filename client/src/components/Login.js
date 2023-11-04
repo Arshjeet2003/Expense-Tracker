@@ -12,7 +12,7 @@ const Login = (props) => {
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        loginUser(credentials.email,credentials.password)
+        await loginUser(credentials.email,credentials.password)
         navigate("/");
         
     }

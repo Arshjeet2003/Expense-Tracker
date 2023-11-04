@@ -6,7 +6,7 @@ import AddTransaction from './AddTransaction';
 
 //useRef to reference an element
 
-const EditTransaction = (props)=>{
+const EditTransaction = ()=>{
     
     const context = useContext(transactionContext);
     const { transactions,editTransaction,getUserTransactions } = context;
@@ -24,7 +24,7 @@ const EditTransaction = (props)=>{
         }
     },[])
 
-    const [transaction, setTransactions] = useState({id: "",ename: "", edescription: "",ecategory: "",erecurring: 0,erepeat: ""}) 
+    const [transaction, setTransactions] = useState({id: "",ename: "", edescription: "",ecategory: "",erecurring: "",erepeat: ""}) 
 
     const updateTransaction = (currentTransaction)=>{
         ref.current.click();
@@ -42,9 +42,6 @@ const EditTransaction = (props)=>{
     }
   return (
     <>
-    {
-        localStorage.getItem('token')?<AddTransaction/>:""
-    }
     <button type="button" className="btn btn-primary d-none" ref={ref} data-bs-toggle="modal" data-bs-target="#exampleModal">
     Update Transaction
     </button>
@@ -92,9 +89,9 @@ const EditTransaction = (props)=>{
       <div className="container mx-2">
       {transactions.length===0 && 'No Transactions to display'}
       </div>
-      {/* {transactions.map((transaction)=>{
+      {transactions.map((transaction)=>{
         return <MyTransactionCard key={transaction._id} updateTransaction={updateTransaction} transaction={transaction}/>
-      })} */}
+      })}
     </div>
     </>
   )

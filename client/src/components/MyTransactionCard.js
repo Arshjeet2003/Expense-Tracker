@@ -12,8 +12,7 @@ const MyTransactionCard = (props) => {
             <div className="card-body">
                 <h5 className="card-title">{transaction.name}</h5>
                 <p className="card-text">{transaction.description}</p>
-                <i className="far fa-trash-alt mx-2" onClick={()=>{deleteTransaction(transaction._id);
-                props.showAlert("Deleted successfully","success");}}></i>
+                <i className="far fa-trash-alt mx-2" onClick={()=>{deleteTransaction(transaction._id);}}></i>
                 <i className="far fa-edit mx-2" onClick={()=>{updateTransaction(transaction)}}></i>
             </div>
             </div>

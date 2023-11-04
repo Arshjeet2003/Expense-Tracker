@@ -6,7 +6,7 @@ const TransactionSchema = new mongoose.Schema(
         name: String,
         description: String,
         category: String,
-        recurring: Boolean,
+        recurring: String,
         repeat: String,
         date:{
             type: Date,

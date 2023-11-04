@@ -21,11 +21,6 @@ try {
     // Step 2: Retrieve the transaction IDs from the user's transactions
     const transactionIds = user.transactions;
 
-    if (transactionIds.length === 0) {
-        // Handle the case where no transactions are found
-        return res.status(404).json({ message: "No transactions found" });
-    }
-
     // Step 3: Use .populate() to retrieve the transaction documents
     const transactions = await Transaction.find({ _id: { $in: transactionIds } });
 

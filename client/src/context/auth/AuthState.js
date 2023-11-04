@@ -18,13 +18,13 @@ const AuthState = (props)=>{
         else{
         }
     }
-    const signupUser = async (name,email,password)=>{
+    const signupUser = async (username,name,email,password)=>{
         const response = await fetch(`${host}/api/auth/createuser`,{
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({name,email,password})
+            body: JSON.stringify({_id: username,name: name,email: email,password: password})
         });
         const json = await response.json();
     }
