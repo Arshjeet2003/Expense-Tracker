@@ -9,6 +9,7 @@ const fetchuser = require('../middleware/fetchuser')
 const JWT_SECRET = 'mysecretstring';
 //ROUTE 1: create a user using: POST "/api/auth/createuser"
 router.post('/createuser',[
+    body('username','Enter a valid username').isLength({min: 3}),
     body('name','Enter a valid name').isLength({min: 3}),
     body('email','Enter a valid email').isEmail(),
     body('password','Must be atleast 5 characters').isLength({min: 5})
@@ -22,10 +23,15 @@ router.post('/createuser',[
         if(user){
             return res.status(400).json({error: "Sorry a user with this email exists"})
         }
+        let username = await User.findOne({username: req.body.username});
+        if(username){
+            return res.status(400).json({error: "Sorry a user with this email exists"})
+        }
         const salt = await bcrypt.genSalt(10);
         const secPass = await bcrypt.hash(req.body.password,salt);
 
         user = await User.create({
+        username: req.body.username,
         name: req.body.name,
         email: req.body.email,
         password: secPass
@@ -81,9 +87,9 @@ router.post('/login',[
 })
 
 //ROUTE 3: get logged in user details: POST "/api/auth/getuser"
-router.post('/getuser',fetchuser,async (req,res)=>{
+router.get('/getuser',fetchuser,async (req,res)=>{
     try {
-        userId = req.user.id;
+        const userId = req.user.id;
         const user = await User.findById(userId).select("-password");
         res.send(user);
     }
