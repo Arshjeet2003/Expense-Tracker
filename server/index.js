@@ -7,12 +7,15 @@ dotenv.config();
 connectToMongo();
 
 const app = express()
-const port = process.env.PORT || 5004
+const port = process.env.PORT || 9000;
 
 app.use(cors())
 app.use(express.json());
 
+app.use('/api/auth',require('./routes/auth'));
+app.use('/api/transactions',require('./routes/transactions'));
+
 
 app.listen(port, () => {
-  console.log(`Get Pet app listening to http://localhost:${port}`)
+  console.log(`Expense Tracker listening to http://localhost:${port}`)
 })
