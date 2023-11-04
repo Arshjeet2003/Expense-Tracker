@@ -8,6 +8,7 @@ const Transaction = require('../models/Transactions');
 // ROUTE 1: Get all the transactions of user using: GET "/api/transactions/gettransactions".
 router.get('/gettransactions', fetchuser, async (req, res) => {
     const userId = req.user.id;
+    const { search = "" } = req.query;
 
 try {
     // Step 1: Find the user by ID
@@ -20,12 +21,21 @@ try {
 
     // Step 2: Retrieve the transaction IDs from the user's transactions
     const transactionIds = user.transactions;
+    const transactions = await Transaction.find({
+        $and: [
+            { name: { $regex: new RegExp(search, "i") } },
+            { _id: { $in: transactionIds } }
+        ]
+    });
 
-    // Step 3: Use .populate() to retrieve the transaction documents
-    const transactions = await Transaction.find({ _id: { $in: transactionIds } });
+    const total = await Transaction.countDocuments({
+        name: { $regex: search, $options: "i" },
+    });
 
-    // Step 4: Send the retrieved transactions as a response
-    res.status(200).json(transactions);
+    res.status(200).json({
+      transactions,
+      total,
+    });
     } catch (error) {
         // Handle any potential errors, such as database errors
         return res.status(500).json({ message: "Internal server error" });
@@ -35,13 +45,13 @@ try {
 // ROUTE 2: Add a new transaction using: POST "/api/transactions/addtransaction".
 router.post('/addtransaction',fetchuser,async (req,res)=>{
     try {
-        const {name,description,category,type,recurring,repeat} = req.body;
+        const {name,category,type,recurring,repeat,price} = req.body;
         const errors = validationResult(req);
         if(!errors.isEmpty()){
             return res.status(400).json({ errors: errors.array() });
         }
         const new_transaction = new Transaction({
-            name,description,category,type,recurring,repeat,
+            name,category,type,recurring,repeat,price
         })
         const userId = req.user.id;
         const user = await User.findById(userId);
@@ -102,12 +112,12 @@ router.delete('/deletetransaction/:id',fetchuser, async (req,res)=>{
 
 // ROUTE 4: Update an existing transaction using: PUT "/api/transactions/updatetransaction".
 router.put('/updatetransaction/:id',fetchuser, async (req,res)=>{
-    const {name,description,category,type,recurring,repeat} = req.body;
+    const {name,category,type,recurring,repeat,price} = req.body;
 
     const transactionIdToUpdate = req.params.id;
     
     const updatedTransactionData = {
-        name,description,category,type,recurring,repeat,
+        name,category,type,recurring,repeat,price
     }
 
     // Step 1: Update the transaction by its ID

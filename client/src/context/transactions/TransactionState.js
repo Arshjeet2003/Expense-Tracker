@@ -6,25 +6,31 @@ const TransactionState = (props)=>{
 
     const [transactions,setTransactions] = useState([]);
 
-    const getUserTransactions = async ()=>{
-        const response = await fetch(`${host}/api/transactions/gettransactions`,{
+    const getUserTransactions = async (search) => {
+        try {
+          const response = await fetch(`${host}/api/transactions/gettransactions?search=${search}`, {
             method: 'GET',
-            headers:{
-                'auth-token': localStorage.getItem('token')
+            headers: {
+              'auth-token': localStorage.getItem('token')
             }
-        });
-        const json = await response.json();
-        setTransactions(json);
-    }
+          });
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          // Handle network or other errors
+          console.error('An error occurred:', error);
+          return {};
+        }
+      };
 
-    const addTransactions = async (name,description,category,type,recurring,repeat)=>{
+    const addTransactions = async (name,type,category,recurring,repeat,price)=>{
         const response = await fetch(`${host}/api/transactions/addtransaction`,{
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
                 'auth-token': localStorage.getItem('token')
             },
-            body: JSON.stringify({name,description,category,type,recurring,repeat})
+            body: JSON.stringify({name,type,category,recurring,repeat,price})
         });
 
         const transaction = await response.json();

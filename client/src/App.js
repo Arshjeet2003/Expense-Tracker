@@ -14,6 +14,7 @@ import EditTransaction from './components/EditTransaction.js';
 // import Chat from './Chat/Chat.jsx'
 import AddTransaction from './components/AddTransaction.js';
 import FriendState from './context/friend/FriendState.js';
+import TransactionGrid from './components/TransactionGrid.js';
 
 function App() {
   // const[alert,setAlert] = useState(null);
@@ -43,6 +44,7 @@ function App() {
           <Route exact path="/addtransaction" element={<AddTransaction />}></Route>
           <Route exact path="/login" element={<Login/>}></Route>
           <Route exact path="/signup" element={<Signup/>}></Route>
+          <Route exact path="/gettransaction" element={<TransactionGrid/>}></Route>
         </Routes>
         </div>
       </BrowserRouter>

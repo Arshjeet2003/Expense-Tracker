@@ -4,12 +4,12 @@ import transactionContext from '../context/transactions/transactionContext';
 const AddTransaction = () => {
     const context = useContext(transactionContext);
     const {addTransactions} = context;
-    const [transaction,setTransaction] = useState({name: "", description: "",category: "",recurring: "",
-    repeat: ""})
+    const [transaction,setTransaction] = useState({name: "", type: "",category: "",recurring: "",
+    repeat: "",price:""})
     const handleClick = (e)=>{
         e.preventDefault(); //So that page does not reload
-        addTransactions(transaction.name,transaction.description,transaction.category,transaction.recurring,transaction.repeat);
-        setTransaction({name: "", description: "",category:"",recurring:"",repeat:""})
+        addTransactions(transaction.name,transaction.type,transaction.category,transaction.recurring,transaction.repeat,Number(transaction.price));
+        setTransaction({name: "", type: "",category:"",recurring:"",repeat:"",price:""})
         // props.showAlert("Note Added successfully","success");
     }
     const onChange = (e)=>{
@@ -26,8 +26,8 @@ const AddTransaction = () => {
              onChange={onChange}/>
         </div>
         <div className="mb-3">
-            <label htmlFor="description" className="form-label">Description</label>
-            <input type="text" className="form-control" minLength={5} value={transaction.description} required id="description" name="description"  onChange={onChange}/>
+            <label htmlFor="type" className="form-label">Type</label>
+            <input type="text" className="form-control" value={transaction.type} required id="type" name="type"  onChange={onChange}/>
         </div>
         <div className="mb-3">
             <label htmlFor="category" className="form-label">Category</label>
@@ -41,7 +41,11 @@ const AddTransaction = () => {
             <label htmlFor="repeat" className="form-label">Repeat</label>
             <input type="text" className="form-control" id="repeat" name="repeat" value={transaction.repeat}  onChange={onChange}/>
         </div>
-            <button disabled={transaction.name.length<3 || transaction.description.length<5} type="submit" className="btn btn-primary" onClick={handleClick}>Add Transaction</button>
+        <div className="mb-3">
+            <label htmlFor="price" className="form-label">Price</label>
+            <input type="text" className="form-control" id="price" name="price" value={transaction.price}  onChange={onChange}/>
+        </div>
+            <button disabled={transaction.name.length<3} type="submit" className="btn btn-primary" onClick={handleClick}>Add Transaction</button>
         </form>
       </div>
     </div>

@@ -27,6 +27,9 @@ const Navbar = () => {
         <li className="nav-item">
           <Link className={`nav-link ${location.pathname==="/addtransaction"? "active": ""}`} to="/addtransaction">Add Transactions</Link>
         </li>
+        <li className="nav-item">
+          <Link className={`nav-link ${location.pathname==="/gettransaction"? "active": ""}`} to="/gettransaction">Get Transactions</Link>
+        </li>
       </ul>
       {!localStorage.getItem('token')?<form className="d-flex">
         <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
