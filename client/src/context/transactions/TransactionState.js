@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TransactionContext from './transactionsContext.js';
+import TransactionContext from '../transactions/transactionContext';
 
 const TransactionState = (props)=>{
     const host = "http://localhost:5004"
@@ -44,7 +44,7 @@ const TransactionState = (props)=>{
         setTransactions(newTransactions);
     }
 
-    const editTransaction = async (name,description,category,type,recurring,repeat)=>{
+    const editTransaction = async (id,name,description,category,type,recurring,repeat)=>{
         const response = await fetch(`${host}/api/transactions/updatetransaction/${id}`,{
             method: 'PUT',
             headers:{
@@ -60,11 +60,9 @@ const TransactionState = (props)=>{
             if(element._id === id){
                 newTransactions[index].name = name;
                 newTransactions[index].description = description;
-                newTransactions[index].location = location;
-                newTransactions[index].animal_type = animal_type;
-                newTransactions[index].gender = gender;
-                newTransactions[index].gender = gender;
-                newTransactions[index].age = age;
+                newTransactions[index].category = category;
+                newTransactions[index].recurring = recurring;
+                newTransactions[index].repeat = repeat;
                 break;
             }
         }
@@ -76,3 +74,4 @@ const TransactionState = (props)=>{
         </TransactionContext.Provider>
     );
 }
+export default TransactionState

@@ -45,3 +45,4 @@ const FriendState = (props)=>{
         </FriendContext.Provider>
     );
 }
+export default FriendState

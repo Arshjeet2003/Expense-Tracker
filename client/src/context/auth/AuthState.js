@@ -1,10 +1,7 @@
 import AuthContext from './authContext.js';
-import { useNavigate } from 'react-router-dom';
 
-const TransactionState = (props)=>{
+const AuthState = (props)=>{
     const host = "http://localhost:5004"
-
-    let navigate = useNavigate();
 
     const loginUser = async (email,password)=>{
         const response = await fetch(`${host}/api/auth/login`,{
@@ -17,7 +14,6 @@ const TransactionState = (props)=>{
         const json = await response.json();
         if(json.success){
             localStorage.setItem('token',json.authtoken);
-            navigate("/");
         }
         else{
         }
@@ -30,8 +26,7 @@ const TransactionState = (props)=>{
             },
             body: JSON.stringify({name,email,password})
         });
-        // const json = await response.json();
-        navigate("/login");
+        const json = await response.json();
     }
 
     return (
@@ -40,3 +35,4 @@ const TransactionState = (props)=>{
         </AuthContext.Provider>
     );
 }
+export default AuthState
