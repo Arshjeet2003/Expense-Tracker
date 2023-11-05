@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  
+}
+
+
+
+#neubar {
+      background: #4D4DFF;
+      box-shadow: 4px 6px 12px rgba(0,0,0,0.4);
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+      
+    }
+    
+    .nav-item .active {
+      border-radius: 6px;
+      background: linear-gradient(145deg, #4d4dbd, #3131c2);
+      display: inline-block;
+      
+    }
+   
+    #neubar .nav-item {
+      margin : auto 4px;
+    }
+    #neubar a {
+    
+      padding-left:12px;
+      padding-right:12px;
+      color: #fff;
+    }
+    .plus-sign
+    {
+        font-size: 1.8em;
+        margin-left: 5px;
+        vertical-align: middle;
+    }
+    a.navbar-brand {
+      color: #454545
+    }
