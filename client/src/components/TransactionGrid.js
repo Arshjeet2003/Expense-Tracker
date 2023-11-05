@@ -20,7 +20,6 @@ const TransactionGrid = () => {
         try {
           const result = await getUserTransactions(searchInput);
           setData(result);
-          console.log(data);
           // setTransactions(result.transactions); // Update your state with the fetched data
         } catch (error) {
           console.error('Error:', error);

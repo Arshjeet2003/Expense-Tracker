@@ -14,9 +14,9 @@ const AuthState = (props)=>{
         const json = await response.json();
         if(json.success){
             localStorage.setItem('token',json.authtoken);
+            return true;
         }
-        else{
-        }
+        return false;
     }
     const signupUser = async (username,name,email,password)=>{
         const response = await fetch(`${host}/api/auth/createuser`,{

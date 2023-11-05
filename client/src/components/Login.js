@@ -1,39 +1,135 @@
 import React,{useState,useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
 import authContext from '../context/auth/authContext';
+import '../css/login.css'
 
 const Login = (props) => {
-
+    const [isSignUpMode, setIsSignUpMode] = useState(false);
     const context = useContext(authContext);
-    const { loginUser } = context;
+    const { loginUser,signupUser } = context;
 
-    const [credentials,setCredentials] = useState({email:"",password:""});
+    const [credentials,setCredentials] = useState({email:"",password:"",name:"",username:""});
     let navigate = useNavigate();
 
-    const handleSubmit = async (e)=>{
+    const handleSignInSubmit = async (e)=>{
         e.preventDefault();
-        await loginUser(credentials.email,credentials.password)
-        navigate("/");
-        
+        const res = await loginUser(credentials.email,credentials.password)
+        if(res){
+          navigate("/");
+        }
+        else{
+
+        }
+    }
+    const handleSignUpSubmit = async (e)=>{
+      e.preventDefault();
+      await signupUser(credentials.username,credentials.name,credentials.email,credentials.password);
+      // navigate("/login");
     }
     const onChange = (e)=>{
         setCredentials({...credentials,[e.target.name]: e.target.value})
     }
   return (
-    <div className='container mt-2'>
-        <h2 className='my-3'>Login</h2>
-        <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-            <label htmlFor="email" className="form-label">Email address</label>
-            <input type="email" className="form-control" value={credentials.email} onChange={onChange} id="email" name="email" aria-describedby="emailHelp"/>
+    <div>
+        <div className={`c ${isSignUpMode ? "sign-up-mode" : ""}`}>
+  <div className="forms-container">
+    <div className="signin-signup">
+      <form action="#" className="sign-in-form" method="post">
+        <h2 className="title">Log in</h2>
+        <div className="input-field">
+          <i className="fas fa-user" />
+          <input type="email" placeholder="Email" name="email" onChange={onChange} />
         </div>
-        <div className="mb-3">
-            <label htmlFor="password" className="form-label">Password</label>
-            <input type="password" className="form-control" value={credentials.password} onChange={onChange} id="password" name="password"/>
+        <div className="input-field">
+          <i className="fas fa-lock" />
+          <input type="password" placeholder="Password" name="password" onChange={onChange} />
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+        <br />
+        <input type="submit" defaultValue="Login" className="btn solid" onClick={handleSignInSubmit} />
+        <p className="social-text">Or Log in with social platforms</p>
+        <div className="social-media">
+          <a href="#" className="social-icon">
+            <i className="fab fa-facebook-f" />
+          </a>
+          <a href="#" className="social-icon">
+            <i className="fab fa-twitter" />
+          </a>
+          <a href="#" className="social-icon">
+            <i className="fab fa-google" />
+          </a>
+          <a href="#" className="social-icon">
+            <i className="fab fa-linkedin-in" />
+          </a>
+        </div>
+      </form>
+      <form action="#" className="sign-up-form" method="post">
+        <h2 className="title">Sign up</h2>
+        <div className="input-field">
+          <i className="fas fa-user" />
+          <input type="text" name="name" placeholder="Full Name" onChange={onChange} />
+        </div>
+        <div className="input-field">
+          <i className="fas fa-user" />
+          <input type="text" name="username" placeholder="Username" onChange={onChange} />
+        </div>
+        <div className="input-field">
+          <i className="fas fa-envelope" />
+          <input type="email" name="email" placeholder="Email" onChange={onChange} />
+        </div>
+        <div className="input-field">
+          <i className="fas fa-lock" />
+          <input type="password" name="password" placeholder="Password" onChange={onChange} />
+        </div>
+        <input type="submit" className="btn" defaultValue="Sign up" onClick={handleSignUpSubmit} />
+        <p className="social-text">Or Sign up with social platforms</p>
+        <div className="social-media">
+          <a href="#" className="social-icon">
+            <i className="fab fa-facebook-f" />
+          </a>
+          <a href="#" className="social-icon">
+            <i className="fab fa-twitter" />
+          </a>
+          <a href="#" className="social-icon">
+            <i className="fab fa-google" />
+          </a>
+          <a href="#" className="social-icon">
+            <i className="fab fa-linkedin-in" />
+          </a>
+        </div>
+      </form>
     </div>
+  </div>
+  <div className="panels-container">
+    <div className="panel left-panel">
+      <div className="content">
+        <button
+          className="btn transparent"
+          id="sign-up-btn"
+          onClick={() => setIsSignUpMode(true)}
+          style={{ marginRight: 150 }}
+        >
+          Sign up
+        </button>
+      </div>
+      <img src="../images/login.svg" className="image" alt="" />
+    </div>
+    <div className="panel right-panel">
+      <div className="content">
+        <button
+          className="btn transparent"
+          id="sign-in-btn"
+          onClick={() => setIsSignUpMode(false)}
+          style={{ marginRight: 150 }}
+        >
+          Sign in
+        </button>
+      </div>
+      <img src="../images/login.svg" className="image" alt="" />
+    </div>
+  </div>
+</div>
+
+</div>
   )
 }
 

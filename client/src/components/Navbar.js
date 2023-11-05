@@ -1,43 +1,52 @@
 import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useLocation,useNavigate} from 'react-router-dom'
-
+import "../css/navbar.css";
 const Navbar = () => {
-   let navigate = useNavigate();
-    const handleLogout=()=>{
-      localStorage.removeItem('token');
-      navigate("/login");
-    }
+    
     let location = useLocation();
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div className="container-fluid">
-    <Link className="navbar-brand" to="/">Expense Tracker</Link>
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        <li className="nav-item">
-          <Link className={`nav-link ${location.pathname==="/"? "active": ""}`} aria-current="page" to="/">Edit Transactions</Link>
-        </li>
-        <li className="nav-item">
-          <Link className={`nav-link ${location.pathname==="/about"? "active": ""}`} to="/about">About</Link>
-        </li>
-        <li className="nav-item">
-          <Link className={`nav-link ${location.pathname==="/addtransaction"? "active": ""}`} to="/addtransaction">Add Transactions</Link>
-        </li>
-        <li className="nav-item">
-          <Link className={`nav-link ${location.pathname==="/gettransaction"? "active": ""}`} to="/gettransaction">Get Transactions</Link>
-        </li>
-      </ul>
-      {!localStorage.getItem('token')?<form className="d-flex">
-        <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
-        <Link className="btn btn-primary mx-1" to="/signup" role="button">Signup</Link>
-      </form>: <button onClick={handleLogout} className="btn btn-primary">Logout</button>}
-    </div>
-  </div>
-</nav>
+      <nav className="navbar navbar-expand-sm navbar-light" id="neubar">
+        <div className="container">
+          <a className="navbar-brand" href="#"><img src="image" height="60" alter = "logo"/></a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+      
+          <div className=" collapse navbar-collapse" id="navbarNavDropdown">
+            <ul className="navbar-nav ms-auto ">
+              <li className="nav-item">
+                <a className="nav-link mx-2 active" aria-current="page" href="#">Quick Add<span className="material-symbols-outlined plus-sign">
+                    add
+                    </span></a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link mx-2" href="#"><span className="material-symbols-outlined">
+                    dark_mode
+                    </span></a>
+                    {/* <!-- <span className="material-symbols-outlined">
+                        light_mode
+                        </span> --> */}
+              </li>
+              <li className="nav-item">
+                <a className="nav-link mx-2" href="#"><span className="material-symbols-outlined">
+                    notifications
+                    </span></a>
+              </li>
+              <li className="nav-item dropdown">
+                <a className="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Register
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li><Link className="dropdown-item" to="/login">Sign-up</Link></li>
+                  <li><a className="dropdown-item" href="#">Log in</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
   )
 }
