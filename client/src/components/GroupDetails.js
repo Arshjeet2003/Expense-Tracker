@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import groupContext from '../context/groups/groupContext.js';
 import { useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { SearchBar } from './SearchBar.js';
+import authContext from '../context/auth/authContext.js';
 
 const GroupDetails = () => {
     const { id } = useParams();
     const context = useContext(groupContext);
+    const context1 = useContext(authContext);
     const { getGroup, addGroupMember, deleteGroupMember, getGroupTransactions, AddGroupTransaction } = context;
+    const { getUserId } = context1;
     const [group, setGroup] = useState({});
     const [member, setMember] = useState({ username: "" });
     const [memberChanged, setMemberChanged] = useState(false); // State to track member changes
@@ -34,6 +36,7 @@ const GroupDetails = () => {
                 const { groupMember, userId, price } = DbTransaction; // Destructure each transaction
                 data.push([groupMember, userId, price]); // Push the destructured data as an array
               }
+              console.log(data);
               simplifyDebts(data);
             })
             .catch((error) => {
@@ -160,7 +163,6 @@ const GroupDetails = () => {
 
     return (
         <div className="container">
-          <SearchBar />
             <div className="row">
                 <div className="col-md-8">
                     <div className="group-details">

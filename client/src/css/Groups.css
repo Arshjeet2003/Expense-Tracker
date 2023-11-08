@@ -1,0 +1,54 @@
+
+
+.complete{
+    position:sticky;
+}
+
+.first{
+    text-align: center; 
+    justify-content: center; 
+    padding-top: 10px;
+    }
+
+.bgroup {
+  width: 150px;
+  background-color: #4D4DFF;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.bgroup:hover {
+  background-color: #4D4DFF;
+  color: #fff;
+}
+
+
+/* this is the attempt to make the create group button to stick to right side of a div */
+/* .con{
+  display: flex;
+  justify-content: flex-end; 
+} */
+
+/* .btn.transparent {
+  margin: 0;
+  background: none;
+  border: 2px solid #fff;
+  width: 130px;
+  height: 41px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.btn.transparent {
+    width: 110px;
+    height: 35px;
+    font-size: 0.7rem;
+  } */
