@@ -2,6 +2,8 @@ import React,{useState,useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
 import authContext from '../context/auth/authContext';
 import '../css/login.css'
+import signup from '../images/signup.svg';
+import login from '../images/login.svg';
 
 const Login = (props) => {
     const [isSignUpMode, setIsSignUpMode] = useState(false);
@@ -111,7 +113,7 @@ const Login = (props) => {
           Sign up
         </button>
       </div>
-      <img src="../images/login.svg" className="image" alt="" />
+      <img src={signup} className="image" alt="hello i am under water" />
     </div>
     <div className="panel right-panel">
       <div className="content">
@@ -124,7 +126,7 @@ const Login = (props) => {
           Sign in
         </button>
       </div>
-      <img src="../images/login.svg" className="image" alt="" />
+      <img src={login} className="image" alt="" />
     </div>
   </div>
 </div>
