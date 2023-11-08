@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import AuthContext from './authContext.js';
 
 const AuthState = (props)=>{
     const host = "http://localhost:5004"
+
+    const [userId,setUserId] = useState("");
 
     const loginUser = async (email,password)=>{
         const response = await fetch(`${host}/api/auth/login`,{
@@ -29,8 +32,19 @@ const AuthState = (props)=>{
         const json = await response.json();
     }
 
+    const getUserId = async ()=>{
+        const response = await fetch(`${host}/api/auth/getuser`,{
+            method: 'GET',
+            headers:{
+                'auth-token': localStorage.getItem('token')
+            }
+        });
+        const json = await response.json();
+        setUserId(json._id);
+    }
+
     return (
-        <AuthContext.Provider value={{loginUser,signupUser}}>
+        <AuthContext.Provider value={{userId,loginUser,signupUser,getUserId}}>
             {props.children}
         </AuthContext.Provider>
     );

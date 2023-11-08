@@ -14,11 +14,12 @@ import EditTransaction from './components/EditTransaction.js';
 import AddTransaction from './components/AddTransaction.js';
 import FriendState from './context/friend/FriendState.js';
 import TransactionGrid from './components/TransactionGrid.js';
-import Sidebar from './components/Sidebar.js';
 import Dashboard from './components/Dashboard.js';
+import GroupDetails from'./components/GroupDetails.js'
 import Friends from './components/Friends.js';
 import Transactions from './components/Transactions.js';
 import Groups from './components/Groups.js';
+import GroupState from './context/groups/GroupState.js';
 
 function App() {
   // const[alert,setAlert] = useState(null);
@@ -37,6 +38,7 @@ function App() {
     <div>
     <FriendState>
     <AuthState>
+    <GroupState>
     <TransactionState>
     <BrowserRouter>
         <Routes>
@@ -49,10 +51,12 @@ function App() {
           <Route exact path="/friends" element={<Friends/>}></Route>
           <Route exact path="/groups" element={<Groups/>}></Route>
           <Route exact path="/transactions" element={<Transactions/>}></Route>
+          <Route path="/group/:id" element={<GroupDetails />}></Route>
         </Routes>
         
       </BrowserRouter>
     </TransactionState>
+    </GroupState>
     </AuthState>
     </FriendState>
     </div>

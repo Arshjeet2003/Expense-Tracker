@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const fetchuser = require('../middleware/fetchuser');
-const { body, validationResult } = require('express-validator');
 const User = require('../models/User.js');
 const User_friend_rel = require('../models/FriendRel.js');
 
@@ -42,16 +41,32 @@ router.post('/addfriend/:id',fetchuser,async (req,res)=>{
 
 try {
     // Create a new FriendRel document to represent the friendship
-    const friendRel = new User_friend_rel({
+    const friendRel1 = new User_friend_rel({
         userid1: userId1,
         userid2: userId2
     });
-
-    // Save the new friendship document using a try...catch block
-    await friendRel.save();
-
-    // Successfully added a friend
-    res.status(200).json({ message: "Friend added successfully" });
+    const user = await User.findById(userId2);
+    if(!user){
+        res.status(404).json({message:"Username does not exist"});
+    }
+    else{
+        const friendRel = await User_friend_rel.findOne({
+            $or: [
+                { userid1: userId1, userid2: userId2 },
+                { userid1: userId2, userid2: userId1 }
+            ]
+        }).exec();
+    
+        if (friendRel) {
+            // Handle the case where the friend relationship is not found
+            res.status(404).json({ message: "Friend already exist" });
+        } else {
+            await friendRel1.save();
+    
+            // Successfully added a friend
+            res.status(200).json({ message: "Friend added successfully" });
+        }
+    }
     } catch (error) {
         // Handle any errors, e.g., duplicate friend requests or other issues
         res.status(500).json({ message: "Error adding friend" });

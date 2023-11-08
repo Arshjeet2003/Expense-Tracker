@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const {Schema} = mongoose;
-const User = require('./User');
 
 const GroupSchema = new mongoose.Schema(
     {
@@ -9,6 +8,11 @@ const GroupSchema = new mongoose.Schema(
         users: [{
             type: String,
             ref: 'User'
+        }],
+        groupTransactions: [{
+            groupMember: String,
+            userId: String,
+            price: Number
         }],
         date:{
             type: Date,
