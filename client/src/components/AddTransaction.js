@@ -1,4 +1,4 @@
-import React,{useContext,useState} from 'react'
+import React, { useContext, useState } from 'react'
 import transactionContext from '../context/transactions/transactionContext';
 
 const AddTransaction = () => {
@@ -16,7 +16,7 @@ const AddTransaction = () => {
         setTransaction({...transaction,[e.target.name]: e.target.value})
     }
   return (
-    <div>
+      <div>
       <div className="container my-3">
         <h2>Add a Transaction</h2>
         <form className='my-3'>

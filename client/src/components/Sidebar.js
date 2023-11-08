@@ -1,5 +1,5 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { useState } from 'react';
 import "../css/sidebar.css";
 import { Link,useNavigate } from 'react-router-dom';
@@ -92,7 +92,7 @@ const Sidebar = () => {
           <div onClick={handleLogout} className="name">Log Out</div>
         </div>
       </div>
-      <i className="bx bx-log-out" id="log_out" />
+      <i className="bx bx-log-out" onClick={handleLogout} id="log_out" />
     </li>
   </ul>
 </div>

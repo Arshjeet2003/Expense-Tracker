@@ -2,6 +2,7 @@ import React,{useContext,useState,useEffect} from 'react';
 import Sidebar from './Sidebar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import friendContext from '../context/friend/friendContext';
+import Navbar from "./Navbar";
 
 const Friends = () => {
   const context = useContext(friendContext);
@@ -32,6 +33,7 @@ const Friends = () => {
     }
   return (
     <div>
+        <Navbar/>
         <Sidebar/>
         <form>
   <div className="mb-3">

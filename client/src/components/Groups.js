@@ -3,6 +3,7 @@ import Sidebar from './Sidebar';
 import 'bootstrap';
 import groupContext from '../context/groups/groupContext';
 import GroupCard from './GroupCard';
+import Navbar from "./Navbar";
 
 const Groups = () => {
     const context = useContext(groupContext);
@@ -39,7 +40,8 @@ const Groups = () => {
   }
   return (
     <>
-    <div>
+      <div>
+        <Navbar/>
         <Sidebar/>
         <form>
   <div className="mb-3">
