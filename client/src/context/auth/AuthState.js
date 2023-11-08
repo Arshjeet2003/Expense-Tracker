@@ -32,19 +32,19 @@ const AuthState = (props)=>{
         const json = await response.json();
     }
 
-    const getUserId = async ()=>{
-        const response = await fetch(`${host}/api/auth/getuser`,{
+    const getUsers = async (search)=>{
+        const response = await fetch(`${host}/api/auth/getuser?search=${search}`,{
             method: 'GET',
             headers:{
                 'auth-token': localStorage.getItem('token')
             }
         });
         const json = await response.json();
-        setUserId(json._id);
+        return json;
     }
 
     return (
-        <AuthContext.Provider value={{userId,loginUser,signupUser,getUserId}}>
+        <AuthContext.Provider value={{userId,loginUser,signupUser,getUsers}}>
             {props.children}
         </AuthContext.Provider>
     );

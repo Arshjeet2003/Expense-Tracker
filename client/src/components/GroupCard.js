@@ -8,10 +8,13 @@ const GroupCard = (props) => {
     const {deleteGroup} = context;
     return (
         <div className='col-md-3'><Link to={`/group/${group._id}`}>
+
             <div className="card my-3">
             <div className="card-body">
+                <div>
                 <h5 className="card-title">{group.name}</h5>
                 <p className="card-text">{group.description}</p>
+                </div>
                 <i className="far fa-trash-alt mx-2" onClick={()=>{deleteGroup(group._id);}}></i>
                 <i className="far fa-edit mx-2" onClick={()=>{updateGroup(group)}}></i>
             </div>

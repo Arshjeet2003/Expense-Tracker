@@ -86,18 +86,24 @@ router.post('/login',[
     }
 })
 
-//ROUTE 3: get logged in user details: POST "/api/auth/getuser"
-router.get('/getuser',fetchuser,async (req,res)=>{
+router.get('/getuser', fetchuser, async (req, res) => {
+    const { search = "" } = req.query;
     try {
-        const userId = req.user.id;
-        const user = await User.findById(userId).select("-password");
-        res.send(user);
-    }
-    catch(error){
+        if (search.length === 0) {
+            const userId = req.user.id;
+            const user = await User.findById(userId).select("-password");
+            res.send(user);
+        } else {
+            const users = await User.find({
+                _id: { $regex: search, $options: "i" },
+            }).select("-password");
+            res.send(users);
+        }
+    } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server Error");
-    } 
-})
+    }
+});
 
 // ROUTE 4: Update an existing user using: PUT "/api/auth/updateuser".
 router.put('/updateuser',fetchuser, async (req,res)=>{
