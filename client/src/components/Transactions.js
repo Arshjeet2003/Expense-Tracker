@@ -9,7 +9,6 @@ const Transactions = () => {
     <div>
       <Navbar/>
       <Sidebar/>
-      <AddTransaction/>
       <TransactionGrid/>
     </div>
   );

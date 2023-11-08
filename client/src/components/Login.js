@@ -47,7 +47,7 @@ const Login = (props) => {
           <input type="password" placeholder="Password" name="password" onChange={onChange} />
         </div>
         <br />
-        <input type="submit" defaultValue="Login" className="btn solid" onClick={handleSignInSubmit} />
+        <input type="submit" defaultValue="Login" className="btn solid blog" onClick={handleSignInSubmit} />
         <p className="social-text">Or Log in with social platforms</p>
         <div className="social-media">
           <a href="#" className="social-icon">
@@ -82,7 +82,7 @@ const Login = (props) => {
           <i className="fas fa-lock" />
           <input type="password" name="password" placeholder="Password" onChange={onChange} />
         </div>
-        <input type="submit" className="btn" defaultValue="Sign up" onClick={handleSignUpSubmit} />
+        <input type="submit" className="btn blog" defaultValue="Sign up" onClick={handleSignUpSubmit} />
         <p className="social-text">Or Sign up with social platforms</p>
         <div className="social-media">
           <a href="#" className="social-icon">
@@ -105,7 +105,7 @@ const Login = (props) => {
     <div className="panel left-panel">
       <div className="content">
         <button
-          className="btn transparent"
+          className="btn transparent blog"
           id="sign-up-btn"
           onClick={() => setIsSignUpMode(true)}
           style={{ marginRight: 150 }}
@@ -118,7 +118,7 @@ const Login = (props) => {
     <div className="panel right-panel">
       <div className="content">
         <button
-          className="btn transparent"
+          className="btn transparent blog"
           id="sign-in-btn"
           onClick={() => setIsSignUpMode(false)}
           style={{ marginRight: 150 }}
