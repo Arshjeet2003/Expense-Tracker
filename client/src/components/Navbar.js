@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link, useLocation,useNavigate} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import "../css/navbar.css";
-const Navbar = () => {
+import NotificationComp from './NotificationComp';
+
+const Navbar = (props) => {
+
+  const [notificationClicked,setClicked] = useState(false);
+  const transaction = props?.data?.transactions;
+  const handleNotification = ()=>{
+    setClicked(true);
+  }
+  useEffect(() => {
     
-    let location = useLocation();
+  }, [notificationClicked]);
   return (
     <div>
       <nav className="navbar navbar-expand-sm navbar-light" id="neubar">
@@ -47,11 +56,9 @@ const Navbar = () => {
                         </span> --> */}
               </li>
               <li className="nav-item">
-                <a className="nav-link mx-2" href="#">
-                  <span className="material-symbols-outlined">
+                <a onClick={handleNotification} className="nav-link mx-2"><span className="material-symbols-outlined">
                     notifications
-                  </span>
-                </a>
+                    </span></a>
               </li>
               <li className="nav-item dropdown">
                 <a
@@ -84,6 +91,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+      {notificationClicked?<NotificationComp transaction={transaction}/>:""};
     </div>
   );
 }

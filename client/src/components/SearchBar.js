@@ -1,33 +1,35 @@
-import { useState } from "react";
+import { useState,useEffect,useContext } from "react";
+import authContext from '../context/auth/authContext';
 import { FaSearch } from "react-icons/fa";
 
 import "../css/SearchBar.css";
+import { SearchResultsList } from "./SearchResultsList";
 
-export const SearchBar = ({ setResults }) => {
+export const SearchBar = () => {
   const [input, setInput] = useState("");
+  const [data, setData] = useState([]);
 
-  const fetchData = (value) => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((json) => {
-        const results = json.filter((user) => {
-          return (
-            value &&
-            user &&
-            user.name &&
-            user.name.toLowerCase().includes(value)
-          );
-        });
-        setResults(results);
-      });
-  };
+  const context = useContext(authContext);
+  const { getUsers } = context;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await getUsers(input);
+        setData(result);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+    fetchData(); // Call the async function to fetch data
+  }, [input]);
 
   const handleChange = (value) => {
     setInput(value);
-    fetchData(value);
   };
 
   return (
+    <>
     <div className="input-wrapper">
       <FaSearch id="search-icon" />
       <input
@@ -36,5 +38,7 @@ export const SearchBar = ({ setResults }) => {
         onChange={(e) => handleChange(e.target.value)}
       />
     </div>
+    {data? <SearchResultsList data={data} />:""}
+    </>
   );
 };

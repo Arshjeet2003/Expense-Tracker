@@ -44,38 +44,22 @@ function App() {
               <BrowserRouter>
                 <Routes>
                   {/* <Route exact path="/" element={<EditTransaction/>}></Route> */}
-                  <Route exact path="/about" element={<About />}></Route>
-                  <Route
-                    exact
-                    path="/addtransaction"
-                    element={<AddTransaction />}
-                  ></Route>
-                  <Route exact path="/login" element={<Login />}></Route>
-                  <Route
-                    exact
-                    path="/gettransaction"
-                    element={<TransactionGrid />}
-                  ></Route>
-                  <Route exact path="/" element={<Dashboard />}></Route>
-                  <Route exact path="/friends" element={<Friends />}></Route>
-                  <Route exact path="/groups" element={<Groups />}></Route>
-                  <Route
-                    exact
-                    path="/transactions"
-                    element={<Transactions />}
-                  ></Route>
-                  <Route
-                    exact
-                    path="/quickadd"
-                    element={<Quickadd />}
-                  ></Route>
-                  <Route path="/group/:id" element={<GroupDetails />}></Route>
-                </Routes>
-              </BrowserRouter>
-            </TransactionState>
-          </GroupState>
-        </AuthState>
-      </FriendState>
+          <Route exact path="/about" element={<About/>}></Route>
+          <Route exact path="/addtransaction" element={<AddTransaction />}></Route>
+          <Route exact path="/login" element={<Login/>}></Route>
+          <Route exact path="/gettransaction" element={<TransactionGrid/>}></Route>
+          <Route exact path="/" element={<Dashboard/>}></Route>
+          <Route exact path="/friends" element={<Friends/>}></Route>
+          <Route exact path="/groups" element={<Groups/>}></Route>
+          <Route exact path="/transactions" element={<Transactions/>}></Route>
+          <Route path="/group/:id" element={<GroupDetails />}></Route>
+          <Route exact path="/quickadd" element={<Quickadd/>}></Route>
+        </Routes>
+      </BrowserRouter>
+    </TransactionState>
+    </GroupState>
+    </AuthState>
+    </FriendState>
     </div>
   );
 }
