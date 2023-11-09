@@ -45,13 +45,13 @@ try {
 // ROUTE 2: Add a new transaction using: POST "/api/transactions/addtransaction".
 router.post('/addtransaction',fetchuser,async (req,res)=>{
     try {
-        const {name,category,type,recurring,repeat,price} = req.body;
+        const {name,category,type,recurring,repeat,price,billUrl} = req.body;
         const errors = validationResult(req);
         if(!errors.isEmpty()){
             return res.status(400).json({ errors: errors.array() });
         }
         const new_transaction = new Transaction({
-            name,category,type,recurring,repeat,price
+            name,category,type,recurring,repeat,price,billUrl
         })
         const userId = req.user.id;
         const user = await User.findById(userId);
@@ -112,12 +112,12 @@ router.delete('/deletetransaction/:id',fetchuser, async (req,res)=>{
 
 // ROUTE 4: Update an existing transaction using: PUT "/api/transactions/updatetransaction".
 router.put('/updatetransaction/:id',fetchuser, async (req,res)=>{
-    const {name,category,type,recurring,repeat,price} = req.body;
+    const {name,category,type,recurring,repeat,price,billUrl} = req.body;
 
     const transactionIdToUpdate = req.params.id;
     
     const updatedTransactionData = {
-        name,category,type,recurring,repeat,price
+        name,category,type,recurring,repeat,price,billUrl
     }
 
     // Step 1: Update the transaction by its ID

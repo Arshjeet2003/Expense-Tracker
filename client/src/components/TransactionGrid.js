@@ -38,7 +38,7 @@ const TransactionGrid = () => {
       {
         field: "category",
         headerName: "Category",
-        flex: 1,
+        flex: 0.5,
       },
       {
         field: "date",
@@ -48,9 +48,15 @@ const TransactionGrid = () => {
       {
         field: "price",
         headerName: "Price",
-        flex: 1,
+        flex: 0.3,
         // renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
       },
+      {
+        field: "billUrl",
+        headerName: "Bill",
+        flex: 1,
+        renderCell: (params) => {return <a target='_blank' href={`${params.value}`}>{`${params.value}`}</a>} 
+      }
     ];
     return (
       <Box m="1.5rem 2.5rem">

@@ -4,28 +4,49 @@ import "../css/Quickadd.css";
 import Navbar from './Navbar';
 import Sidebar from './Sidebar'
 import transactionContext from '../context/transactions/transactionContext';
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "firebase/storage";
+import { v4 } from "uuid";
+import { storage } from "../firebase";
+
 
 import EWallet from "../images/E-Wallet.svg";
 const Quickadd = () => {
 
   const context = useContext(transactionContext);
     const {addTransactions} = context;
+    // const imagesListRef1 = ref(storage, "profilePic/");
+    // const imagesListRef2 = ref(storage, "bills/");
 
     // State to manage the selected option
     const [selectedValue, setSelectedValue] = useState("");
     const [category, setCategory] = useState("");
     const [Recurring,setRecurring] = useState("No");
+    const [fileNames, setFileNames] = useState([]);
+    const [files,setFiles] = useState({});
 
     const [transaction,setTransaction] = useState({name: "", type: "",category: "",recurring: "",
     repeat: "",price:""})
 
     const handleClick = (e)=>{
         e.preventDefault(); //So that page does not reload
-        addTransactions(transaction.name,selectedValue,category,Recurring,transaction.repeat,Number(transaction.price));
-        setTransaction({name: "", type: "",category:"",recurring:"",repeat:"",price:""})
-        setCategory("");
-        setSelectedValue("");
-        setRecurring("No");
+
+        if (files[0] == null) return;
+        const imageRef = ref(storage, `images/${v4()}`);
+        uploadBytes(imageRef, files[0]).then((snapshot) => {
+          getDownloadURL(snapshot.ref).then((url) => {
+            addTransactions(transaction.name,selectedValue,category,Recurring,transaction.repeat,Number(transaction.price),url);
+            setTransaction({name: "", type: "",category:"",recurring:"",repeat:"",price:""})
+            setCategory("");
+            setSelectedValue("");
+            setRecurring("No");
+            setFileNames([]);
+            alert('Transaction added');
+          });
+        });
     }
     const onChange = (e)=>{
         setTransaction({...transaction,[e.target.name]: e.target.value})
@@ -67,17 +88,17 @@ const Quickadd = () => {
   const handleSelectChange = (event) => {
     setCategory(event.target.value);
   };
-  const [fileNames, setFileNames] = useState([]);
 
   const handleFileChange = (event) => {
-    const files = event.target.files;
+    const fileAttached = event.target.files;
     const fileNamesArray = [];
 
-    for (let i = 0; i < files.length; i++) {
-      fileNamesArray.push(files[i].name);
+    for (let i = 0; i < fileAttached.length; i++) {
+      fileNamesArray.push(fileAttached[i].name);
     }
 
     setFileNames(fileNamesArray);
+    setFiles(fileAttached);
   };
 
 

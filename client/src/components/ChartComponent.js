@@ -1,27 +1,44 @@
 import React, { useState,useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS } from 'chart.js/auto'
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from "chart.js";
+import { Pie } from 'react-chartjs-2';
+
+ChartJS.register(ArcElement,Tooltip,Legend,CategoryScale,LinearScale,BarElement);
 
 const ChartComponent = (props) => {
 
   const transactionData = props?.data?.transactions;
 
   const today = new Date();
-  const [dailyPriceForThisYearExpense, setDailyPriceExpense] = useState(['10','20','30','40','50','60','20']);
-  const [dailyPriceForThisYearIncome, setDailyPriceIncome] = useState(['10','20','30','40','50','60','20']);
-
-  const [monthyPriceForThisYearExpense, setMonthyPriceExpense] = useState(['10','20','30','40','50','60','20','10','9','13','15','50']);
-  const [monthyPriceForThisYearIncome, setMonthyPriceIncome] = useState(['10','20','30','40','50','60','20','10','9','13','15','50']);
-
-  const [yearlyPriceExpense, setYearlyPriceExpense] = useState(['10','20','30','40','50','60','20','10','9','13']);
-  const [yearlyPriceIncome, setYearlyPriceIncome] = useState(['10','20','30','40','50','60','20','10','9','13']);
 
   const [dateType,setDataType] = useState("Daily");
 
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedMonth, setSelectedMonth] = useState(today);
   const [selectedYear, setSelectedYear] = useState(today);
+
+  const backgroundColors = [
+    'aqua',
+    'orangered',
+    'purple',
+    'gold',
+    'lime',
+    'teal',
+    'coral',
+    'violet'
+  ];
+
+  const [PieData1 , setPieData1] = useState({
+    labels: ['One', 'Two', 'Three'],
+    datasets: [
+        {
+            data: [3,6,9],
+            backgroundColor: ['aqua' , 'orangered' , 'purple' ]
+        }
+    ]
+});
+
 
   const generateYearLabels = () => {
     const currentYear = selectedYear.getFullYear();
@@ -37,14 +54,14 @@ const ChartComponent = (props) => {
     datasets: [
       {
         label: 'Transactions per day',
-        data: dailyPriceForThisYearExpense,
+        data: ['10','20','30','40','50','60','20'],
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
       },
       {
         label: 'Savings per day',
-        data: dailyPriceForThisYearIncome,
+        data: ['10','20','30','40','50','60','20'],
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,
@@ -57,14 +74,14 @@ const ChartComponent = (props) => {
     datasets: [
       {
         label: 'Transactions per month',
-        data: monthyPriceForThisYearExpense,
+        data: ['10','20','30','40','50','60','20','10','9','13','15','50'],
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
       },
       {
         label: 'Savings per month',
-        data: monthyPriceForThisYearIncome,
+        data: ['10','20','30','40','50','60','20','10','9','13','15','50'],
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,
@@ -77,14 +94,14 @@ const ChartComponent = (props) => {
     datasets: [
       {
         label: 'Transactions per year',
-        data: yearlyPriceExpense,
+        data: ['10','20','30','40','50','60','20','10','9','13','15','50'],
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
       },
       {
         label: 'Savings per year',
-        data: yearlyPriceIncome,
+        data: ['10','20','30','40','50','60','20','10','9','13','15','50'],
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,
@@ -96,7 +113,7 @@ const ChartComponent = (props) => {
     labels: DailyData.labels,
     datasets: [{
       ...DailyData.datasets[0],
-      data: dailyPriceForThisYearExpense,
+      data: ['10','20','30','40','50','60','20'],
     }],
   });
 
@@ -104,7 +121,7 @@ const ChartComponent = (props) => {
     labels: DailyData.labels,
     datasets: [{
       ...DailyData.datasets[1],
-      data: dailyPriceForThisYearIncome,
+      data: ['10','20','30','40','50','60','20'],
     }],
   });
 
@@ -133,6 +150,17 @@ const ChartComponent = (props) => {
     const dailyPriceExpense = Array(7).fill(0); // Initialize an array with zeros for each day of the week.
     const dailyPriceIncome = Array(7).fill(0);
 
+    const weeklyCategoryDataExpenses = [
+      { label: 'Food', data: 0 },
+      { label: 'Groceries', data: 0 },
+      { label: 'Medal', data: 0 },
+      { label: 'Education', data: 0 },
+      { label: 'Travel', data: 0 },
+      { label: 'Bills', data: 0 },
+      { label: 'Shopping', data: 0 },
+      { label: 'Others', data: 0 },
+    ];
+    
     for (const transaction of transactionData) {
       const transactionDate = new Date(transaction.date);
 
@@ -144,6 +172,11 @@ const ChartComponent = (props) => {
       ) {
         const dayOfWeek = transactionDate.getDay(); // 0 (Sunday) to 6 (Saturday)
         dailyPriceExpense[dayOfWeek] += transaction.price;
+
+        const categoryToUpdate = weeklyCategoryDataExpenses.find(item => item.label === transaction.category);
+        if (categoryToUpdate) {
+          categoryToUpdate.data += transaction.price;
+        }
       }
       else if(
         transactionDate >= startDate &&
@@ -153,10 +186,9 @@ const ChartComponent = (props) => {
       ){
         const dayOfWeek = transactionDate.getDay(); // 0 (Sunday) to 6 (Saturday)
         dailyPriceIncome[dayOfWeek] += transaction.price;
+
       }
     }
-    setDailyPriceExpense(dailyPriceExpense);
-    setDailyPriceIncome(dailyPriceIncome);
 
     setDailyData({
       labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat'],
@@ -194,6 +226,16 @@ const ChartComponent = (props) => {
       }],
     });
 
+    setPieData1({
+      labels: weeklyCategoryDataExpenses.map(item => item.label), // Extract labels from objects
+      datasets: [
+        {
+          data: weeklyCategoryDataExpenses.map(item => item.data), // Extract data from objects
+          backgroundColor: backgroundColors,
+        }
+      ]
+    });
+
   };
 
   const getMonthlyDataForThisYear = () => {
@@ -201,6 +243,17 @@ const ChartComponent = (props) => {
   
     const monthlyPriceExpense = Array(12).fill(0); // Initialize an array with zeros for each month.
     const monthlyPriceIncome = Array(12).fill(0);
+
+    const weeklyCategoryDataExpenses = [
+      { label: 'Food', data: 0 },
+      { label: 'Groceries', data: 0 },
+      { label: 'Medal', data: 0 },
+      { label: 'Education', data: 0 },
+      { label: 'Travel', data: 0 },
+      { label: 'Bills', data: 0 },
+      { label: 'Shopping', data: 0 },
+      { label: 'Others', data: 0 },
+    ];
   
     for (const transaction of transactionData) {
       const transactionDate = new Date(transaction.date);
@@ -210,6 +263,10 @@ const ChartComponent = (props) => {
         transaction.type === "Expense"
       ) {
         monthlyPriceExpense[month] += transaction.price;
+        const categoryToUpdate = weeklyCategoryDataExpenses.find(item => item.label === transaction.category);
+        if (categoryToUpdate) {
+          categoryToUpdate.data += transaction.price;
+        }
       } else if (
         transactionDate.getFullYear() === selectedMonth.getFullYear() &&
         transaction.type === "Income"
@@ -217,8 +274,6 @@ const ChartComponent = (props) => {
         monthlyPriceIncome[month] += transaction.price;
       }
     }
-    setMonthyPriceExpense(monthlyPriceExpense);
-    setMonthyPriceIncome(monthlyPriceIncome);
 
     setMonthlyData({
       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -255,6 +310,16 @@ const ChartComponent = (props) => {
       }],
     };
 
+    setPieData1({
+      labels: weeklyCategoryDataExpenses.map(item => item.label), // Extract labels from objects
+      datasets: [
+        {
+          data: weeklyCategoryDataExpenses.map(item => item.data), // Extract data from objects
+          backgroundColor: backgroundColors,
+        }
+      ]
+    });
+
     setData1(newData1);
     setData2(newData2);
   };
@@ -279,9 +344,6 @@ const ChartComponent = (props) => {
         }
       }
     }
-
-    setYearlyPriceExpense(lastTenYearsDataExpense);
-    setYearlyPriceIncome(lastTenYearsDataIncome);
 
     setYearlyData({
       labels: generateYearLabels(),
@@ -340,73 +402,18 @@ const ChartComponent = (props) => {
     if (dateType === "Daily") {
       const selectedDateNow = new Date(selectedDate);
       selectedDateNow.setDate(selectedDateNow.getDate() - 7); // Subtract 7 days
+
       setSelectedDate(selectedDateNow);
-  
-      // Calculate and set new data for "Transactions per day" dataset
-      const newData1 = {
-        labels: DailyData.labels,
-        datasets: [{
-          ...DailyData.datasets[0],
-          data: dailyPriceForThisYearExpense,
-        }],
-      };
-      const newData2 = {
-        labels: DailyData.labels,
-        datasets: [{
-          ...DailyData.datasets[1],
-          data: dailyPriceForThisYearIncome,
-        }],
-      };
-      setData1(newData1);
-      setData2(newData2);
 
     } else if (dateType === "Monthly") {
       const selectedMonthNow = new Date(selectedMonth);
       selectedMonthNow.setMonth(selectedMonthNow.getMonth() - 12); // Subtract 12 months
       setSelectedMonth(selectedMonthNow);
-  
-      // Calculate and set new data for "Transactions per day" dataset
-      const newData1 = {
-        labels: MonthlyData.labels,
-        datasets: [{
-          ...MonthlyData.datasets[0],
-          data: monthyPriceForThisYearExpense,
-        }],
-      };
-
-      const newData2 = {
-        labels: MonthlyData.labels,
-        datasets: [{
-          ...MonthlyData.datasets[1],
-          data: monthyPriceForThisYearIncome,
-        }],
-      };
-
-      setData1(newData1);
-      setData2(newData2);
 
     } else {
       const selectedYearNow = new Date(selectedYear);
       selectedYearNow.setYear(selectedYearNow.getFullYear() - 10); // Subtract 10 years
       setSelectedYear(selectedYearNow);
-
-      // Calculate and set new data for "Transactions per day" dataset
-      const newData1 = {
-        labels: YearlyData.labels,
-        datasets: [{
-          ...YearlyData.datasets[0],
-          data: yearlyPriceExpense,
-        }],
-      };
-      const newData2 = {
-        labels: YearlyData.labels,
-        datasets: [{
-          ...YearlyData.datasets[1],
-          data: yearlyPriceIncome,
-        }],
-      };
-      setData1(newData1);
-      setData2(newData2);
 
     }
   };
@@ -417,67 +424,15 @@ const ChartComponent = (props) => {
       selectedDateNow.setDate(selectedDateNow.getDate() + 7); // Add 7 days
       setSelectedDate(selectedDateNow);
   
-      // Calculate and set new data for "Transactions per day" dataset
-      const newData1 = {
-        labels: DailyData.labels,
-        datasets: [{
-          ...DailyData.datasets[0],
-          data: dailyPriceForThisYearExpense,
-        }],
-      };
-      const newData2 = {
-        labels: DailyData.labels,
-        datasets: [{
-          ...DailyData.datasets[1],
-          data: dailyPriceForThisYearIncome,
-        }],
-      };
-      setData1(newData1);
-      setData2(newData2);
     } else if (dateType === "Monthly") {
       const selectedMonthNow = new Date(selectedMonth);
       selectedMonthNow.setMonth(selectedMonthNow.getMonth() + 12); // Subtract 12 months
       setSelectedMonth(selectedMonthNow);
   
-      // Calculate and set new data for "Transactions per day" dataset
-      const newData1 = {
-        labels: MonthlyData.labels,
-        datasets: [{
-          ...MonthlyData.datasets[0],
-          data: monthyPriceForThisYearExpense,
-        }],
-      };
-      const newData2 = {
-        labels: MonthlyData.labels,
-        datasets: [{
-          ...MonthlyData.datasets[1],
-          data: monthyPriceForThisYearIncome,
-        }],
-      };
-      setData1(newData1);
-      setData2(newData2);
     } else {
       const selectedYearNow = new Date(selectedYear);
       selectedYearNow.setYear(selectedYearNow.getFullYear() + 10); // Subtract 10 years
       setSelectedYear(selectedYearNow);
-
-      // Calculate and set new data for "Transactions per day" dataset
-      const newData1 = {
-        labels: YearlyData.labels,
-        datasets: [{
-          ...YearlyData.datasets[0],
-          data: yearlyPriceExpense,
-        }],
-      };
-      const newData2 = {
-        labels: YearlyData.labels,
-        datasets: [{
-          ...YearlyData.datasets[1],
-          data: yearlyPriceIncome,
-        }],
-      };
-      setData1(newData1);
-      setData2(newData2);
 
     }
   };
@@ -492,6 +447,16 @@ const ChartComponent = (props) => {
     marginLeft: '150px',
   };
 
+  const chartContainerStylesPie = {
+    height: '300px',
+    width: '20%',
+    marginLeft: '150px',
+    marginTop: '100px',
+  };
+
+
+  const options = {};
+
   return (
     <div>
       <button onClick={changeDateType}>Date Type</button>
@@ -504,6 +469,15 @@ const ChartComponent = (props) => {
         </div>
         <button onClick={changeSelectedDate}>Prev</button>
       <button onClick={changeSelectedDateNext}>Next</button>
+      </div>
+      <div style={{ display: 'flex' }}>
+      <div style={chartContainerStylesPie}>
+            <Pie
+                data = {PieData1}
+                options = {options}
+            > 
+            </Pie>
+        </div>
       </div>
     </div>
   );

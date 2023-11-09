@@ -23,14 +23,14 @@ const TransactionState = (props)=>{
         }
       };
 
-    const addTransactions = async (name,type,category,recurring,repeat,price)=>{
+    const addTransactions = async (name,type,category,recurring,repeat,price,billUrl)=>{
         const response = await fetch(`${host}/api/transactions/addtransaction`,{
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
                 'auth-token': localStorage.getItem('token')
             },
-            body: JSON.stringify({name,type,category,recurring,repeat,price})
+            body: JSON.stringify({name,type,category,recurring,repeat,price,billUrl})
         });
 
         const transaction = await response.json();

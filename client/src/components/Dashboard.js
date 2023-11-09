@@ -48,10 +48,10 @@ const Dashboard = () => {
       <Navbar data={data}/>
       <Sidebar />
       <div className="container-fluid full-height">
-      <ChartComponent data={data}/>
         <div className="row full-height">
           {/* Left Side */}
           <div className="col-md-8 full-height bordered">
+          <ChartComponent data={data}/>
           {/* <ChartComponent data={data}/> */}
             {/* Content here */}
           </div>
