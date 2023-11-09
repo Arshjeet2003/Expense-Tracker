@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import "../css/dashboard.css";
 import transactionContext from '../context/transactions/transactionContext.js';
 import { SearchBar } from "./SearchBar.js";
+import ChartComponent from "./ChartComponent.js";
 
 const Dashboard = () => {
 
@@ -47,9 +48,11 @@ const Dashboard = () => {
       <Navbar data={data}/>
       <Sidebar />
       <div className="container-fluid full-height">
+      <ChartComponent data={data}/>
         <div className="row full-height">
           {/* Left Side */}
           <div className="col-md-8 full-height bordered">
+          {/* <ChartComponent data={data}/> */}
             {/* Content here */}
           </div>
           {/* Right Side */}

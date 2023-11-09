@@ -1,25 +1,47 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useContext } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/Quickadd.css";
 import Navbar from './Navbar';
 import Sidebar from './Sidebar'
+import transactionContext from '../context/transactions/transactionContext';
 
 import EWallet from "../images/E-Wallet.svg";
 const Quickadd = () => {
+
+  const context = useContext(transactionContext);
+    const {addTransactions} = context;
+
+    // State to manage the selected option
+    const [selectedValue, setSelectedValue] = useState("");
+    const [category, setCategory] = useState("");
+    const [Recurring,setRecurring] = useState("No");
+
+    const [transaction,setTransaction] = useState({name: "", type: "",category: "",recurring: "",
+    repeat: "",price:""})
+
+    const handleClick = (e)=>{
+        e.preventDefault(); //So that page does not reload
+        addTransactions(transaction.name,selectedValue,category,Recurring,transaction.repeat,Number(transaction.price));
+        setTransaction({name: "", type: "",category:"",recurring:"",repeat:"",price:""})
+        setCategory("");
+        setSelectedValue("");
+        setRecurring("No");
+    }
+    const onChange = (e)=>{
+        setTransaction({...transaction,[e.target.name]: e.target.value})
+    }
   const [showRepeat, setShowRepeat] = useState(false);
 
   const handleYes = (e) => {
     e.preventDefault();
     setShowRepeat(true);
+    setRecurring("Yes");
   };
   const handleNo = (e) => {
     e.preventDefault();
     setShowRepeat(false);
+    setRecurring("No");
   };
-  // State to manage the selected option
-  const [selectedValue, setSelectedValue] = useState("");
-  const [category, setCategory] = useState("");
-
 
   // Effect to change the color based on the selected option
   useEffect(() => {
@@ -78,7 +100,7 @@ const Quickadd = () => {
             >
               <div className="input-field">
                 <i className="fas fa-user" />
-                <input type="text" placeholder="Name" name="Name" />
+                <input type="text" placeholder="Name" name="name" onChange={onChange} value={transaction.name}/>
               </div>
               {/* <div class="input-field">
           <i class="material-symbols-outlined" style="font-size: 24px;">
@@ -165,16 +187,16 @@ const Quickadd = () => {
                   className="form-select"
                   id="mySelect"
                   value={selectedValue}
-                  onChange={(e) => setSelectedValue(e.target.value)}
+                  onChange={(e) => {setSelectedValue(e.target.value)}}
                   style={{ color: selectedValue === "" ? "#aaa" : "black" }} // Inline style for dynamic color
                 >
                   <option disabled value="">
                     Type
                   </option>
-                  <option value="jweb" style={{ color: "red" }}>
+                  <option value="Expense" style={{ color: "red" }}>
                     Expense
                   </option>
-                  <option value="sweb" style={{ color: "green" }}>
+                  <option value="Income" style={{ color: "green" }}>
                     Income
                   </option>
                 </select>
@@ -186,7 +208,7 @@ const Quickadd = () => {
                 >
                   attach_money
                 </i>
-                <input type="number" placeholder="Price" name="Price" />
+                <input type="number" placeholder="Price" name="price" value={transaction.price} onChange={onChange} />
               </div>
               <div className=" checkBox container-fluid col-md-12 ">
                 <label className="mr-1" htmlFor="gender">
@@ -195,7 +217,7 @@ const Quickadd = () => {
                 <input
                   type="radio"
                   className="btn-check button"
-                  name="type"
+                  name="rec_yes"
                   id="yes"
                   autoComplete="off"
                   onClick={handleYes}
@@ -209,7 +231,7 @@ const Quickadd = () => {
                 <input
                   type="radio"
                   className="btn-check"
-                  name="type"
+                  name="rec_no"
                   id="no"
                   autoComplete="off"
                   onClick={handleNo}
@@ -234,9 +256,11 @@ const Quickadd = () => {
                   </i>
                   <input
                     className="repeat"
-                    type="number"
+                    type="text"
                     placeholder="Repeat"
-                    name="Repeat"
+                    name="repeat"
+                    onChange={onChange}
+                    value={transaction.repeat}
                   />
                 </div>
               </div>
@@ -286,6 +310,7 @@ const Quickadd = () => {
                   id="submit"
                   type="submit"
                   className="submit-btn-for-trans"
+                  onClick={handleClick}
                 >
                   Add Transaction
                 </button>
