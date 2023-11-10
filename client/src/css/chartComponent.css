@@ -1,0 +1,58 @@
+.buttons-for-graph{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+
+    padding-top: 20px;
+}
+
+.total-buttons{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    padding-top: 20px;
+}
+
+.single-button{
+    margin-left: 20px;
+}
+
+.btns{
+    top: 30px;
+}
+
+.graphs{
+    display: flex;
+    top: 40px;
+    position: relative;
+}
+
+.ghghg{
+    padding-top: 40px;
+}
+
+
+.bchart {
+  width: 75px;
+  background-color: #4D4DFF;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+  margin-left: 15px;
+}
+
+.bchart:hover {
+  background-color: #fff;
+  border: 2px solid black;
+  color: #4D4DFF;
+}
+
+

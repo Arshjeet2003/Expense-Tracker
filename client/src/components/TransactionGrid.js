@@ -55,10 +55,17 @@ const TransactionGrid = () => {
         field: "billUrl",
         headerName: "Bill",
         flex: 1,
-        renderCell: (params) => {return <a target='_blank' href={`${params.value}`}>{`${params.value}`}</a>} 
+        renderCell: (params) => {return (
+          <a
+            style={{ color: "#4D4DFF" }}
+            target="_blank"
+            href={`${params.value}`}
+          >Bill</a>
+        );} 
       }
     ];
-    return (
+  return (
+    <Box>
       <Box m="1.5rem 2.5rem">
         {/* <Header title="TRANSACTIONS" subtitle="Entire list of transactions" /> */}
         <Box
@@ -102,6 +109,7 @@ const TransactionGrid = () => {
           />
         </Box>
       </Box>
-    );
+    </Box>
+  );
 }
 export default TransactionGrid;
