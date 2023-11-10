@@ -14,7 +14,7 @@ export const SearchResultsList = (props) => {
   return (
     <div className="results-list">
       {ids.map((result, id) => {
-        return <SearchResult result={result} key={id} />;
+        return <SearchResult result={result} key={id}/>;
       })}
     </div>
   );

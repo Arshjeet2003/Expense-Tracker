@@ -249,3 +249,7 @@
 ol,ul{
   padding-left: 0 !important;
 }
+
+input{
+  outline: none !important;
+}

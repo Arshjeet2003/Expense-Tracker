@@ -1,4 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
+
+body,
+input {
+  font-family: "Poppins", sans-serif;
+}
 
 .complete{
     position:sticky;
@@ -15,20 +21,41 @@
   background-color: #4D4DFF;
   border: none;
   outline: none;
-  height: 49px;
+  height: 35px;
   border-radius: 49px;
   color: #fff;
-  text-transform: uppercase;
   font-weight: 600;
   margin: 10px 0;
   cursor: pointer;
   transition: 0.5s;
+  text-align: center;
+  justify-content: center;
+  display: flex;
 }
 
 .bgroup:hover {
   background-color: #4D4DFF;
   color: #fff;
 }
+
+.con{
+  width: 10% !important;
+}
+
+
+.card-container{
+  padding-left: 50px;
+  margin-top: 0 !important;
+}
+
+.form-control{
+  border: 1px solid black;
+}
+
+
+/* .groupCard{
+  background-color: black;
+} */
 
 
 /* this is the attempt to make the create group button to stick to right side of a div */

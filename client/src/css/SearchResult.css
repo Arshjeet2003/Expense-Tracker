@@ -1,7 +1,29 @@
 .search-result {
   padding: 10px 20px;
+  z-index: 2;
+  background-color: #efefef;
+  position: relative;
 }
 
 .search-result:hover {
-  background-color: #efefef;
+  background-color: #4D4DFF;
+  color: white;
+  cursor: pointer;
+}
+
+.add-user{
+  right: 5px;
+  font-size: 25px;
+  position: absolute;
+  background: rgba(11, 190, 11, 0.852);
+  border-radius: 40px;
+  bottom: 10px;
+  color: white;
+  padding: 2px;
+  /* margin-left: 60px; */
+}
+
+.add-user-button{
+  background: inherit;
+  border: none;
 }
