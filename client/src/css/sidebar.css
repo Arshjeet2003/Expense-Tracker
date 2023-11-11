@@ -1,12 +1,23 @@
 /* Google Font Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins" , sans-serif;
+@import "index.css";
+
+
+.icons{
+  font-size: "24px";
 }
-.sidebar{
+ol,ul{
+  padding-left: 0 !important;
+}
+
+input{
+  outline: none !important;
+}
+
+
+ /************light mode************/
+
+.sidebarl{
   position: fixed;
   border-radius: 0 20px 20px 0;
   left: 0;
@@ -18,49 +29,14 @@
   z-index: 99;
   transition: all 0.5s ease;
 }
-.icons{
-  font-size: "24px";
-}
-.sidebar.open{
-  width: 250px;
-}
-.sidebar .logo-details{
-  height: 60px;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-.sidebar .logo-details .icon{
-  opacity: 0;
-  transition: all 0.5s ease;
-}
-.sidebar .logo-details .logo_name{
+.sidebarl .logo-detailsl .logo_namel{
   color: #fff;
   font-size: 20px;
   font-weight: 600;
   opacity: 0;
   transition: all 0.5s ease;
 }
-.sidebar.open .logo-details .icon,
-.sidebar.open .logo-details .logo_name{
-  opacity: 1;
-}
-.sidebar .logo-details #btn{
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  font-size: 22px;
-  transition: all 0.4s ease;
-  font-size: 23px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.5s ease;
-}
-.sidebar.open .logo-details #btn{
-  text-align: right;
-}
-.sidebar i{
+.sidebarl i{
   color: #11101d;
   height: 60px;
   min-width: 50px;
@@ -68,16 +44,8 @@
   text-align: center;
   line-height: 60px;
 }
-.sidebar .nav-list{
-  margin-top: 20px;
-  height: 100%;
-}
-.sidebar li{
-  position: relative;
-  margin: 8px 0;
-  list-style: none;
-}
-.sidebar li .tooltip{
+
+.sidebarl li .tooltip{
   position: absolute;
   top: -20px;
   left: calc(100% + 15px);
@@ -93,36 +61,8 @@
   pointer-events: none;
   transition: 0s;
 }
-.sidebar li:hover .tooltip{
-  opacity: 1;
-  pointer-events: auto;
-  transition: all 0.4s ease;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.sidebar.open li .tooltip{
-  display: none;
-}
-.sidebar input{
-  font-size: 15px;
-  color: #FFF;
-  font-weight: 400;
-  outline: none;
-  height: 50px;
-  width: 100%;
-  width: 50px;
-  border: none;
-  border-radius: 12px;
-  transition: all 0.5s ease;
-  background: #1d1b31;
-}
-.sidebar.open input{
-  padding: 0 20px 0 50px;
-  width: 100%;
-}
 
-
-.sidebar li a{
+.sidebarl li a{
   display: flex;
   height: 100%;
   width: 100%;
@@ -132,11 +72,11 @@
   transition: all 0.4s ease;
   background: #FFF;
 }
-.sidebar li a:hover{
+.sidebarl li a:hover{
   background: #11101d;
   
 }
-.sidebar li a .links_name{
+.sidebarl li a .links_namel{
   color: #11101D;
   font-size: 15px;
   font-weight: 400;
@@ -146,27 +86,25 @@
   transition: 0.4s;
 }
 
-.sidebar li a .links_name:hover{
+.sidebarl li a .links_namel:hover{
   color: #FFF;
 }
-
-.sidebar.open li a .links_name{
-  opacity: 1;
-  pointer-events: auto;
-}
-.sidebar li a:hover .links_name,
-.sidebar li a:hover i{
+.sidebarl li a:hover .links_namel,
+.sidebarl li a:hover i{
   transition: all 0.5s ease;
   color: #FFF;
   
 }
-.sidebar li i{
-  height: 50px;
-  line-height: 50px;
-  font-size: 18px;
-  border-radius: 12px;
+
+.sidebarl li.profilel .namel,
+.sidebarl li.profilel .jobl{
+  font-size: 15px;
+  font-weight: 400;
+  color: #FFF;
+  white-space: nowrap;
 }
-.sidebar li.profile{
+
+.sidebarl li.profilel{
   position: fixed;
   height: 60px;
   width: 78px;
@@ -177,32 +115,8 @@
   transition: all 0.5s ease;
   overflow: hidden;
 }
-.sidebar.open li.profile{
-  width: 250px;
-}
-.sidebar li .profile-details{
-  display: flex;
-  align-items: center;
-  flex-wrap: nowrap;
-}
-.sidebar li img{
-  height: 45px;
-  width: 45px;
-  object-fit: cover;
-  border-radius: 6px;
-  margin-right: 10px;
-}
-.sidebar li.profile .name,
-.sidebar li.profile .job{
-  font-size: 15px;
-  font-weight: 400;
-  color: #FFF;
-  white-space: nowrap;
-}
-.sidebar li.profile .job{
-  font-size: 12px;
-}
-.sidebar .profile #log_out{
+
+.sidebarl .profilel #log_outl{
   position: absolute;
   top: 50%;
   right: 0;
@@ -214,7 +128,7 @@
   border-radius: 0px;
   transition: all 0.5s ease;
 }
-.sidebar.open .profile #log_out{
+.sidebarl.openl .profilel #log_outl{
   width: 50px;
   background: none;
   color: #FFF;
@@ -229,10 +143,7 @@
   transition: all 0.5s ease;
   z-index: 2;
 }
-.sidebar.open ~ .home-section{
-  left: 250px;
-  width: calc(100% - 250px);
-}
+
 .home-section .text{
   display: inline-block;
   color: #11101d;
@@ -240,16 +151,355 @@
   font-weight: 500;
   margin: 18px
 }
+
+
+.sidebarl.openl{
+  width: 250px;
+}
+.sidebarl .logo-detailsl{
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.sidebarl .logo-detailsl .icon{
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+
+.sidebarl.openl .logo-detailsl .icon,
+.sidebarl.openl .logo-detailsl .logo_namel{
+  opacity: 1;
+}
+.sidebarl .logo-detailsl #btn{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: all 0.4s ease;
+  font-size: 23px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.sidebarl.openl .logo-detailsl #btn{
+  text-align: right;
+}
+
+.sidebarl .nav-list{
+  margin-top: 20px;
+  height: 100%;
+}
+.sidebarl li{
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+
+.sidebarl li:hover .tooltip{
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sidebarl.openl li .tooltip{
+  display: none;
+}
+
+
+
+
+
+
+.sidebarl.openl li a .links_namel{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebarl li i{
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
+}
+
+.sidebarl.openl li.profilel{
+  width: 250px;
+}
+.sidebarl li .profile-detailsl{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.sidebarl li img{
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+.sidebarl li.profilel .jobl{
+  font-size: 12px;
+}
+
+.sidebarl.openl ~ .home-section{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+
 @media (max-width: 420px) {
-  .sidebar li .tooltip{
+  .sidebarl li .tooltip{
     display: none;
   }
 }
 
-ol,ul{
-  padding-left: 0 !important;
+
+
+/***********night mode************/
+
+.sidebard{
+  position: fixed;
+  border-radius: 0 20px 20px 0;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 78px;
+  background: #333d82;
+  padding: 6px 14px;
+  z-index: 99;
+  transition: all 0.5s ease;
 }
 
-input{
-  outline: none !important;
+.sidebard .logo-detailsd .logo_named{
+  color: #FFF;
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all 0.5s ease;
 }
+.sidebard i{
+  color: #fff;
+  height: 60px;
+  min-width: 50px;
+  font-size: 28px;
+  text-align: center;
+  line-height: 60px;
+}
+
+.sidebard li .tooltip{
+  position: absolute;
+  top: -20px;
+  left: calc(100% + 15px);
+  z-index: 3;
+  background: #fadb69;
+  box-shadow: 0 5px 10px #080808;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: 0s;
+}
+
+.sidebard li a{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  background: #11101d;
+}
+.sidebard li a:hover{
+  background: #fadb69;
+  
+}
+.sidebard li a .links_named{
+  color: #FFF;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+
+.sidebard li a .links_named:hover{
+  color: #11101d;
+}
+.sidebard li a:hover .links_named,
+.sidebard li a:hover i{
+  transition: all 0.5s ease;
+  color: #11101d;
+  
+}
+
+.sidebard li.profiled .named,
+.sidebard li.profiled .jobd{
+  font-size: 15px;
+  font-weight: 400;
+  color: #FFF;
+  white-space: nowrap;
+}
+
+.sidebard li.profiled{
+  position: fixed;
+  height: 60px;
+  width: 78px;
+  left: 0;
+  bottom: -8px;
+  padding: 10px 14px;
+  background: #1d1b31;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+
+.sidebard .profiled #log_outd{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: #11101d;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 0px;
+  transition: all 0.5s ease;
+}
+.sidebard.opend .profiled #log_outd{
+  width: 50px;
+  background: none;
+  color: #FFF;
+}
+.home-section{
+  position: relative;
+  background: #E4E9F7;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+.home-section .text{
+  display: inline-block;
+  color: #11101d;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px
+}
+
+
+.sidebard.opend{
+  width: 250px;
+}
+.sidebard .logo-detailsd{
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.sidebard .logo-detailsd .icon{
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+
+.sidebard.opend .logo-detailsd .icon,
+.sidebard.opend .logo-detailsd .logo_named{
+  opacity: 1;
+}
+.sidebard .logo-detailsd #btn{
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: all 0.4s ease;
+  font-size: 23px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.sidebard.opend .logo-detailsd #btn{
+  text-align: right;
+}
+
+.sidebard .nav-list{
+  margin-top: 20px;
+  height: 100%;
+}
+.sidebard li{
+  position: relative;
+  margin: 8px 0;
+  list-style: none;
+}
+
+.sidebard li:hover .tooltip{
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sidebard.opend li .tooltip{
+  display: none;
+}
+
+
+
+
+
+
+.sidebard.opend li a .links_named{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebard li i{
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  border-radius: 12px;
+}
+
+.sidebard.opend li.profiled{
+  width: 250px;
+}
+.sidebard li .profile-detailsd{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.sidebard li img{
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+.sidebard li.profiled .jobd{
+  font-size: 12px;
+}
+
+.sidebard.opend ~ .home-section{
+  left: 250px;
+  width: calc(100% - 250px);
+}
+
+@media (max-width: 420px) {
+  .sidebard li .tooltip{
+    display: none;
+  }
+}
+
+

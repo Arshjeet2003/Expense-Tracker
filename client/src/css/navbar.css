@@ -1,47 +1,76 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  
+@import "index.css";
+
+
+.plus-sign {
+  font-size: 1.8em;
+  margin-left: 5px;
+  vertical-align: middle;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  
+.navbar-collapse{
+  display: flex;
 }
 
 
 
-#neubar {
-      background: #4D4DFF;
-      box-shadow: 4px 6px 12px rgba(0,0,0,0.4);
-      border-bottom-left-radius: 25px;
-      border-bottom-right-radius: 25px;
-    }
-    
-    .nav-item .active {
-      border-radius: 6px;
-      background: linear-gradient(145deg, #4d4dbd, #3131c2);
-      display: inline-block;
-      
-    }
-   
-    #neubar .nav-item {
-      margin : auto 4px;
-    }
-    #neubar a {
-    
-      padding-left:12px;
-      padding-right:12px;
-      color: #fff;
-    }
-    .plus-sign
-    {
-        font-size: 1.8em;
-        margin-left: 5px;
-        vertical-align: middle;
-    }
-    a.navbar-brand {
-      color: #454545
-    }
+
+
+/* light mode */
+#neubarl {
+  background: #4d4dff;
+  box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.4);
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.nav-iteml .activel {
+  border-radius: 6px;
+  background: linear-gradient(145deg, #4d4dbd, #3131c2);
+  display: inline-block;
+}
+a.navbar-brandl {
+  color: #454545;
+}
+
+#neubarl a {
+  padding-left: 12px;
+  padding-right: 12px;
+  color: #fff;
+}
+/* 
+li.nav-iteml{
+  right: 0;
+  position: absolute;
+} */
+
+
+
+
+/* night mode */
+#neubard {
+  background: #333d82;
+  box-shadow: 4px 6px 12px #080808;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.nav-itemd .actived {
+  border-radius: 6px;
+  background: linear-gradient(145deg, #1f2863, #495497);
+  display: inline-block;
+}
+a.navbar-brandd {
+  color: #4545;
+}
+
+#neubard a {
+  padding-left: 12px;
+  padding-right: 12px;
+  color: #fff;
+}
+
+/* li.nav-itemd{
+  right: 0;
+  position: absolute;
+} */
