@@ -567,6 +567,7 @@ const ChartComponent = (props) => {
 
   return (
     <div>
+      <div className="text-center"></div>
       <div className="graphs">
         <div style={chartContainerStyles}>
           <Bar data={data1} options={chartOptions} />
@@ -578,7 +579,6 @@ const ChartComponent = (props) => {
           <Pie data={PieData1} options={options}></Pie>
         </div>
       </div>
-
       <div class="row btns">
         <div class="col-6 ghghg">
           <div className="buttons-for-graph">
@@ -615,7 +615,6 @@ const ChartComponent = (props) => {
               onClick={changeSelectedDateNext}
             >
               Next
-              
             </button>
           </div>
         </div>

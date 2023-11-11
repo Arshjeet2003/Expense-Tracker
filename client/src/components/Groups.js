@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "./Sidebar";
 import "bootstrap";
 import groupContext from "../context/groups/groupContext";
+import themeContext from "../context/theme/themeContext";
 import GroupCard from "./GroupCard";
 import Navbar from "./Navbar";
 import "../css/Groups.css";
@@ -10,6 +11,8 @@ import "../css/Groups.css";
 const Groups = () => {
   const context = useContext(groupContext);
   const { groups, addGroup, getGroups, deleteGroup, editGroup } = context;
+  const context1 = useContext(themeContext);
+  const { theme } = context1;
   const [group, setGroup] = useState({ id: "", ename: "", edescription: "" });
   const [group1, setGroup1] = useState({ name: "", description: "" });
   const ref = useRef(null);
@@ -52,7 +55,11 @@ const Groups = () => {
   };
   return (
     <>
-      <div>
+      <div
+        className={`${
+          theme === "light" ? "complete-groupl" : "complete-groupd"
+        }`}
+      >
         <Navbar />
         <Sidebar />
         <div className="container complete">
@@ -62,7 +69,9 @@ const Groups = () => {
               <button
                 type="submit"
                 onClick={createGroup}
-                className="btn transparent bgroup"
+                className={`btn transparent ${
+                  theme === "light" ? "bgroupl" : "bgroupd"
+                }`}
                 id="Create-group"
                 style={{ marginRight: 150 }}
               >
@@ -70,7 +79,11 @@ const Groups = () => {
               </button>
             </div>
           </div>
-          <div className="row my-3 card-container">
+          <div
+            className={`row my-3 card-container ${
+              theme === "light" ? "card-headingl" : "card-headingd"
+            }`}
+          >
             <h2 style={{ paddingLeft: 40 }}>My Groups</h2>
             <div className="container mx-2">
               {groups.length === 0 && "No groups to display"}
@@ -170,11 +183,13 @@ const Groups = () => {
                       onChange={onChange1}
                     />
                   </div>
-                  <div className="mb-3" style={{paddingLeft: 40}}>
+                  <div className="mb-3" style={{ paddingLeft: 40 }}>
                     <label htmlFor="edescription" className="form-label">
                       Description
                     </label>
-                    <textarea rows="5" cols="33"
+                    <textarea
+                      rows="5"
+                      cols="33"
                       type=""
                       className="form-control"
                       required
@@ -182,8 +197,7 @@ const Groups = () => {
                       name="description"
                       value={group1.description}
                       onChange={onChange1}
-                      >
-                      </textarea>
+                    ></textarea>
                   </div>
                 </form>
               </div>

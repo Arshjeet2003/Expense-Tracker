@@ -1,15 +1,14 @@
 html, body {
     height: 100%;
     margin: 0;
+    z-index: 1;
   }
   /* Full height container */
   .full-height {
     min-height: 89vh;
   }
   /* Styles for the borders, replace or remove these with your own styles */
-  .bordered {
-    border: 2px solid blue;
-  }
+  
 
   .upper{
        height: 60%;

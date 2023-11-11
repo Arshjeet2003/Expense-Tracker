@@ -44,10 +44,10 @@ const Dashboard = () => {
 
 
   return (
-    <div>
+    <div className="full-height">
       <Navbar data={data}/>
       <Sidebar />
-      <div className="container-fluid full-height">
+      <div className="container-fluid">
         <div className="row full-height">
           {/* Left Side */}
           <div className="col-md-8 full-height bordered">
