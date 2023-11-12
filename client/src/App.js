@@ -13,58 +13,34 @@ import Transactions from './components/Transactions.js';
 import Groups from './components/Groups.js';
 import GroupState from './context/groups/GroupState.js';
 import Quickadd from './components/Quickadd.js';
-import ThemeState from './context/theme/ThemeState.js';
-function App() {
-  // const[alert,setAlert] = useState(null);
-  
-  // const showAlert = (message,type)=>{
-  //   setAlert({
-  //     msg: message,
-  //     type: type
-  //   })
-  //   setTimeout(() => {
-  //     setAlert(null);
-  //   }, 1500);
-  // }
+import Conversions from './components/Conversions.js';
 
+function App() {
   return (
     <div>
-      <ThemeState>
-        <FriendState>
-          <AuthState>
-            <GroupState>
-              <TransactionState>
-                <BrowserRouter>
-                  <Routes>
-                    {/* <Route exact path="/" element={<EditTransaction/>}></Route> */}
-                    <Route exact path="/about" element={<About />}></Route>
-                    <Route exact path="/login" element={<Login />}></Route>
-                    <Route
-                      exact
-                      path="/gettransaction"
-                      element={<TransactionGrid />}
-                    ></Route>
-                    <Route exact path="/" element={<Dashboard />}></Route>
-                    <Route exact path="/friends" element={<Friends />}></Route>
-                    <Route exact path="/groups" element={<Groups />}></Route>
-                    <Route
-                      exact
-                      path="/transactions"
-                      element={<Transactions />}
-                    ></Route>
-                    <Route path="/group/:id" element={<GroupDetails />}></Route>
-                    <Route
-                      exact
-                      path="/quickadd"
-                      element={<Quickadd />}
-                    ></Route>
-                  </Routes>
-                </BrowserRouter>
-              </TransactionState>
-            </GroupState>
-          </AuthState>
-        </FriendState>
-      </ThemeState>
+      <FriendState>
+        <AuthState>
+          <GroupState>
+            <TransactionState>
+              <BrowserRouter>
+                <Routes>
+                  {/* <Route exact path="/" element={<EditTransaction/>}></Route> */}
+          <Route exact path="/about" element={<About/>}></Route>
+          <Route exact path="/login" element={<Login/>}></Route>
+          <Route exact path="/gettransaction" element={<TransactionGrid/>}></Route>
+          <Route exact path="/" element={<Dashboard/>}></Route>
+          <Route exact path="/friends" element={<Friends/>}></Route>
+          <Route exact path="/groups" element={<Groups/>}></Route>
+          <Route exact path="/transactions" element={<Transactions/>}></Route>
+          <Route path="/group/:id" element={<GroupDetails />}></Route>
+          <Route exact path="/quickadd" element={<Quickadd/>}></Route>
+          <Route exact path="/Conversions" element={<Conversions/>}></Route>
+        </Routes>
+      </BrowserRouter>
+    </TransactionState>
+    </GroupState>
+    </AuthState>
+    </FriendState>
     </div>
   );
 }

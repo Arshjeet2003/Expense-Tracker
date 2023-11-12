@@ -1,0 +1,40 @@
+/* Conversions.css */
+
+.converter-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  select, input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+  }
+  
+  .result-container {
+    margin-top: 20px;
+  }
+  
+  h1, h2 {
+    text-align: center;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 16px;
+  }
+  
