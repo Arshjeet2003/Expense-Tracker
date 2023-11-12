@@ -1,6 +1,8 @@
 import React, { useState,useContext, useEffect } from "react";
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+import "../css/TransactionGrid.css";
+import themeContext from "../context/theme/themeContext";
 // import Header from "components/Header";
 import DataGridCustomToolbar from "./DataGridCustomToolbar.js";
 import transactionContext from '../context/transactions/transactionContext.js';
@@ -12,7 +14,8 @@ const TransactionGrid = () => {
     const [sort, setSort] = useState({});
     const [search, setSearch] = useState("");
     const [data,setData] = useState({});
-
+     const context1 = useContext(themeContext);
+     const { theme } = context1;
     const [searchInput, setSearchInput] = useState("");
 
     useEffect(() => {
@@ -57,59 +60,74 @@ const TransactionGrid = () => {
         flex: 1,
         renderCell: (params) => {return (
           <a
-            style={{ color: "#4D4DFF" }}
+            style={{ color: `${theme === "light" ? "#4D4DFF" : "#8989f5"}` }}
             target="_blank"
+            rel="noreferrer"
             href={`${params.value}`}
-          >Bill</a>
+          >
+            Bill
+          </a>
         );} 
       }
     ];
   return (
-    <Box>
-      <Box m="1.5rem 2.5rem">
-        {/* <Header title="TRANSACTIONS" subtitle="Entire list of transactions" /> */}
-        <Box
-          height="80vh"
-          sx={{
-            "& .MuiDataGrid-root": {
-              border: "none",
-            },
-            "& .MuiDataGrid-cell": {
-              borderBottom: "none",
-            },
-            "& .MuiDataGrid-columnHeaders": {
-              // backgroundColor: theme.palette.background.alt,
-              // color: theme.palette.secondary[100],
-              borderBottom: "none",
-            },
-            "& .MuiDataGrid-virtualScroller": {
-              // backgroundColor: theme.palette.primary.light,
-            },
-            "& .MuiDataGrid-footerContainer": {
-              // backgroundColor: theme.palette.background.alt,
-              // color: theme.palette.secondary[100],
-              borderTop: "none",
-            },
-            "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-              // color: `${theme.palette.secondary[200]} !important`,
-            },
-          }}
-        >
-          <DataGrid
-            loading={!data}
-            getRowId={(row) => row._id}
-            rows={data.transactions || []}
-            rowCount={data.total}
-            columns={columns}
-            onSortModelChange={(newSortModel) => setSort(...newSortModel)}
-            components={{ Toolbar: DataGridCustomToolbar }}
-            componentsProps={{
-              toolbar: { searchInput, setSearchInput, setSearch },
-            }}
-          />
+    <div
+      className={`${
+        theme === "light" ? "complete-transactionl" : "complete-transactiond"
+      }`}
+    >
+      <div className="close">
+        <Box>
+          <Box m="-1.9rem 1.5rem">
+            {/* <Header title="TRANSACTIONS" subtitle="Entire list of transactions" /> */}
+            <Box
+              height="80vh"
+              sx={{
+                "& .MuiDataGrid-root": {
+                  border: "none",
+                },
+                "& .MuiDataGrid-cell": {
+                  borderBottom: "none",
+                },
+                "& .MuiDataGrid-columnHeaders": {
+                  // backgroundColor: theme.palette.background.alt,
+                  // color: theme.palette.secondary[100],
+                  color: `${theme === "light" ? "black" : "#fff"}`,
+                  borderBottom: "none",
+                },
+                "& .MuiDataGrid-virtualScroller": {
+                  // backgroundColor: theme.palette.primary.light,
+                  color: `${theme === "light" ? "black" : "#fff"}`,
+                },
+                "& .MuiDataGrid-footerContainer": {
+                  // backgroundColor: theme.palette.background.alt,
+                  // color: theme.palette.secondary[100],
+                  
+                  borderTop: "none",
+                },
+                "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+                  color: `${theme === "light" ? "black" : "#8989f5"}`,
+                  // color: `${theme.palette.secondary[200]} !important`,
+                },
+              }}
+            >
+              <DataGrid
+                loading={!data}
+                getRowId={(row) => row._id}
+                rows={data.transactions || []}
+                rowCount={data.total}
+                columns={columns}
+                onSortModelChange={(newSortModel) => setSort(...newSortModel)}
+                components={{ Toolbar: DataGridCustomToolbar }}
+                componentsProps={{
+                  toolbar: { searchInput, setSearchInput, setSearch },
+                }}
+              />
+            </Box>
+          </Box>
         </Box>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }
 export default TransactionGrid;

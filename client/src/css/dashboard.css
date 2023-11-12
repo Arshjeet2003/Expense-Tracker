@@ -4,11 +4,15 @@ html, body {
     z-index: 1;
   }
   /* Full height container */
-  .full-height {
-    min-height: 89vh;
+  .full-heightl {
+    min-height: 100vh;
+     background: #fff;
   }
-  /* Styles for the borders, replace or remove these with your own styles */
-  
+
+  .full-heightd{
+    min-height: 100vh;
+    background: #25273f;
+  }
 
   .upper{
        height: 60%;

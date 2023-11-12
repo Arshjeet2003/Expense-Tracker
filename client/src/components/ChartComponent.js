@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/chartComponent.css";
+import themeContext from "../context/theme/themeContext";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -23,10 +24,17 @@ ChartJS.register(
 );
 
 const ChartComponent = (props) => {
+  const [counter, setCounter] = useState(1);
+
+  const handleRadioClick = () => {
+    setCounter((prevCounter) => (prevCounter % 2) + 1);
+  };
+
   const transactionData = props?.data?.transactions;
 
   const today = new Date();
-
+  const context1 = useContext(themeContext);
+  const { theme } = context1;
   const [dateType, setDataType] = useState("Daily");
 
   const [selectedDate, setSelectedDate] = useState(today);
@@ -34,14 +42,14 @@ const ChartComponent = (props) => {
   const [selectedYear, setSelectedYear] = useState(today);
 
   const backgroundColors = [
-    "aqua",
-    "orangered",
-    "purple",
-    "gold",
-    "lime",
-    "teal",
-    "coral",
-    "violet",
+    "#003f5c",
+    "#58508d",
+    "#bc5090",
+    "#ff6361",
+    "#60a726",
+    "#ffa600",
+    "#15ab86",
+    "#cb0083",
   ];
 
   const [PieData1, setPieData1] = useState({
@@ -542,86 +550,143 @@ const ChartComponent = (props) => {
   };
 
   const chartContainerStyles = {
-    height: "300px",
-    width: "20%",
-    marginLeft: "100px",
+    height: "225px",
+    width: "275px",
+    marginLeft: "20px",
     borderRadius: "30px",
     // border:"1px solid black",
     // boxShadow: "black",
   };
 
-  const chartContainerStyles1 = {
-    height: "300px",
-    width: "20%",
-    marginLeft: "20px",
-    borderRadius: "30px",
-  };
-
   const chartContainerStylesPie = {
-    height: "300px",
-    width: "33%",
-    marginLeft: "80px",
+    height: "400px",
+    width: "640px",
+    marginLeft: "150px",
+    borderRadius: "30px",
+    display: "flex",
   };
 
   const options = {};
 
   return (
     <div>
-      <div className="text-center"></div>
-      <div className="graphs">
-        <div style={chartContainerStyles}>
-          <Bar data={data1} options={chartOptions} />
-        </div>
-        <div style={chartContainerStyles1}>
-          <Bar data={data2} options={chartOptions} />
-        </div>
-        <div style={chartContainerStylesPie}>
-          <Pie data={PieData1} options={options}></Pie>
-        </div>
-      </div>
-      <div className="row btns">
-        <div className="col-6 ghghg">
-          <div className="buttons-for-graph">
-            <button className="single-button bchart" onClick={changeDateType}>
-              Type
-            </button>
-            <button
-              className="single-button bchart"
-              onClick={changeSelectedDate}
-            >
-              Prev
-            </button>
-            <button
-              className="single-button bchart"
-              onClick={changeSelectedDateNext}
-            >
-              Next
-            </button>
+      <div className={`graphs ${theme === "light" ? "sliderl" : "sliderd"}`}>
+        <div className="slides">
+          <input
+            type="radio"
+            name="radio-btn"
+            id="radio1"
+            checked={counter === 1}
+            onChange={handleRadioClick}
+          />
+          <input
+            type="radio"
+            name="radio-btn"
+            id="radio2"
+            checked={counter === 2}
+            onChange={handleRadioClick}
+          />
+          <div
+            className="slide first"
+            style={{ display: "flex", top: "25%", position: "relative" }}
+          >
+            <div style={chartContainerStyles}>
+              <Bar data={data1} options={chartOptions} />
+            </div>
+            <div style={chartContainerStyles}>
+              <Bar data={data2} options={chartOptions} />
+            </div>
+
+            <div className="row btns">
+              <div class="col-6 ghghg">
+                <div className="buttons-for-graph">
+                  <button
+                    className={`single-button ${
+                      theme === "light" ? "bchartl" : "bchartd"
+                    }`}
+                    onClick={changeDateType}
+                  >
+                    Type
+                  </button>
+                  <button
+                    className={`single-button ${
+                      theme === "light" ? "bchartl" : "bchartd"
+                    }`}
+                    onClick={changeSelectedDate}
+                  >
+                    Prev
+                  </button>
+                  <button
+                    className={`single-button ${
+                      theme === "light" ? "bchartl" : "bchartd"
+                    }`}
+                    onClick={changeSelectedDateNext}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="slide">
+            <div style={chartContainerStylesPie}>
+              <Pie data={PieData1} options={options}></Pie>
+              <div className="row btns">
+                <div class="col-6 ghgh">
+                  <div className="buttons-for-graph">
+                    <button
+                      className={`single-button ${
+                        theme === "light" ? "bchartl" : "bchartd"
+                      }`}
+                      onClick={changeDateType}
+                    >
+                      Type
+                    </button>
+                    <button
+                      className={`single-button ${
+                        theme === "light" ? "bchartl" : "bchartd"
+                      }`}
+                      onClick={changeSelectedDate}
+                    >
+                      Prev
+                    </button>
+                    <button
+                      className={`single-button ${
+                        theme === "light" ? "bchartl" : "bchartd"
+                      }`}
+                      onClick={changeSelectedDateNext}
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="navigation-auto">
+            <div className="auto-btn1" />
+            <div className="auto-btn2" />
           </div>
         </div>
-        <div className="col-6 ghghg">
-          <div className="buttons-for-graph">
-            <button className="single-button bchart" onClick={changeDateType}>
-              Type
-            </button>
-            <button
-              className="single-button bchart"
-              onClick={changeSelectedDate}
-            >
-              Prev
-            </button>
-            <button
-              className="single-button bchart"
-              onClick={changeSelectedDateNext}
-            >
-              Next
-            </button>
-          </div>
+        <div className="navigation-manual">
+          <label
+            htmlFor="radio1"
+            className={`single-button ${
+              theme === "light" ? "manual-btnl" : "manual-btnd"
+            }`}
+          >
+            Bar
+          </label>
+          <label
+            htmlFor="radio2"
+            className={`single-button ${
+              theme === "light" ? "manual-btnl" : "manual-btnd"
+            }`}
+          >
+            Pie
+          </label>
         </div>
       </div>
-      {/* <div className="totalButtons">
-      
-      </div> */}
     </div>
   );
 };
