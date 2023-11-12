@@ -6,10 +6,13 @@ import "../css/dashboard.css";
 import transactionContext from '../context/transactions/transactionContext.js';
 import { SearchBar } from "./SearchBar.js";
 import ChartComponent from "./ChartComponent.js";
+import themeContext from "../context/theme/themeContext";
 
 const Dashboard = () => {
 
   const context = useContext(transactionContext);
+  const context1 = useContext(themeContext);
+  const { theme } = context1;
   const { getUserTransactions } = context;
   const [data,setData] = useState({});
   useEffect(() => {
@@ -44,23 +47,27 @@ const Dashboard = () => {
 
 
   return (
-    <div className="full-height">
-      <Navbar data={data}/>
+    <div className={`${
+          theme === "light" ? "full-heightl" : "full-heightd"
+        }`}>
+      <Navbar data={data} />
       <Sidebar />
       <div className="container-fluid">
         <div className="row full-height">
           {/* Left Side */}
           <div className="col-md-8 full-height bordered">
-          <ChartComponent data={data}/>
-          {/* <ChartComponent data={data}/> */}
+            <ChartComponent data={data} />
+            {/* <ChartComponent data={data}/> */}
             {/* Content here */}
           </div>
           {/* Right Side */}
           <div className="col-md-4 full-height">
             {/* Upper Right Section */}
             <div className="row  bordered upper">
-              <SearchBar/>
-              <div className="col-12">{/* Upper Right Content here */}</div>
+              <div className="col-12">
+                {/* Upper Right Content here */}
+                <SearchBar />
+              </div>
             </div>
             {/* Lower Right Section */}
             <div className="row bordered lower">

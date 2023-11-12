@@ -1,0 +1,36 @@
+@import "index.css";
+
+.complete-transactionl{
+    background: #fff;
+    min-height: 100vh;
+}
+
+.complete-transactiond{
+    background: #25273f;
+    min-height: 100vh;
+}
+
+
+
+.close{
+    margin-left: 60px;
+}
+
+.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input{
+    padding-bottom: 20px;
+}
+
+.css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon{
+    top: calc(30% - 0.5em) !important;
+}
+
+.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar .MuiTablePagination-actions
+{
+    top: -10px;
+    position: relative;
+}
+
+
+.css-jycsbp .MuiDataGrid-toolbarContainer .MuiButton-text{
+    color: #4D4DFF;
+}

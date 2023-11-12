@@ -1,41 +1,102 @@
-.buttons-for-graph{
-    display: flex;
-    text-align: center;
-    justify-content: center;
+.buttons-for-graph {
+  /* display: flex; */
+  text-align: center;
+  justify-content: center;
 
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
-.total-buttons{
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    position: relative;
-    padding-top: 20px;
+.total-buttons {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  position: relative;
 }
 
-.single-button{
-    margin-left: 20px;
+.single-button {
+  margin-left: 20px;
 }
 
-.btns{
-    top: 30px;
+.btns {
+  top: -50px;
+  position: relative;
+  margin-left: 10px;
 }
 
-.graphs{
-    display: flex;
-    top: 40px;
-    position: relative;
+.graphs {
+  display: flex;
+  top: 40px;
+  position: relative;
 }
 
-.ghghg{
-    padding-top: 40px;
+/* .ghghg {
+  padding-top: 40px;
+} */
+
+.slides {
+  width: 500%;
+  height: 300px;
+  display: flex;
 }
 
+.slides input {
+  display: none;
+}
 
-.bchart {
+.slide {
+  width: 50%;
+  transition: 2s;
+}
+
+.slide img {
+  height: 450px;
+  width: 640px;
+  margin-left: 20px;
+  border-radius: 30px;
+}
+
+.first img {
+  height: 225px;
+  width: 320px;
+  margin-left: 20px;
+  border-radius: 30px;
+}
+
+.navigation-manual {
+  position: absolute;
+  width: 640px;
+  margin-top: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.manual-btn:not(:last-child) {
+  margin-right: 40px;
+}
+
+#radio1:checked ~ .first {
+  margin-left: 0;
+}
+
+#radio2:checked ~ .first {
+  margin-left: -52%;
+}
+
+.ghghg {
+  top: 23%;
+  position: relative;
+}
+
+.ghgh {
+  top: 40%;
+  position: relative;
+}
+
+/************light mode************/
+
+.bchartl {
   width: 75px;
-  background-color: #4D4DFF;
+  background-color: #4d4dff;
   border: none;
   outline: none;
   height: 49px;
@@ -49,10 +110,98 @@
   margin-left: 15px;
 }
 
-.bchart:hover {
+.bchartl:hover {
   background-color: #fff;
-  border: 2px solid black;
-  color: #4D4DFF;
+  border: 2px solid #4d4dff;
+  color: #4d4dff;
 }
 
+.sliderl {
+  width: 720px;
+  height: 450px;
+  border-radius: 50px;
+  box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.4);
+  top: 10px;
+  overflow: hidden;
+  border: 5px solid #4d4dff;
+  margin-left: 100px;
+}
 
+.manual-btnl {
+  border: 2px solid #4d4dff;
+  background: #4d4dff;
+  color: #fff;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 1s;
+  width: 100px;
+  height: 30px;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+.manual-btnl:hover {
+  background: #fff;
+  border: 2px solid #4d4dff;
+  color: #4d4dff;
+}
+
+/************night mode************/
+
+.bchartd {
+  width: 75px;
+  background-color: #333d82;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+  margin-left: 15px;
+}
+
+.bchartd:hover {
+  background-color: #25273f;
+  border: 2px solid #333d82;
+  color: #fff;
+}
+
+.sliderd {
+  width: 720px;
+  height: 450px;
+  border-radius: 50px;
+  box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.4);
+  top: 10px;
+  overflow: hidden;
+  border: 5px solid #fadb69;
+  margin-left: 100px;
+}
+
+.manual-btnd {
+  border: 2px solid #333d82;
+  background: #333d82;
+  color: #fff;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 1s;
+  width: 100px;
+  height: 30px;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+.manual-btnd:hover {
+  background: #25273f;
+  border: 2px solid #333d82;
+  color: #fff;
+}
