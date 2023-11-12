@@ -14,10 +14,12 @@ import Groups from './components/Groups.js';
 import GroupState from './context/groups/GroupState.js';
 import Quickadd from './components/Quickadd.js';
 import Conversions from './components/Conversions.js';
+import ThemeState from './context/theme/ThemeState.js';
 
 function App() {
   return (
     <div>
+      <ThemeState>
       <FriendState>
         <AuthState>
           <GroupState>
@@ -41,6 +43,7 @@ function App() {
     </GroupState>
     </AuthState>
     </FriendState>
+    </ThemeState>
     </div>
   );
 }

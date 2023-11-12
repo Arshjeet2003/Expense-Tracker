@@ -15,7 +15,7 @@ input{
 }
 
 
- /************light mode************/
+ /*****light mode*****/
 
 .sidebarl{
   position: fixed;
@@ -259,7 +259,7 @@ input{
 
 
 
-/***********night mode************/
+/****night mode*****/
 
 .sidebard{
   position: fixed;
@@ -501,5 +501,3 @@ input{
     display: none;
   }
 }
-
-

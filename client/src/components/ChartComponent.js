@@ -579,8 +579,8 @@ const ChartComponent = (props) => {
           <Pie data={PieData1} options={options}></Pie>
         </div>
       </div>
-      <div class="row btns">
-        <div class="col-6 ghghg">
+      <div className="row btns">
+        <div className="col-6 ghghg">
           <div className="buttons-for-graph">
             <button className="single-button bchart" onClick={changeDateType}>
               Type
@@ -599,7 +599,7 @@ const ChartComponent = (props) => {
             </button>
           </div>
         </div>
-        <div class="col-6 ghghg">
+        <div className="col-6 ghghg">
           <div className="buttons-for-graph">
             <button className="single-button bchart" onClick={changeDateType}>
               Type
