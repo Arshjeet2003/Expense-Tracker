@@ -19,6 +19,7 @@ const Dashboard = () => {
   const { getUserTransactions } = context;
   const [propsData,setPropsData] = useState({value:"0"});
   const [data,setData] = useState({});
+  const [dataForNotification,setDataForNotification] = useState([]);
   useEffect(() => {
     getUserFriends();
     const fetchData = async () => {
@@ -31,32 +32,39 @@ const Dashboard = () => {
       }
     };
     fetchData(); // Call the async function to fetch data
-  }, []);
+  }, [data]);
 
 
   const giveNotification = () => {
     const today = new Date();
+    const notifications = [];
     if (data.transactions) {
       for (const transaction of data.transactions) {
-        if (transaction.recurring === "Yes") {
+        if (transaction.recurring === "Yes"){
           const Repeat = transaction.repeat;
           const transactionDate = new Date(transaction.date);
-  
           if (today.getDate() === transactionDate.getDate() + Number(Repeat)) {
-            // console.log(transaction.name);
+            notifications.push(transaction);
+          }
+        }
+        else{
+          const Due_date = new Date(transaction.dueDate);
+          if(today.getDate() === Due_date.getDate() ){
+            notifications.push(transaction);
           }
         }
       }
     }
+    setDataForNotification(notifications);
+    // console.log(notifications);
   }
-
 
   return (
     <>
     <div className={`${
           theme === "light" ? "full-heightl" : "full-heightd"
         }`}>
-      <Navbar data={data} />
+      <Navbar dataForNotification={dataForNotification} />
       <Sidebar />
       <div className="container-fluid">
         <div className="row full-height">
@@ -79,7 +87,7 @@ const Dashboard = () => {
                 {friends.length===0 && 'No Friends to display'}
                 </div>
                 {friends.map((friend) => (
-              <li key={friend.id}>{friend.name}</li>
+              <li key={friend.name}>{friend.name}</li>
               ))}
               </div>
               </div>

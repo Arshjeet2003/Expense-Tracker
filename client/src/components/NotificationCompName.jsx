@@ -4,9 +4,9 @@ const NotificationCompName = (props) => {
   return (
     <div
       className="search-result"
-      onClick={(e) => alert(`You selected ${props?.result.name}!`)}
+      onClick={(e) => alert(`Payment Due for ${props?.result.name}!`)}
     >
-      {props?.result.name}
+      Payment Due for {props?.result.name}
     </div>
   );
 };

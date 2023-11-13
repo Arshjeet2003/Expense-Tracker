@@ -23,14 +23,14 @@ const TransactionState = (props)=>{
         }
       };
 
-    const addTransactions = async (name,type,category,recurring,repeat,price,billUrl)=>{
+    const addTransactions = async (name,type,category,recurring,repeat,price,billUrl,dueDate)=>{
         const response = await fetch(`${host}/api/transactions/addtransaction`,{
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
                 'auth-token': localStorage.getItem('token')
             },
-            body: JSON.stringify({name,type,category,recurring,repeat,price,billUrl})
+            body: JSON.stringify({name,type,category,recurring,repeat,price,billUrl,dueDate})
         });
 
         const transaction = await response.json();
@@ -50,32 +50,34 @@ const TransactionState = (props)=>{
         setTransactions(newTransactions);
     }
 
-    const editTransaction = async (id,name,description,category,type,recurring,repeat)=>{
-        const response = await fetch(`${host}/api/transactions/updatetransaction/${id}`,{
-            method: 'PUT',
-            headers:{
-                'Content-Type': 'application/json',
-                'auth-token': localStorage.getItem('token')
-            },
-            body: JSON.stringify({name,description,category,type,recurring,repeat})
-        });
-        const json =  await response.json();
-        let newTransactions = await JSON.parse(JSON.stringify(transactions))
-        for(let index=0; index<newTransactions.length; index++){
-            const element = newTransactions[index];
-            if(element._id === id){
-                newTransactions[index].name = name;
-                newTransactions[index].description = description;
-                newTransactions[index].category = category;
-                newTransactions[index].recurring = recurring;
-                newTransactions[index].repeat = repeat;
-                break;
-            }
-        }
-        setTransactions(newTransactions);
-    }
+    // const editTransaction = async (id,name,description,category,type,recurring,repeat)=>{
+    //     const response = await fetch(`${host}/api/transactions/updatetransaction/${id}`,{
+    //         method: 'PUT',
+    //         headers:{
+    //             'Content-Type': 'application/json',
+    //             'auth-token': localStorage.getItem('token')
+    //         },
+    //         body: JSON.stringify({name,description,category,type,recurring,repeat})
+    //     });
+    //     const json =  await response.json();
+    //     let newTransactions = await JSON.parse(JSON.stringify(transactions))
+    //     for(let index=0; index<newTransactions.length; index++){
+    //         const element = newTransactions[index];
+    //         if(element._id === id){
+    //             newTransactions[index].name = name;
+    //             newTransactions[index].description = description;
+    //             newTransactions[index].category = category;
+    //             newTransactions[index].recurring = recurring;
+    //             newTransactions[index].repeat = repeat;
+    //             break;
+    //         }
+    //     }
+    //     setTransactions(newTransactions);
+    // }
+
+    
     return (
-        <TransactionContext.Provider value={{transactions,addTransactions,deleteTransaction,editTransaction,getUserTransactions}}>
+        <TransactionContext.Provider value={{transactions,addTransactions,deleteTransaction,getUserTransactions}}>
             {props.children}
         </TransactionContext.Provider>
     );
