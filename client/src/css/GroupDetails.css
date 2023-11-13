@@ -35,10 +35,10 @@
 }
 
 
-.wrap2{
+/* .wrap2{
     margin-left: 200px;
     /* background: green; */
-}
+/* }  */
 
 .left-side{
   text-align: center;
@@ -49,16 +49,13 @@
 
 .fixed-description {
   position: fixed;
-  top: 30%;
-  left: 50%;
+  
   z-index: 1;
-  width: 44.7%;
+ 
 }
 
 .fixed-members{
-  position: fixed;
-  top: 30%;
-  left: 10%;
+  position: fixed; 
 }
 
 .left-card{
@@ -86,9 +83,14 @@
   background: #fff;
 }
 
+li.singleUserl{
+  height: 33%;
+}
+
 .card-membersl{
   width: 500px;
   height: 290px;
+  margin-top: 18%;
   border: none;
   z-index: 2;
   background: #fff;
@@ -162,7 +164,7 @@
   padding: 20px;
   border-radius: 10px;
   margin-left: 50px auto;
-  max-width: 320px;
+  max-width: 500px;
   box-shadow: 5px 10px #d3c8df;
 }
 
@@ -172,15 +174,16 @@
   color: black;
 
   border: 5px solid #4d4dff;
-
+  justify-content: center;
+  text-align: center;
   position: relative;
   padding: 20px;
   border-radius: 10px;
   margin-left: 50px auto;
-  max-width: 320px;
+  max-width: 800px;
   box-shadow: 5px 10px #d3c8df;
   height: 150px;
-  max-width: 800px;
+  
 }
 
 
@@ -208,13 +211,14 @@
 li.singleUserl{
   font-size: 15px;
   list-style-type: none;
-  max-width:200px;
+  max-width:fit-content;
   border-radius: 40px;
   background: #acacac70;
   text-align: center;
   justify-content: center;
   display: flex;
   padding-right: 5px;
+  height: max-content;
   padding-top: 7px;
   margin-right: 5px;
   padding-left: 5px;
@@ -251,10 +255,16 @@ li.singleUserl{
   background: #25273f;
 }
 
+
+li.singleUserd{
+  height: 33%;
+}
+
 .card-membersd{
   width: 500px;
   height: 290px;
   border: none;
+  margin-top: 18%;
   z-index: 2;
   background: #25273f
 }
@@ -327,7 +337,7 @@ li.singleUserl{
   padding: 20px;
   border-radius: 10px;
   margin-left: 50px auto;
-  max-width: 320px;
+  max-width: 500px;
   box-shadow: 5px 10px black;
 }
 
@@ -337,7 +347,8 @@ li.singleUserl{
   color: #fff;
   background: #333d82;
   border: 5px solid #fadb69;
-
+  justify-content: center;
+  text-align: center;
   position: relative;
   padding: 20px;
   border-radius: 10px;
@@ -373,7 +384,8 @@ li.singleUserl{
 li.singleUserd{
   font-size: 15px;
   list-style-type: none;
-  max-width:200px;
+  max-width:fit-content;
+  height: max-content;
   border-radius: 40px;
   background: #acacac70;
   text-align: center;
@@ -406,3 +418,32 @@ li.singleUserd{
   background: #acacac19;
   border-radius: 40px;
 }
+
+
+
+.table-card {
+  /* box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%); */
+  width: 500px;
+  margin-top: 10%;
+  margin-left: 5%;
+  
+}
+.avatar.sm {
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 0.818125rem;
+}
+.table-nowrap .table td,
+.table-nowrap .table th {
+  white-space: nowrap;
+}
+.table > :not(caption) > * > * {
+  padding: 0.75rem 1.25rem;
+  border-bottom-width: 1px;
+}
+table th {
+  font-weight: 600;
+  outline: none;
+  /* background-color: #eeecfd !important; */
+}
+

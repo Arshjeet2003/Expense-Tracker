@@ -280,7 +280,7 @@ const Quickadd = () => {
                 <div className=" checkBox container-fluid col-md-12 ">
                   <label
                     className="mr-1"
-                    htmlFor="gender"
+                    
                     style={{
                       color: `${theme === "light" ? "black" : "#fff"}`,
                     }}
