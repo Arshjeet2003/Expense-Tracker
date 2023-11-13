@@ -11,8 +11,8 @@ import "../css/GroupDetails.css";
 const GroupDetails = () => {
   const { id } = useParams();
   const context = useContext(groupContext);
-   const context1 = useContext(themeContext);
-   const { theme } = context1;
+  const context1 = useContext(themeContext);
+  const { theme } = context1;
   const {
     getGroup,
     addGroupMember,
@@ -30,7 +30,7 @@ const GroupDetails = () => {
   const ref = useRef(null);
   const refClose = useRef(null);
 
-  const [propsData,setPropsData] = useState({value:id});
+  const [propsData, setPropsData] = useState({ value: id });
 
   useEffect(() => {
     // Fetch group data whenever a member is added or deleted
@@ -41,7 +41,7 @@ const GroupDetails = () => {
       .catch((error) => {
         console.error(error);
       });
-      
+
     setMemberChanged(false); // Reset memberChanged state
     setTransactionMade(false);
     getGroupTransactions(id)
@@ -204,6 +204,7 @@ const GroupDetails = () => {
                 className="material-symbols-outlined"
                 style={{
                   color: `${theme === "light" ? "#4d4dff" : "#fadb69"}`,
+                  paddingLeft: "4%",
                 }}
               >
                 groups
@@ -233,11 +234,19 @@ const GroupDetails = () => {
                 </button>
               </div>
             </div>
-            <div className="col-6 col-md-4 .suggestion">
-              <SearchBar propsData={propsData} />
+            <div className="col-6 col-md-4 .suggestion" style={{
+              zIndex: "2",
+              position: "absolute",
+              marginLeft: "60%",
+            }}>
+              <SearchBar propsData={propsData}/>
             </div>
           </div>
-          <div className="container" style={{ minHeight: "100vh" }}>
+          <div className="container" style={{
+            minHeight: "100vh",
+            zIndex: "1",
+            position: "relative",
+          }}>
             <div class="row">
               <div class="col-6">
                 {Object.keys(finalAns).map((giver) => (
@@ -245,22 +254,76 @@ const GroupDetails = () => {
                     <div className="row">
                       <div className="col-12 mb-3 mb-lg-5">
                         <div className="overflow-hidden card table-nowrap table-card">
-                          <div className="card-header d-flex justify-content-between align-items-center">
+                          <div
+                            className="card-header d-flex justify-content-between align-items-center"
+                            style={{
+                              color: `${theme === "light" ? "black" : "#fff"}`,
+                              background: `${
+                                theme === "light" ? "white" : "#333d82"
+                              }`,
+                              border: `${
+                                theme === "light" ? "1px solid #5f627d48" : "1px solid white"
+                              }`,
+                            }}
+                          >
                             <h5 className="mb-0">{giver} owes:</h5>
                           </div>
                           <div className="table-responsive">
                             <table className="table mb-0">
                               <thead className="small text-uppercase bg-body text-muted">
                                 <tr>
-                                  <th>Name</th>
-                                  <th>Amount(in dollors)</th>
-                                  <th className="text-end" />
+                                  <th
+                                    style={{
+                                      color: `${
+                                        theme === "light" ? "black" : "#fff"
+                                      }`,
+                                      background: `${
+                                        theme === "light" ? "white" : "#333d82"
+                                      }`,
+                                    }}
+                                  >
+                                    Name
+                                  </th>
+                                  <th
+                                    style={{
+                                      color: `${
+                                        theme === "light" ? "black" : "#fff"
+                                      }`,
+                                      background: `${
+                                        theme === "light" ? "white" : "#333d82"
+                                      }`,
+                                    }}
+                                  >
+                                    Amount(INR)
+                                  </th>
+                                  <th
+                                    style={{
+                                      color: `${
+                                        theme === "light" ? "black" : "#fff"
+                                      }`,
+                                      background: `${
+                                        theme === "light" ? "white" : "#333d82"
+                                      }`,
+                                    }}
+                                    className="text-end"
+                                  />
                                 </tr>
                               </thead>
                               <tbody>
                                 {finalAns[giver].map((transaction, index) => (
                                   <tr className="align-middle" key={index}>
-                                    <td>
+                                    <td
+                                      style={{
+                                        color: `${
+                                          theme === "light" ? "black" : "#fff"
+                                        }`,
+                                        background: `${
+                                          theme === "light"
+                                            ? "white"
+                                            : "#333d82"
+                                        }`,
+                                      }}
+                                    >
                                       <div className="d-flex align-items-center">
                                         <img
                                           src="https://bootdey.com/img/Content/avatar/avatar1.png"
@@ -274,20 +337,51 @@ const GroupDetails = () => {
                                         </div>
                                       </div>
                                     </td>
-                                    <td>{transaction.amount}</td>
-                                    <td className="text-end">
+                                    <td
+                                      style={{
+                                        color: `${
+                                          theme === "light" ? "black" : "#fff"
+                                        }`,
+                                        background: `${
+                                          theme === "light"
+                                            ? "white"
+                                            : "#333d82"
+                                        }`,
+                                      }}
+                                    >
+                                      {transaction.amount}
+                                    </td>
+                                    <td
+                                      className="text-end"
+                                      style={{
+                                        color: `${
+                                          theme === "light" ? "black" : "#fff"
+                                        }`,
+                                        background: `${
+                                          theme === "light"
+                                            ? "white"
+                                            : "#333d82"
+                                        }`,
+                                      }}
+                                    >
                                       <div className="drodown">
-                                        <a
-                                          data-bs-toggle="dropdown"
-                                          href="#"
-                                          className="btn p-1"
-                                          aria-expanded="false"
+                                        <i
+                                          class="material-symbols-outlined"
+                                          style={{
+                                            color: `${
+                                              theme === "light"
+                                                ? "black"
+                                                : "white"
+                                            }`,
+                                            background: `${
+                                              theme === "light"
+                                                ? "white"
+                                                : "#333d82"
+                                            }`,
+                                          }}
                                         >
-                                          <i
-                                            className="fa fa-bars"
-                                            aria-hidden="true"
-                                          />
-                                        </a>
+                                          currency_rupee
+                                        </i>
                                       </div>
                                     </td>
                                   </tr>
@@ -488,130 +582,6 @@ const GroupDetails = () => {
             </div>
           </div>
         </div>
-        {/* <div>
-          {Object.keys(finalAns).map((giver) => (
-            <div key={giver}>
-              <h2>{giver} owes:</h2>
-              <ul>
-                {finalAns[giver].map((transaction, index) => (
-                  <li key={index}>
-                    {transaction.receiver} - {transaction.amount}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div> */}
-        {/* arsh bhai ka code start */}
-        {/* <div className="row">
-          <div className="col-md-8">
-            <div className="group-details">
-              <h1>{group.name}</h1>
-              <p>{group.description}</p>
-              <form>
-                <div className="mb-3">
-                  <label htmlFor="username" className="form-label">
-                    Username
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    name="username"
-                    value={member.username}
-                    aria-describedby="emailHelp"
-                    onChange={(e) =>
-                      setMember({ ...member, username: e.target.value })
-                    }
-                  />
-                </div>
-                <button
-                  type="submit"
-                  onClick={handleClickAdd}
-                  className="btn btn-primary"
-                >
-                  Add Member
-                </button>
-                <button
-                  type="submit"
-                  onClick={handleClickDelete}
-                  className="btn btn-primary"
-                >
-                  Delete Member
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-8">
-            <h2>Group Members</h2>
-            <ul>
-              {group.users?.map((user) => (
-                <li key={user}>{user}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-8">
-            <h2>Add Group Expense</h2>
-            <form>
-              <div className="mb-3">
-                <label htmlFor="transactionCost" className="form-label">
-                  Transaction Cost
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="transactionCost"
-                  name="transactionCost"
-                  value={transaction.cost}
-                  onChange={handleTransactionCostChange}
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="transactionType" className="form-label">
-                  Transaction Type
-                </label>
-                <select
-                  className="form-select"
-                  id="transactionType"
-                  name="transactionType"
-                  value={transaction.type}
-                  onChange={handleTransactionTypeChange}
-                >
-                  <option value="credit">Credit</option>
-                  <option value="debit">Debit</option>
-                </select>
-              </div>
-              <h2>Group Member to Include</h2>
-              <ul className="list-group">{renderMemberCheckboxes()}</ul>
-              <button
-                type="button"
-                onClick={handleAddTransaction}
-                className="btn btn-primary"
-              >
-                Add Transaction
-              </button>
-            </form>
-            <div>
-              {Object.keys(finalAns).map((giver) => (
-                <div key={giver}>
-                  <h2>{giver} owes:</h2>
-                  <ul>
-                    {finalAns[giver].map((transaction, index) => (
-                      <li key={index}>
-                        {transaction.receiver} - {transaction.amount}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div> */}
-        {/* arsh bhai ka code end */}
       </div>
     </>
   );
