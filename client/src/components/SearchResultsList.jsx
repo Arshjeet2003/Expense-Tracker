@@ -3,6 +3,7 @@ import { SearchResult } from "./SearchResult.jsx";
 
 export const SearchResultsList = (props) => {
   const ids = [];
+  const { handleAddMember } = props
   const grpId = props?.propData;
   if (props && props.data && Array.isArray(props.data)) {
     for (const item of props.data) {
@@ -15,7 +16,7 @@ export const SearchResultsList = (props) => {
   return (
     <div className="results-list">
       {ids.map((result, id) => {
-        return <SearchResult result={result} key={id} grpId={grpId}/>;
+        return <SearchResult result={result} key={id} grpId={grpId} handleAddMember={handleAddMember}/>;
       })}
     </div>
   );

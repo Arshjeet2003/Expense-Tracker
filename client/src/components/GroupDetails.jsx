@@ -59,15 +59,6 @@ const GroupDetails = () => {
       });
   }, [id, memberChanged, transactionMade]);
 
-  const handleClickAdd = (e) => {
-    e.preventDefault();
-    if (member.username.length !== 0) {
-      addGroupMember(id, member.username);
-      setMemberChanged(true); // Member has been added, trigger useEffect
-    }
-    setMember({ username: "" });
-  };
-
   const handleClickDelete = (e, username) => {
     e.preventDefault();
     if (username.length !== 0) {
@@ -77,6 +68,10 @@ const GroupDetails = () => {
     }
     setMember({ username: "" });
   };
+
+  const handleAddMember = (value)=>{
+    setMemberChanged(value);
+  }
 
   const handleToggleMember = (username) => {
     if (selectedMembers.includes(username)) {
@@ -242,7 +237,7 @@ const GroupDetails = () => {
                 marginLeft: "60%",
               }}
             >
-              <SearchBar propsData={propsData} />
+              <SearchBar propsData={propsData} handleAddMember={handleAddMember} />
             </div>
           </div>
           <div
@@ -253,8 +248,8 @@ const GroupDetails = () => {
               position: "relative",
             }}
           >
-            <div class="row">
-              <div class="col-6">
+            <div className="row">
+              <div className="col-6">
                 {Object.keys(finalAns).map((giver) => (
                   <div className="container" key={giver}>
                     <div className="row">
@@ -374,7 +369,7 @@ const GroupDetails = () => {
                                     >
                                       <div className="drodown">
                                         <i
-                                          class="material-symbols-outlined"
+                                          className="material-symbols-outlined"
                                           style={{
                                             color: `${
                                               theme === "light"
@@ -403,7 +398,7 @@ const GroupDetails = () => {
                   </div>
                 ))}
               </div>
-              <div class="col-6">
+              <div className="col-6">
                 <div style={{ display: "flex", justifyContent: "flex-end" }}>
                   <div
                     className={`fixed-description ${

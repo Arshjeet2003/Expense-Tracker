@@ -4,10 +4,11 @@ import friendContext from '../context/friend/friendContext';
 import groupContext from "../context/groups/groupContext.js";
 
 export const SearchResult = (props) => {
-
+  const {handleAddMember} = props;
   const context = useContext(friendContext);
   const context1 = useContext(groupContext);
   // console.log(props);
+
 
   const { addFriend } = context;
   const { addGroupMember } = context1;
@@ -15,7 +16,12 @@ export const SearchResult = (props) => {
   return (
     <div
       className="search-result"
-      onClick={(e) =>{ props.grpId.value==="0"?addFriend(props.result):addGroupMember(props.grpId.value,props.result)}}
+      onClick={(e) => {
+        props.grpId.value === "0"
+          ? addFriend(props.result)
+          : addGroupMember(props.grpId.value, props.result);
+        handleAddMember(() => true);
+      }}      
     >
       {props.result}
       <button className="add-user-button">
@@ -23,4 +29,5 @@ export const SearchResult = (props) => {
       </button>
     </div>
   );
+  
 };

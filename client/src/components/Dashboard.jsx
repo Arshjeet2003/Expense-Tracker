@@ -33,6 +33,11 @@ const Dashboard = () => {
     fetchData(); // Call the async function to fetch data
   }, [data]);
 
+  const handleClickDelete = (e, username) => {
+    e.preventDefault();
+    deleteFriend(username);
+  };
+
   const giveNotification = () => {
     const today = new Date();
     const notifications = [];
@@ -124,8 +129,8 @@ const Dashboard = () => {
                             </div>
                             <tbody>
                               {friends.map((friend) => (
-                                <tr className="align-middle" key={friend.name}>
-                                  <td
+                                <tr className="align-middle"  key={friend._id}>
+                                  <td 
                                     style={{
                                       color: `${
                                         theme === "light" ? "black" : "#fff"
@@ -144,7 +149,7 @@ const Dashboard = () => {
                                       />
                                       <div>
                                         <div className="h6 mb-0 lh-1">
-                                          {friend.name}
+                                          {friend._id}
                                         </div>
                                       </div>
                                     </div>
@@ -162,7 +167,7 @@ const Dashboard = () => {
                                     }}
                                   >
                                     <div className="drodown">
-                                      <button
+                                      <button onClick={(e) => handleClickDelete(e, friend._id)}
                                         style={{
                                           border: "none",
                                           background: `${
@@ -173,7 +178,7 @@ const Dashboard = () => {
                                         }}
                                       >
                                         <i
-                                          class="material-symbols-outlined"
+                                          className="material-symbols-outlined"
                                           style={{
                                             color: `${
                                               theme === "light"

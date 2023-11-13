@@ -6,6 +6,8 @@ import "../css/SearchBar.css";
 import { SearchResultsList } from "./SearchResultsList";
 
 export const SearchBar = (props) => {
+
+  const { handleAddMember } = props
   const [input, setInput] = useState("");
   const [data, setData] = useState([]);
   const propData = props?.propsData;
@@ -40,7 +42,7 @@ export const SearchBar = (props) => {
           onChange={(e) => handleChange(e.target.value)}
         />
       </div>
-      {data ? <SearchResultsList data={data} propData={propData} /> : ""}
+      {data ? <SearchResultsList data={data} propData={propData} handleAddMember={handleAddMember}/> : ""}
     </>
   );
 };
