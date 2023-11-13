@@ -36,10 +36,16 @@ const ChartComponent = (props) => {
   const context1 = useContext(themeContext);
   const { theme } = context1;
   const [dateType, setDataType] = useState("Daily");
+  const [dataTypeForPie, setDataTypeForPie] = useState("Daily");
 
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedMonth, setSelectedMonth] = useState(today);
   const [selectedYear, setSelectedYear] = useState(today);
+
+  const [selectedDateForPie, setSelectedDateForPie] = useState(today);
+  const [selectedMonthForPie, setSelectedMonthForPie] = useState(today);
+  const [selectedYearForPie, setSelectedYearForPie] = useState(today);
+  const [selectedWeekForPie, setSelectedWeemForPie] = useState(today);
 
   const backgroundColors = [
     "#003f5c",
@@ -226,6 +232,19 @@ const ChartComponent = (props) => {
     }
   }, [selectedDate, selectedMonth, selectedYear, transactionData, dateType]);
 
+  useEffect(() => {
+    if (dataTypeForPie === "Daily") {
+      getDailyDataForSelectedDateForPie();
+    } else if (dataTypeForPie === "Weekly") {
+      getWeeklyDataForThisYearForPie();
+    } else if (dataTypeForPie === "Monthly"){
+      getMonthlyDataForThisYearForPie();
+    }
+    else{
+      getYearlyDataForPie();
+    }
+  },[transactionData ,selectedDateForPie, selectedMonthForPie, selectedYearForPie , selectedWeekForPie, dataTypeForPie])
+
   const getDailyDataForSelectedDate = () => {
     if (!transactionData || !selectedDate) return;
 
@@ -236,17 +255,6 @@ const ChartComponent = (props) => {
 
     const dailyPriceExpense = Array(7).fill(0); // Initialize an array with zeros for each day of the week.
     const dailyPriceIncome = Array(7).fill(0);
-
-    const weeklyCategoryDataExpenses = [
-      { label: "Food", data: 0 },
-      { label: "Groceries", data: 0 },
-      { label: "Medal", data: 0 },
-      { label: "Education", data: 0 },
-      { label: "Travel", data: 0 },
-      { label: "Bills", data: 0 },
-      { label: "Shopping", data: 0 },
-      { label: "Others", data: 0 },
-    ];
 
     for (const transaction of transactionData) {
       const transactionDate = new Date(transaction.date);
@@ -260,12 +268,6 @@ const ChartComponent = (props) => {
         const dayOfWeek = transactionDate.getDay(); // 0 (Sunday) to 6 (Saturday)
         dailyPriceExpense[dayOfWeek] += transaction.price;
 
-        const categoryToUpdate = weeklyCategoryDataExpenses.find(
-          (item) => item.label === transaction.category
-        );
-        if (categoryToUpdate) {
-          categoryToUpdate.data += transaction.price;
-        }
       } else if (
         transactionDate >= startDate &&
         transactionDate <= endDate &&
@@ -316,23 +318,57 @@ const ChartComponent = (props) => {
         },
       ],
     });
-
-    setPieData1({
-      labels: weeklyCategoryDataExpenses.map((item) => item.label), // Extract labels from objects
-      datasets: [
-        {
-          data: weeklyCategoryDataExpenses.map((item) => item.data), // Extract data from objects
-          backgroundColor: backgroundColors,
-        },
-      ],
-    });
   };
 
-  const getMonthlyDataForThisYear = () => {
-    if (!transactionData || !selectedMonth) return;
+  const getDailyDataForSelectedDateForPie = () => {
+    if (!transactionData || !selectedDateForPie) return;
 
-    const monthlyPriceExpense = Array(12).fill(0); // Initialize an array with zeros for each month.
-    const monthlyPriceIncome = Array(12).fill(0);
+    const dailyCategoryDataExpenses = [
+      { label: "Food", data: 0 },
+      { label: "Groceries", data: 0 },
+      { label: "Medal", data: 0 },
+      { label: "Education", data: 0 },
+      { label: "Travel", data: 0 },
+      { label: "Bills", data: 0 },
+      { label: "Shopping", data: 0 },
+      { label: "Others", data: 0 },
+    ];
+
+    for (const transaction of transactionData) {
+      const transactionDate = new Date(transaction.date);
+
+      if (
+        selectedDateForPie.getDate() === transactionDate.getDate() &&
+        transactionDate.getFullYear() === selectedDateForPie.getFullYear() &&
+        transactionDate.getMonth() === selectedDateForPie.getMonth() &&
+        transaction.type === "Expense"
+      ) {
+        const categoryToUpdate = dailyCategoryDataExpenses.find(
+          (item) => item.label === transaction.category
+        );
+        if (categoryToUpdate) {
+          categoryToUpdate.data += transaction.price;
+        }
+      }
+      setPieData1({
+        labels: dailyCategoryDataExpenses.map((item) => item.label), // Extract labels from objects
+        datasets: [
+          {
+            data: dailyCategoryDataExpenses.map((item) => item.data), // Extract data from objects
+            backgroundColor: backgroundColors,
+          },
+        ],
+      });
+    }
+  };
+
+  const getWeeklyDataForThisYearForPie = () => {
+    if (!transactionData || !selectedWeekForPie) return;
+
+    const startDate = new Date(selectedDateForPie);
+    startDate.setDate(startDate.getDate() - startDate.getDay()); // Get the start of the week for the selected date
+    const endDate = new Date(startDate);
+    endDate.setDate(endDate.getDate() + 6); // Get the end of the week
 
     const weeklyCategoryDataExpenses = [
       { label: "Food", data: 0 },
@@ -347,18 +383,49 @@ const ChartComponent = (props) => {
 
     for (const transaction of transactionData) {
       const transactionDate = new Date(transaction.date);
-      const month = transactionDate.getMonth(); // 0 (January) to 11 (December)
+
       if (
-        transactionDate.getFullYear() === selectedMonth.getFullYear() &&
+        transactionDate >= startDate &&
+        transactionDate <= endDate &&
+        transactionDate.getFullYear() === startDate.getFullYear() &&
         transaction.type === "Expense"
       ) {
-        monthlyPriceExpense[month] += transaction.price;
+
         const categoryToUpdate = weeklyCategoryDataExpenses.find(
           (item) => item.label === transaction.category
         );
         if (categoryToUpdate) {
           categoryToUpdate.data += transaction.price;
         }
+      }
+    }
+
+    setPieData1({
+      labels: weeklyCategoryDataExpenses.map((item) => item.label), // Extract labels from objects
+      datasets: [
+        {
+          data: weeklyCategoryDataExpenses.map((item) => item.data), // Extract data from objects
+          backgroundColor: backgroundColors,
+        },
+      ],
+    });
+  };
+
+
+  const getMonthlyDataForThisYear = () => {
+    if (!transactionData || !selectedMonth) return;
+
+    const monthlyPriceExpense = Array(12).fill(0); // Initialize an array with zeros for each month.
+    const monthlyPriceIncome = Array(12).fill(0);
+
+    for (const transaction of transactionData) {
+      const transactionDate = new Date(transaction.date);
+      const month = transactionDate.getMonth(); // 0 (January) to 11 (December)
+      if (
+        transactionDate.getFullYear() === selectedMonth.getFullYear() &&
+        transaction.type === "Expense"
+      ) {
+        monthlyPriceExpense[month] += transaction.price;
       } else if (
         transactionDate.getFullYear() === selectedMonth.getFullYear() &&
         transaction.type === "Income"
@@ -419,18 +486,49 @@ const ChartComponent = (props) => {
       ],
     };
 
+    setData1(newData1);
+    setData2(newData2);
+  };
+
+  const getMonthlyDataForThisYearForPie = () => {
+    if (!transactionData || !selectedMonthForPie) return;
+
+    const monthlyCategoryDataExpenses = [
+      { label: "Food", data: 0 },
+      { label: "Groceries", data: 0 },
+      { label: "Medal", data: 0 },
+      { label: "Education", data: 0 },
+      { label: "Travel", data: 0 },
+      { label: "Bills", data: 0 },
+      { label: "Shopping", data: 0 },
+      { label: "Others", data: 0 },
+    ];
+
+    for (const transaction of transactionData) {
+      const transactionDate = new Date(transaction.date);
+      if (
+        transactionDate.getFullYear() === selectedMonth.getFullYear() &&
+        transactionDate.getMonth() === selectedMonth.getMonth() &&
+        transaction.type === "Expense"
+      ) {
+        const categoryToUpdate = monthlyCategoryDataExpenses.find(
+          (item) => item.label === transaction.category
+        );
+        if (categoryToUpdate) {
+          categoryToUpdate.data += transaction.price;
+        }
+      } 
+    }
+
     setPieData1({
-      labels: weeklyCategoryDataExpenses.map((item) => item.label), // Extract labels from objects
+      labels: monthlyCategoryDataExpenses.map((item) => item.label), // Extract labels from objects
       datasets: [
         {
-          data: weeklyCategoryDataExpenses.map((item) => item.data), // Extract data from objects
+          data: monthlyCategoryDataExpenses.map((item) => item.data), // Extract data from objects
           backgroundColor: backgroundColors,
         },
       ],
     });
-
-    setData1(newData1);
-    setData2(newData2);
   };
 
   const getYearlyDataForLastTenYears = () => {
@@ -501,6 +599,47 @@ const ChartComponent = (props) => {
     setData2(newData2);
   };
 
+  const getYearlyDataForPie = () => {
+    if (!transactionData || !selectedYearForPie) return;
+
+    const yearlyCategoryDataExpenses = [
+      { label: "Food", data: 0 },
+      { label: "Groceries", data: 0 },
+      { label: "Medal", data: 0 },
+      { label: "Education", data: 0 },
+      { label: "Travel", data: 0 },
+      { label: "Bills", data: 0 },
+      { label: "Shopping", data: 0 },
+      { label: "Others", data: 0 },
+    ];
+
+    for (const transaction of transactionData) {
+      const transactionDate = new Date(transaction.date);
+      if (
+        transactionDate.getFullYear() === selectedYearForPie.getFullYear() &&
+        transaction.type === "Expense"
+      ) {
+        const categoryToUpdate = yearlyCategoryDataExpenses.find(
+          (item) => item.label === transaction.category
+        );
+        if (categoryToUpdate) {
+          categoryToUpdate.data += transaction.price;
+        }
+      } 
+    }
+
+    setPieData1({
+      labels: yearlyCategoryDataExpenses.map((item) => item.label), // Extract labels from objects
+      datasets: [
+        {
+          data: yearlyCategoryDataExpenses.map((item) => item.data), // Extract data from objects
+          backgroundColor: backgroundColors,
+        },
+      ],
+    });
+  };
+
+
   const changeDateType = (e) => {
     e.preventDefault();
     if (dateType === "Daily") {
@@ -509,6 +648,20 @@ const ChartComponent = (props) => {
       setDataType("Yearly");
     } else {
       setDataType("Daily");
+    }
+  };
+
+  const changeDateTypeForPie = (e) => {
+    e.preventDefault();
+    if (dataTypeForPie === "Daily") {
+      setDataTypeForPie("Weekly");
+    } else if (dataTypeForPie === "Weekly") {
+      setDataTypeForPie("Monthly");
+    } else if (dataTypeForPie === "Monthly"){
+      setDataTypeForPie("Yearly");
+    }
+    else{
+      setDataTypeForPie("Daily")
     }
   };
 
@@ -529,6 +682,26 @@ const ChartComponent = (props) => {
     }
   };
 
+  const changeSelectedDateForPie = () => {
+    if (dataTypeForPie === "Daily") {
+      const selectedDateNowForPie = new Date(selectedDateForPie);
+      selectedDateNowForPie.setDate(selectedDateNowForPie.getDate() - 1); // Subtract 1 days
+      setSelectedDate(selectedDateNowForPie);
+    } else if(dataTypeForPie === "Weekly"){
+      const selectedDateNowForPie = new Date(selectedDateForPie);
+      selectedDateNowForPie.setDate(selectedDateNowForPie.getDate() - 7); // Subtract 7 days
+      setSelectedDate(selectedDateNowForPie);
+    } else if (dataTypeForPie === "Monthly") {
+      const selectedMonthNowForPie = new Date(selectedMonthForPie);
+      selectedMonthNowForPie.setMonth(selectedMonthNowForPie.getMonth() - 1); // Subtract 1 month
+      setSelectedMonthForPie(selectedMonthNowForPie);
+    } else {
+      const selectedYearNowForPie = new Date(selectedYearForPie);
+      selectedYearNowForPie.setYear(selectedYearNowForPie.getFullYear() - 1); // Subtract 1 year
+      setSelectedYear(selectedYearNowForPie);
+    }
+  };
+
   const changeSelectedDateNext = () => {
     if (dateType === "Daily") {
       const selectedDateNow = new Date(selectedDate);
@@ -536,12 +709,32 @@ const ChartComponent = (props) => {
       setSelectedDate(selectedDateNow);
     } else if (dateType === "Monthly") {
       const selectedMonthNow = new Date(selectedMonth);
-      selectedMonthNow.setMonth(selectedMonthNow.getMonth() + 12); // Subtract 12 months
+      selectedMonthNow.setMonth(selectedMonthNow.getMonth() + 12); // Add 12 months
       setSelectedMonth(selectedMonthNow);
     } else {
       const selectedYearNow = new Date(selectedYear);
-      selectedYearNow.setYear(selectedYearNow.getFullYear() + 10); // Subtract 10 years
+      selectedYearNow.setYear(selectedYearNow.getFullYear() + 10); // Add 10 years
       setSelectedYear(selectedYearNow);
+    }
+  };
+
+  const changeSelectedDateNextForPie = () => {
+    if (dataTypeForPie === "Daily") {
+      const selectedDateNowForPie = new Date(selectedDateForPie);
+      selectedDateNowForPie.setDate(selectedDateNowForPie.getDate() + 1); // Add 1 days
+      setSelectedDate(selectedDateNowForPie);
+    } else if(dataTypeForPie === "Weekly"){
+      const selectedDateNowForPie = new Date(selectedDateForPie);
+      selectedDateNowForPie.setDate(selectedDateNowForPie.getDate() + 7); // Add 7 days
+      setSelectedDate(selectedDateNowForPie);
+    } else if (dataTypeForPie === "Monthly") {
+      const selectedMonthNowForPie = new Date(selectedMonthForPie);
+      selectedMonthNowForPie.setMonth(selectedMonthNowForPie.getMonth() + 1); // Add 1 month
+      setSelectedMonthForPie(selectedMonthNowForPie);
+    } else {
+      const selectedYearNowForPie = new Date(selectedYearForPie);
+      selectedYearNowForPie.setYear(selectedYearNowForPie.getFullYear() + 1); // Add 1 year
+      setSelectedYear(selectedYearNowForPie);
     }
   };
 
@@ -606,7 +799,7 @@ const ChartComponent = (props) => {
                     }`}
                     onClick={changeDateType}
                   >
-                    Type
+                    {dateType}
                   </button>
                   <button
                     className={`single-button ${
@@ -638,15 +831,15 @@ const ChartComponent = (props) => {
                       className={`single-button ${
                         theme === "light" ? "bchartl" : "bchartd"
                       }`}
-                      onClick={changeDateType}
+                      onClick={changeDateTypeForPie}
                     >
-                      Type
+                      {dataTypeForPie}
                     </button>
                     <button
                       className={`single-button ${
                         theme === "light" ? "bchartl" : "bchartd"
                       }`}
-                      onClick={changeSelectedDate}
+                      onClick={changeSelectedDateForPie}
                     >
                       Prev
                     </button>
@@ -654,7 +847,7 @@ const ChartComponent = (props) => {
                       className={`single-button ${
                         theme === "light" ? "bchartl" : "bchartd"
                       }`}
-                      onClick={changeSelectedDateNext}
+                      onClick={changeSelectedDateNextForPie}
                     >
                       Next
                     </button>
