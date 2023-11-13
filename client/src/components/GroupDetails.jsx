@@ -234,19 +234,25 @@ const GroupDetails = () => {
                 </button>
               </div>
             </div>
-            <div className="col-6 col-md-4 .suggestion" style={{
-              zIndex: "2",
-              position: "absolute",
-              marginLeft: "60%",
-            }}>
-              <SearchBar propsData={propsData}/>
+            <div
+              className="col-6 col-md-4 .suggestion"
+              style={{
+                zIndex: "2",
+                position: "absolute",
+                marginLeft: "60%",
+              }}
+            >
+              <SearchBar propsData={propsData} />
             </div>
           </div>
-          <div className="container" style={{
-            minHeight: "100vh",
-            zIndex: "1",
-            position: "relative",
-          }}>
+          <div
+            className="container"
+            style={{
+              minHeight: "100vh",
+              zIndex: "1",
+              position: "relative",
+            }}
+          >
             <div class="row">
               <div class="col-6">
                 {Object.keys(finalAns).map((giver) => (
@@ -262,7 +268,9 @@ const GroupDetails = () => {
                                 theme === "light" ? "white" : "#333d82"
                               }`,
                               border: `${
-                                theme === "light" ? "1px solid #5f627d48" : "1px solid white"
+                                theme === "light"
+                                  ? "1px solid #5f627d48"
+                                  : "1px solid white"
                               }`,
                             }}
                           >
@@ -349,7 +357,7 @@ const GroupDetails = () => {
                                         }`,
                                       }}
                                     >
-                                      {transaction.amount}
+                                      {transaction.amount.toFixed(2)}
                                     </td>
                                     <td
                                       className="text-end"
