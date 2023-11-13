@@ -11,15 +11,21 @@ const Navbar = (props) => {
   const { theme,toggleTheme } = context;
 
   const [notificationClicked,setClicked] = useState(false);
-  const transaction = props?.data?.transactions;
+  const transaction = props?.dataForNotification;
+  
   const handleNotification = ()=>{
-    setClicked(true);
+    if(notificationClicked===false){
+      setClicked(true);
+    }
+    else{
+      setClicked(false);
+    }
   }
 
 
   useEffect(() => {
     
-  }, [notificationClicked]);
+  }, [setClicked,notificationClicked]);
   return (
       <div>
         <nav

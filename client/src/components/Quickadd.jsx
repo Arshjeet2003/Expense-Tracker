@@ -33,6 +33,7 @@ const Quickadd = () => {
     recurring: "",
     repeat: "",
     price: "",
+    dueDate: new Date(),
   });
 
   const handleClick = (e) => {
@@ -49,7 +50,8 @@ const Quickadd = () => {
           Recurring,
           transaction.repeat,
           Number(transaction.price),
-          url
+          url,
+          transaction.dueDate
         );
         setTransaction({
           name: "",
@@ -58,6 +60,7 @@ const Quickadd = () => {
           recurring: "",
           repeat: "",
           price: "",
+          dueDate: "",
         });
         setCategory("");
         setSelectedValue("");
@@ -82,6 +85,11 @@ const Quickadd = () => {
     setShowRepeat(false);
     setRecurring("No");
   };
+
+  const setDate = (e) => {
+    const newDate = new Date(e.target.value);
+    transaction.dueDate = newDate;
+  }
 
   // Effect to change the color based on the selected option
   useEffect(() => {
@@ -334,6 +342,19 @@ const Quickadd = () => {
                       value={transaction.repeat}
                     />
                   </div>
+                </div>
+                <div className="input-field">
+                  <i
+                    className="material-symbols-outlined"
+                    style={{ fontSize: 24 }}
+                  >
+                  </i>
+                  <input
+                    type="date"
+                    placeholder="DueDate"
+                    name="DueDate"
+                    onChange={setDate}
+                  />
                 </div>
                 <div
                   className="container container1 co file-upload-outer-container"

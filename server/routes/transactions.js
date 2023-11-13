@@ -45,13 +45,13 @@ try {
 // ROUTE 2: Add a new transaction using: POST "/api/transactions/addtransaction".
 router.post('/addtransaction',fetchuser,async (req,res)=>{
     try {
-        const {name,category,type,recurring,repeat,price,billUrl} = req.body;
+        const {name,category,type,recurring,repeat,price,billUrl,dueDate} = req.body;
         const errors = validationResult(req);
         if(!errors.isEmpty()){
             return res.status(400).json({ errors: errors.array() });
         }
         const new_transaction = new Transaction({
-            name,category,type,recurring,repeat,price,billUrl
+            name,category,type,recurring,repeat,price,billUrl,dueDate
         })
         const userId = req.user.id;
         const user = await User.findById(userId);
@@ -111,28 +111,28 @@ router.delete('/deletetransaction/:id',fetchuser, async (req,res)=>{
 });
 
 // ROUTE 4: Update an existing transaction using: PUT "/api/transactions/updatetransaction".
-router.put('/updatetransaction/:id',fetchuser, async (req,res)=>{
-    const {name,category,type,recurring,repeat,price,billUrl} = req.body;
+// router.put('/updatetransaction/:id',fetchuser, async (req,res)=>{
+//     const {name,category,type,recurring,repeat,price,billUrl,dueDate} = req.body;
 
-    const transactionIdToUpdate = req.params.id;
+//     const transactionIdToUpdate = req.params.id;
     
-    const updatedTransactionData = {
-        name,category,type,recurring,repeat,price,billUrl
-    }
+//     const updatedTransactionData = {
+//         name,category,type,recurring,repeat,price,billUrl
+//     }
 
-    // Step 1: Update the transaction by its ID
-    const updatedTransaction = await Transaction.findByIdAndUpdate(
-        transactionIdToUpdate,{$set:updatedTransactionData},{ new: true }
-    );
+//     // Step 1: Update the transaction by its ID
+//     const updatedTransaction = await Transaction.findByIdAndUpdate(
+//         transactionIdToUpdate,{$set:updatedTransactionData},{ new: true }
+//     );
     
-    if (!updatedTransaction) {
-        // Handle the case where the transaction is not found
-        return res.status(404).json({ message: "Transaction not found" });
-    }
+//     if (!updatedTransaction) {
+//         // Handle the case where the transaction is not found
+//         return res.status(404).json({ message: "Transaction not found" });
+//     }
 
-    // You can then send a response or perform any additional actions as needed.
-    res.send(updatedTransaction);
-});
+//     // You can then send a response or perform any additional actions as needed.
+//     res.send(updatedTransaction);
+// });
 
 
 module.exports = router;

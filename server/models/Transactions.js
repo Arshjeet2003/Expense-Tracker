@@ -13,7 +13,11 @@ const TransactionSchema = new mongoose.Schema(
             type: Date,
             default: Date.now
         },
-        billUrl: String
+        billUrl: String,
+        dueDate:{
+            type: Date,
+            default: null
+        }
     }
 )
 const Transaction = mongoose.model('transaction',TransactionSchema);
