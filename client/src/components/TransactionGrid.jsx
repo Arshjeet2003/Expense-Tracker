@@ -2,9 +2,9 @@ import React, { useState,useContext, useEffect } from "react";
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import "../css/TransactionGrid.css";
-import themeContext from "../context/theme/themeContext";
+import themeContext from "../context/theme/themeContext.js";
 // import Header from "components/Header";
-import DataGridCustomToolbar from "./DataGridCustomToolbar.js";
+import DataGridCustomToolbar from "./DataGridCustomToolbar.jsx";
 import transactionContext from '../context/transactions/transactionContext.js';
 
 const TransactionGrid = () => {

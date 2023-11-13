@@ -1,7 +1,7 @@
 import React from 'react';
-import TransactionGrid from './TransactionGrid';
-import Sidebar from './Sidebar';
-import Navbar from './Navbar';
+import TransactionGrid from './TransactionGrid.jsx';
+import Sidebar from './Sidebar.jsx';
+import Navbar from './Navbar.jsx';
 
 const Transactions = () => {
   return (

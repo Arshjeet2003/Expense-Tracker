@@ -194,3 +194,7 @@ p.card-text {
   content: "";
   pointer-events: none;
 }
+
+.complete{
+  min-height: 100vh;
+}

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom'
 import "../css/navbar.css";
-import NotificationComp from './NotificationComp';
+import NotificationComp from './NotificationComp.jsx';
 import themeContext from "../context/theme/themeContext";
 
 const Navbar = (props) => {

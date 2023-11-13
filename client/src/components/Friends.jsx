@@ -1,11 +1,11 @@
 import React,{useContext,useState,useEffect} from 'react';
-import Sidebar from './Sidebar';
+import Sidebar from './Sidebar.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import friendContext from '../context/friend/friendContext';
-import Navbar from "./Navbar";
+import Navbar from "./Navbar.jsx";
 
 const Friends = () => {
-  const context = useContext(friendContext);
+    const context = useContext(friendContext);
     const {friends,addFriend,getUserFriends,deleteFriend} = context;
     const [friend,setFriend] = useState({username:""})
     useEffect(()=>{
@@ -18,7 +18,7 @@ const Friends = () => {
         }
         // console.log(friends);
         setFriend({username: ""});
-        // props.showAlert("Note Added successfully","success");
+        // props.showAlert("Friend Added successfully","success");
     }
     const handleClickDelete = (e)=>{
       e.preventDefault(); //So that page does not reload

@@ -1,5 +1,5 @@
 import "../css/NotificationComponent.css";
-import NotificationCompName from './NotificationCompName';
+import NotificationCompName from './NotificationCompName.jsx';
 import React from 'react'
 import "../css/notificationComp.css";
 

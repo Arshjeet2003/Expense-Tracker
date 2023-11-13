@@ -5,9 +5,10 @@ import { FaSearch } from "react-icons/fa";
 import "../css/SearchBar.css";
 import { SearchResultsList } from "./SearchResultsList";
 
-export const SearchBar = () => {
+export const SearchBar = (props) => {
   const [input, setInput] = useState("");
   const [data, setData] = useState([]);
+  const propData = props?.propsData;
 
   const context = useContext(authContext);
   const { getUsers } = context;
@@ -39,7 +40,7 @@ export const SearchBar = () => {
           onChange={(e) => handleChange(e.target.value)}
         />
       </div>
-      {data ? <SearchResultsList data={data} /> : ""}
+      {data ? <SearchResultsList data={data} propData={propData} /> : ""}
     </>
   );
 };

@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Sidebar from "./Sidebar";
+import Sidebar from "./Sidebar.jsx";
 import "bootstrap";
 import groupContext from "../context/groups/groupContext";
 import themeContext from "../context/theme/themeContext";
-import GroupCard from "./GroupCard";
-import Navbar from "./Navbar";
+import GroupCard from "./GroupCard.jsx";
+import Navbar from "./Navbar.jsx";
 import "../css/Groups.css";
 
 const Groups = () => {

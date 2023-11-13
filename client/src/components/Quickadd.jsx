@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/Quickadd.css";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+import Navbar from "./Navbar.jsx";
+import Sidebar from "./Sidebar.jsx";
 import themeContext from "../context/theme/themeContext";
 import transactionContext from "../context/transactions/transactionContext";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
