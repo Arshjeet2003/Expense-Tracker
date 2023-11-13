@@ -1,21 +1,26 @@
 import React, { useState,useContext, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Sidebar from './Sidebar';
-import Navbar from './Navbar';
+import Sidebar from './Sidebar.jsx';
+import Navbar from './Navbar.jsx';
 import "../css/dashboard.css";
 import transactionContext from '../context/transactions/transactionContext.js';
-import { SearchBar } from "./SearchBar.js";
-import ChartComponent from "./ChartComponent.js";
-import themeContext from "../context/theme/themeContext";
+import { SearchBar } from "./SearchBar.jsx";
+import ChartComponent from "./ChartComponent.jsx";
+import themeContext from "../context/theme/themeContext.js";
+import friendContext from "../context/friend/friendContext.js";
 
 const Dashboard = () => {
 
   const context = useContext(transactionContext);
   const context1 = useContext(themeContext);
+  const context2 = useContext(friendContext);
+  const {friends,addFriend,getUserFriends,deleteFriend} = context2;
   const { theme } = context1;
   const { getUserTransactions } = context;
+  const [propsData,setPropsData] = useState({value:"0"});
   const [data,setData] = useState({});
   useEffect(() => {
+    getUserFriends();
     const fetchData = async () => {
       try {
         const result = await getUserTransactions("");
@@ -47,6 +52,7 @@ const Dashboard = () => {
 
 
   return (
+    <>
     <div className={`${
           theme === "light" ? "full-heightl" : "full-heightd"
         }`}>
@@ -66,7 +72,16 @@ const Dashboard = () => {
             <div className="row  bordered upper">
               <div className="col-12">
                 {/* Upper Right Content here */}
-                <SearchBar />
+                <SearchBar propsData={propsData}/>
+                <div className="row my-3">
+                <h2>Friends</h2>
+                <div className="container mx-2">
+                {friends.length===0 && 'No Friends to display'}
+                </div>
+                {friends.map((friend) => (
+              <li key={friend.id}>{friend.name}</li>
+              ))}
+              </div>
               </div>
             </div>
             {/* Lower Right Section */}
@@ -77,6 +92,7 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
+  </>
   );
 }
 

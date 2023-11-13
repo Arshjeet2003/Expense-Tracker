@@ -598,7 +598,7 @@ const ChartComponent = (props) => {
             </div>
 
             <div className="row btns">
-              <div class="col-6 ghghg">
+              <div className="col-6 ghghg">
                 <div className="buttons-for-graph">
                   <button
                     className={`single-button ${
@@ -632,7 +632,7 @@ const ChartComponent = (props) => {
             <div style={chartContainerStylesPie}>
               <Pie data={PieData1} options={options}></Pie>
               <div className="row btns">
-                <div class="col-6 ghgh">
+                <div className="col-6 ghgh">
                   <div className="buttons-for-graph">
                     <button
                       className={`single-button ${

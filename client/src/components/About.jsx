@@ -1,7 +1,7 @@
 import React, { useState,useContext, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Sidebar from './Sidebar';
-import Navbar from './Navbar';
+import Sidebar from './Sidebar.jsx';
+import Navbar from './Navbar.jsx';
 import "../css/dashboard.css";
 import transactionContext from '../context/transactions/transactionContext.js';
 import { Bar } from 'react-chartjs-2';

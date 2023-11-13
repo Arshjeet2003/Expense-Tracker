@@ -5,15 +5,15 @@ import Login from './components/Login';
 import TransactionState from './context/transactions/TransactionState';
 import AuthState from './context/auth/AuthState.js'
 import FriendState from './context/friend/FriendState.js';
-import TransactionGrid from './components/TransactionGrid.js';
-import Dashboard from './components/Dashboard.js';
-import GroupDetails from'./components/GroupDetails.js'
-import Friends from './components/Friends.js';
-import Transactions from './components/Transactions.js';
-import Groups from './components/Groups.js';
+import TransactionGrid from './components/TransactionGrid.jsx';
+import Dashboard from './components/Dashboard.jsx';
+import GroupDetails from'./components/GroupDetails.jsx'
+import Friends from './components/Friends.jsx';
+import Transactions from './components/Transactions.jsx';
+import Groups from './components/Groups.jsx';
 import GroupState from './context/groups/GroupState.js';
-import Quickadd from './components/Quickadd.js';
-import Conversions from './components/Conversions.js';
+import Quickadd from './components/Quickadd.jsx';
+import Conversions from './components/Conversions.jsx';
 import ThemeState from './context/theme/ThemeState.js';
 
 function App() {

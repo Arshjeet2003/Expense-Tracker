@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import groupContext from "../context/groups/groupContext.js";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import themeContext from "../context/theme/themeContext";
-import { SearchBar } from "./SearchBar.js";
-import Navbar from "./Navbar.js";
-import Sidebar from "./Sidebar.js";
+import themeContext from "../context/theme/themeContext.js";
+import { SearchBar } from "./SearchBar.jsx";
+import Navbar from "./Navbar.jsx";
+import Sidebar from "./Sidebar.jsx";
 import "../css/GroupDetails.css";
 
 const GroupDetails = () => {
@@ -30,6 +30,8 @@ const GroupDetails = () => {
   const ref = useRef(null);
   const refClose = useRef(null);
 
+  const [propsData,setPropsData] = useState({value:id});
+
   useEffect(() => {
     // Fetch group data whenever a member is added or deleted
     getGroup(id)
@@ -39,6 +41,7 @@ const GroupDetails = () => {
       .catch((error) => {
         console.error(error);
       });
+      
     setMemberChanged(false); // Reset memberChanged state
     setTransactionMade(false);
     getGroupTransactions(id)
@@ -65,11 +68,12 @@ const GroupDetails = () => {
     setMember({ username: "" });
   };
 
-  const handleClickDelete = (e) => {
+  const handleClickDelete = (e, username) => {
     e.preventDefault();
-    if (member.username.length !== 0) {
-      deleteGroupMember(id, member.username);
-      setMemberChanged(true); // Member has been deleted, trigger useEffect
+    if (username.length !== 0) {
+      deleteGroupMember(id, username);
+      // Assuming setMemberChanged triggers useEffect correctly
+      setMemberChanged(true);
     }
     setMember({ username: "" });
   };
@@ -229,7 +233,7 @@ const GroupDetails = () => {
               </div>
             </div>
             <div className="col-6 col-md-4 .suggestion">
-              <SearchBar />
+              <SearchBar propsData={propsData}/>
             </div>
           </div>
           <div className="row">
@@ -253,38 +257,33 @@ const GroupDetails = () => {
                       }`}
                     >
                       {group.users?.map((user) => (
-                        <div className="userList">
-                          <li
-                            className={`${
-                              theme === "light" ? "singleUserl" : "singleUserd"
-                            }`}
-                            key={user}
-                          >
-                            {user}
-                            <button
-                              type="submit"
-                              onClick={handleClickDelete}
-                              className={`${
-                                theme === "light"
-                                  ? "deleteUserl"
-                                  : "deleteUserd"
-                              }`}
-                            >
-                              <i
-                                className={`material-symbols-outlined ${
-                                  theme === "light"
-                                    ? "remove-userl"
-                                    : "remove-userd"
-                                }`}
-                              >
-                                person_remove
-                              </i>
-                            </button>
-
-                            {/* <span className="tooltip">Remove User</span> */}
-                          </li>
-                        </div>
-                      ))}
+        <div className="userList" key={user}>
+          <li
+            className={`${
+              theme === "light" ? "singleUserl" : "singleUserd"
+            }`}
+          >
+            {user}
+            <button
+              type="submit"
+              onClick={(e) => handleClickDelete(e, user)}
+              className={`${
+                theme === "light" ? "deleteUserl" : "deleteUserd"
+              }`}
+            >
+              <i
+                className={`material-symbols-outlined ${
+                  theme === "light"
+                    ? "remove-userl"
+                    : "remove-userd"
+                }`}
+              >
+                person_remove
+              </i>
+            </button>
+          </li>
+        </div>
+      ))}
                     </div>
                   </ul>
                 </div>

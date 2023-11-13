@@ -1,8 +1,9 @@
 import "../css/SearchResultsList.css";
-import { SearchResult } from "./SearchResult";
+import { SearchResult } from "./SearchResult.jsx";
 
 export const SearchResultsList = (props) => {
   const ids = [];
+  const grpId = props?.propData;
   if (props && props.data && Array.isArray(props.data)) {
     for (const item of props.data) {
       if (item._id) {
@@ -14,7 +15,7 @@ export const SearchResultsList = (props) => {
   return (
     <div className="results-list">
       {ids.map((result, id) => {
-        return <SearchResult result={result} key={id}/>;
+        return <SearchResult result={result} key={id} grpId={grpId}/>;
       })}
     </div>
   );
