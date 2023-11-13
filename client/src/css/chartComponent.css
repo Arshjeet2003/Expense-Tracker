@@ -108,6 +108,7 @@
   cursor: pointer;
   transition: 0.5s;
   margin-left: 15px;
+  font-size: 90%;
 }
 
 .bchartl:hover {
@@ -165,6 +166,7 @@
   cursor: pointer;
   transition: 0.5s;
   margin-left: 15px;
+  font-size: 90%;
 }
 
 .bchartd:hover {

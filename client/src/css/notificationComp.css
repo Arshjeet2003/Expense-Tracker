@@ -5,7 +5,7 @@
   background-color: #efefef;
   border-radius: 30px;
   border: 1px solid #4d4dff;
-  z-index: 2;
+  z-index: 999;
   position: absolute;
   width: 100%;
 
