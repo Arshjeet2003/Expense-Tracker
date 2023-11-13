@@ -169,7 +169,7 @@ const GroupDetails = () => {
   const handleAddTransaction = async () => {
     const price = transaction.cost / selectedMembers.length;
     for (const groupMember of selectedMembers) {
-      if (transaction.type == "debit") {
+      if (transaction.type === "debit") {
         await AddGroupTransaction(groupMember, price, id);
       } else {
         await AddGroupTransaction(groupMember, -price, id);
@@ -189,6 +189,7 @@ const GroupDetails = () => {
         className={`${
           theme === "light" ? "complete-decriptionl" : "complete-decriptiond"
         }`}
+        style={{ position: "relative" }}
       >
         <Navbar />
         <Sidebar />
@@ -233,84 +234,168 @@ const GroupDetails = () => {
               </div>
             </div>
             <div className="col-6 col-md-4 .suggestion">
-              <SearchBar propsData={propsData}/>
+              <SearchBar propsData={propsData} />
             </div>
           </div>
-          <div className="row">
-            <div className="col-md-3 col-sm-6 right">
-              <div
-                className={`card fixed-members ${
-                  theme === "light" ? "card-membersl" : "card-membersd"
-                }`}
-              >
-                <h4
-                  className=" mt-3 mb-3"
-                  style={{ color: `${theme === "light" ? "black" : "#fff"}` }}
-                >
-                  Group Members
-                </h4>
-                <div className="widget-wrap wrap1 wrap-for-members">
-                  <ul>
-                    <div
-                      className={`${theme === "light" ? "topl" : "topd"} ${
-                        theme === "light" ? "speech1l" : "speech1d"
-                      }`}
-                    >
-                      {group.users?.map((user) => (
-        <div className="userList" key={user}>
-          <li
-            className={`${
-              theme === "light" ? "singleUserl" : "singleUserd"
-            }`}
-          >
-            {user}
-            <button
-              type="submit"
-              onClick={(e) => handleClickDelete(e, user)}
-              className={`${
-                theme === "light" ? "deleteUserl" : "deleteUserd"
-              }`}
-            >
-              <i
-                className={`material-symbols-outlined ${
-                  theme === "light"
-                    ? "remove-userl"
-                    : "remove-userd"
-                }`}
-              >
-                person_remove
-              </i>
-            </button>
-          </li>
-        </div>
-      ))}
+          <div className="container" style={{ minHeight: "100vh" }}>
+            <div class="row">
+              <div class="col-6">
+                {Object.keys(finalAns).map((giver) => (
+                  <div className="container" key={giver}>
+                    <div className="row">
+                      <div className="col-12 mb-3 mb-lg-5">
+                        <div className="overflow-hidden card table-nowrap table-card">
+                          <div className="card-header d-flex justify-content-between align-items-center">
+                            <h5 className="mb-0">{giver} owes:</h5>
+                          </div>
+                          <div className="table-responsive">
+                            <table className="table mb-0">
+                              <thead className="small text-uppercase bg-body text-muted">
+                                <tr>
+                                  <th>Name</th>
+                                  <th>Amount(in dollors)</th>
+                                  <th className="text-end" />
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {finalAns[giver].map((transaction, index) => (
+                                  <tr className="align-middle" key={index}>
+                                    <td>
+                                      <div className="d-flex align-items-center">
+                                        <img
+                                          src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                          className="avatar sm rounded-pill me-3 flex-shrink-0"
+                                          alt="Customer"
+                                        />
+                                        <div>
+                                          <div className="h6 mb-0 lh-1">
+                                            {transaction.receiver}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <td>{transaction.amount}</td>
+                                    <td className="text-end">
+                                      <div className="drodown">
+                                        <a
+                                          data-bs-toggle="dropdown"
+                                          href="#"
+                                          className="btn p-1"
+                                          aria-expanded="false"
+                                        >
+                                          <i
+                                            className="fa fa-bars"
+                                            aria-hidden="true"
+                                          />
+                                        </a>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </ul>
-                </div>
+                  </div>
+                ))}
               </div>
-            </div>
+              <div class="col-6">
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                  <div
+                    className={`fixed-description ${
+                      theme === "light" ? "card-squarel" : "card-squared"
+                    }`}
+                  >
+                    <h4
+                      style={{
+                        color: `${theme === "light" ? "black" : "#fff"}`,
+                        textAlign: "center",
+                      }}
+                      className=" mt-3 mb-3"
+                    >
+                      Group Description
+                    </h4>
+                    <div className="widget-wrap wrap2">
+                      <div
+                        className={`${theme === "light" ? "topl" : "topd"} ${
+                          theme === "light" ? "speechl" : "speechd"
+                        }`}
+                        style={{
+                          overflow: "auto",
+                          maxHeight: "150px",
+                        }}
+                      >
+                        {group.description}
+                      </div>
+                    </div>
+                  </div>
 
-            <div
-              className={`card fixed-description ${
-                theme === "light" ? "card-squarel" : "card-squared"
-              }`}
-            >
-              <h4
-                style={{
-                  color: `${theme === "light" ? "black" : "#fff"}`,
-                  paddingLeft: 150,
-                }}
-                className=" mt-3 mb-3"
-              >
-                Group Description
-              </h4>
-              <div className="widget-wrap wrap2">
-                <div
-                  className={`${theme === "light" ? "topl" : "topd"} ${
-                    theme === "light" ? "speechl" : "speechd"
-                  }`}
-                >
-                  {group.description}
+                  <div
+                    className={`fixed-members ${
+                      theme === "light" ? "card-membersl" : "card-membersd"
+                    }`}
+                  >
+                    <h4
+                      className="mt-3 mb-3"
+                      style={{
+                        color: `${theme === "light" ? "black" : "#fff"}`,
+                        textAlign: "center",
+                      }}
+                    >
+                      Group Members
+                    </h4>
+                    <div className="widget-wrap wrap1 wrap-for-members">
+                      <ul
+                        className={`topl ${
+                          theme === "light" ? "speech1l" : "speech1d"
+                        }`}
+                        style={{
+                          display: "flex",
+                          flexWrap: "wrap",
+                          overflow: "auto",
+                          maxHeight: "150px",
+                        }}
+                      >
+                        {group.users?.map((user) => (
+                          <div
+                            key={user}
+                            style={{ maxWidth: "320px", margin: "5px" }}
+                          >
+                            <li
+                              className={`${
+                                theme === "light"
+                                  ? "singleUserl"
+                                  : "singleUserd"
+                              }`}
+                            >
+                              {user}
+                              <button
+                                type="submit"
+                                onClick={(e) => handleClickDelete(e, user)}
+                                className={`${
+                                  theme === "light"
+                                    ? "deleteUserl"
+                                    : "deleteUserd"
+                                }`}
+                              >
+                                <i
+                                  className={`material-symbols-outlined ${
+                                    theme === "light"
+                                      ? "remove-userl"
+                                      : "remove-userd"
+                                  }`}
+                                >
+                                  person_remove
+                                </i>
+                              </button>
+                            </li>
+                          </div>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -403,7 +488,7 @@ const GroupDetails = () => {
             </div>
           </div>
         </div>
-        <div>
+        {/* <div>
           {Object.keys(finalAns).map((giver) => (
             <div key={giver}>
               <h2>{giver} owes:</h2>
@@ -416,7 +501,7 @@ const GroupDetails = () => {
               </ul>
             </div>
           ))}
-        </div>
+        </div> */}
         {/* arsh bhai ka code start */}
         {/* <div className="row">
           <div className="col-md-8">

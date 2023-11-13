@@ -7,7 +7,7 @@ export const SearchResult = (props) => {
 
   const context = useContext(friendContext);
   const context1 = useContext(groupContext);
-  console.log(props);
+  // console.log(props);
 
   const { addFriend } = context;
   const { addGroupMember } = context1;

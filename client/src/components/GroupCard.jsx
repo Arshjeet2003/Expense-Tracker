@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import groupContext from "../context/groups/groupContext.js";
 import { Link } from "react-router-dom";
 import login from "../images/login.svg";
-import themeContext from "../context/theme/themeContext.js";
+import themeContext from "../context/theme/themeContext";
 import "../css/Groupcard.css";
 const GroupCard = (props) => {
   const { group, updateGroup } = props;
@@ -13,8 +13,19 @@ const GroupCard = (props) => {
   return (
     <div
       className="col-md-3"
-      style={{ color: `${theme === "light" ? "#fff" : "#333d82"}` }}
+      style={{
+        color: `${theme === "light" ? "#fff" : "#333d82"}`,
+        minHeight: "100",
+      }}
     >
+      {/* <div className="card my-3 card-complete">
+            <div className="card-body">
+                <h5 className="card-title">{group.name}</h5>
+                <p className="card-text">{group.description}</p>
+                <i className="far fa-trash-alt mx-2" onClick={()=>{deleteGroup(group._id);}}></i>
+                <i className="far fa-edit mx-2" onClick={()=>{updateGroup(group)}}></i>
+            </div>
+            </div> */}
       <div
         className={` card ${theme === "light" ? "card-blockl" : "card-blockd"}`}
       >
