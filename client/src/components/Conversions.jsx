@@ -94,43 +94,90 @@ const Conversions = () => {
                     : "converter-containerd"
                 }`}
               >
-                <h3 style={{ marginBottom: "300" }}>Convert your currency</h3>
+                <h3
+                  style={{
+                    marginBottom: "300",
+                    color: `${theme === "light" ? "black" : "#fff"}`,
+                    textAlign: "center",
+                  }}
+                >
+                  Convert your currency
+                </h3>
                 <div
                   className={`${
                     theme === "light" ? "input-groupl" : "input-groupd"
                   }`}
                 >
-                  <label>Amount:</label>
+                  <label
+                    style={{
+                      color: `${theme === "light" ? "black" : "#fff"}`,
+                    }}
+                  >
+                    Amount:
+                  </label>
                   <input
                     type="number"
                     value={amount}
                     onChange={handleAmountChange}
+                    style={{
+                      background: `${theme === "light" ? "#fff" : "#333d82"}`,
+                      border: "1px solid #25273f",
+                      color: `${theme === "light" ? "black" : "#fff"}`,
+                    }}
                   />
                 </div>
                 <div
-                  className={`${
+                  className={`mt-3 ${
                     theme === "light" ? "input-groupl" : "input-groupd"
                   }`}
                 >
-                  <label>From Currency:</label>
+                  <label
+                    style={{
+                      color: `${theme === "light" ? "black" : "#fff"}`,
+                    }}
+                  >
+                    From Currency:
+                  </label>
                   <select
                     value={fromCurrency}
                     onChange={handleFromCurrencyChange}
+                    style={{
+                      background: `${theme === "light" ? "#fff" : "#333d82"}`,
+                      border: "1px solid #25273f",
+                      color: `${theme === "light" ? "black" : "#fff"}`,
+                    }}
                   >
                     {currencies.map((currency) => (
-                      <option key={currency} value={currency}>
+                      <option
+                        key={currency}
+                        value={currency}
+                      >
                         {currency}
                       </option>
                     ))}
                   </select>
                 </div>
                 <div
-                  className={`${
+                  className={`mt-3 ${
                     theme === "light" ? "input-groupl" : "input-groupd"
                   }`}
                 >
-                  <label>To Currency:</label>
-                  <select value={toCurrency} onChange={handleToCurrencyChange}>
+                  <label
+                    style={{
+                      color: `${theme === "light" ? "black" : "#fff"}`,
+                    }}
+                  >
+                    To Currency:
+                  </label>
+                  <select
+                    value={toCurrency}
+                    onChange={handleToCurrencyChange}
+                    style={{
+                      background: `${theme === "light" ? "#fff" : "#333d82"}`,
+                      border: "1px solid #25273f",
+                      color: `${theme === "light" ? "black" : "#fff"}`,
+                    }}
+                  >
                     {currencies.map((currency) => (
                       <option key={currency} value={currency}>
                         {currency}
@@ -144,9 +191,21 @@ const Conversions = () => {
                       ? "result-containerl"
                       : "result-containerd"
                   }`}
+                  style={{ textAlign: "center" }}
                 >
-                  <h4>Conversion Result:</h4>
-                  <p>
+                  <h4
+                    className="mt-3"
+                    style={{
+                      color: `${theme === "light" ? "black" : "#fff"}`,
+                    }}
+                  >
+                    Conversion Result:
+                  </h4>
+                  <p
+                    style={{
+                      color: `${theme === "light" ? "black" : "#fff"}`,
+                    }}
+                  >
                     {amount} {fromCurrency} is equal to {convertedAmount}{" "}
                     {toCurrency}
                   </p>
