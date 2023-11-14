@@ -55,7 +55,7 @@ const Sidebar = () => {
             </Link>
             <span className="tooltip">Dashboard</span>
           </li>
-          <li>
+          {/* <li>
             <Link to="/friends">
               <i className="material-symbols-outlined" style={{ fontSize: 24 }}>
                 person
@@ -69,7 +69,7 @@ const Sidebar = () => {
               </span>
             </Link>
             <span className="tooltip">Friends</span>
-          </li>
+          </li> */}
           <li>
             <Link to="/groups">
               <i className="material-symbols-outlined" style={{ fontSize: 24 }}>
@@ -129,6 +129,21 @@ const Sidebar = () => {
               </span>
             </Link>
             <span className="tooltip">Conversions</span>
+          </li>
+          <li>
+            <Link to="#">
+              <i className="material-symbols-outlined" style={{ fontSize: 24 }}>
+                currency_bitcoin
+              </i>
+              <span
+                className={`${
+                  theme === "light" ? "links_namel" : "links_named"
+                }`}
+              >
+                Stocks
+              </span>
+            </Link>
+            <span className="tooltip">Stocks</span>
           </li>
           <li className={`${theme === "light" ? "profilel" : "profiled"}`}>
             <div className="profile-details">
