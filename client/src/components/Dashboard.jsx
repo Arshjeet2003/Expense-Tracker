@@ -19,10 +19,12 @@ const Dashboard = () => {
   const { getUserTransactions } = context;
   const [propsData, setPropsData] = useState({ value: "0" });
   const [data, setData] = useState({});
+  const [hasNotification,hasNotificationUpdate] = useState(false);
   const [dataForNotification, setDataForNotification] = useState([]);
   useEffect(() => {
     getUserFriends();
     handleAddMember(false);
+    hasNotificationUpdate(false);
     const fetchData = async () => {
       try {
         const result = await getUserTransactions("");
@@ -33,7 +35,7 @@ const Dashboard = () => {
       }
     };
     fetchData(); // Call the async function to fetch data
-  }, [addmember]);
+  }, [addmember,hasNotification]);
 
   const handleClickDelete = (e, username) => {
     e.preventDefault();
@@ -59,6 +61,7 @@ const Dashboard = () => {
         }
       }
     }
+    hasNotificationUpdate(true);
     setDataForNotification(notifications);
     // console.log(notifications);
   };
