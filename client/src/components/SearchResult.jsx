@@ -4,7 +4,7 @@ import friendContext from '../context/friend/friendContext';
 import groupContext from "../context/groups/groupContext.js";
 
 export const SearchResult = (props) => {
-  const {handleAddMember} = props;
+  const {handleAddMember,handleChange} = props;
   const context = useContext(friendContext);
   const context1 = useContext(groupContext);
   // console.log(props);
@@ -21,6 +21,7 @@ export const SearchResult = (props) => {
           ? addFriend(props.result)
           : addGroupMember(props.grpId.value, props.result);
         handleAddMember(() => true);
+        handleChange(() => '')
       }}      
     >
       {props.result}

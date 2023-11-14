@@ -14,6 +14,7 @@ const Dashboard = () => {
   const context1 = useContext(themeContext);
   const context2 = useContext(friendContext);
   const { friends, addFriend, getUserFriends, deleteFriend } = context2;
+  const [addmember,handleAddMember] = useState(false);
   const { theme } = context1;
   const { getUserTransactions } = context;
   const [propsData, setPropsData] = useState({ value: "0" });
@@ -21,6 +22,7 @@ const Dashboard = () => {
   const [dataForNotification, setDataForNotification] = useState([]);
   useEffect(() => {
     getUserFriends();
+    handleAddMember(false);
     const fetchData = async () => {
       try {
         const result = await getUserTransactions("");
@@ -31,7 +33,7 @@ const Dashboard = () => {
       }
     };
     fetchData(); // Call the async function to fetch data
-  }, [data]);
+  }, [addmember]);
 
   const handleClickDelete = (e, username) => {
     e.preventDefault();
@@ -99,7 +101,7 @@ const Dashboard = () => {
                       marginLeft: "12%",
                     }}
                   >
-                    <SearchBar propsData={propsData} />
+                    <SearchBar propsData={propsData} handleAddMember={handleAddMember} />
                   </div>
                 </div>
                 <div className="container mt-3">

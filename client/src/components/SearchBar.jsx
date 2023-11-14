@@ -42,7 +42,7 @@ export const SearchBar = (props) => {
           onChange={(e) => handleChange(e.target.value)}
         />
       </div>
-      {data ? <SearchResultsList data={data} propData={propData} handleAddMember={handleAddMember}/> : ""}
+      {data ? <SearchResultsList data={data} propData={propData} handleAddMember={handleAddMember} handleChange={handleChange}/> : ""}
     </>
   );
 };
