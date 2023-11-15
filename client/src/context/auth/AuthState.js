@@ -30,6 +30,7 @@ const AuthState = (props)=>{
             body: JSON.stringify({_id: username,name: name,email: email,password: password})
         });
         const json = await response.json();
+        return false;
     }
 
     const getUsers = async (search)=>{

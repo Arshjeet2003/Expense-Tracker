@@ -1,5 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -8,9 +11,14 @@ const firebaseConfig = {
   projectId: "expense-tracker-vault",
   storageBucket: "expense-tracker-vault.appspot.com",
   messagingSenderId: "993658819743",
-  appId: "1:993658819743:web:5e59da4de5656448ddfeaa"
+  appId: "1:993658819743:web:5e59da4de5656448ddfeaa",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+export { auth, provider };
 export const storage = getStorage(app);
+
