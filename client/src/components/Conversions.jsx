@@ -75,7 +75,8 @@ const Conversions = () => {
       >
         <div className="row">
           <Navbar />
-          <div className="col">
+          <div className="col"
+          style={{paddingTop:"4.5%"}}>
             <img
               src={Conversion}
               alt=""

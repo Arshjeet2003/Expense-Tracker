@@ -74,7 +74,8 @@ const TransactionGrid = () => {
     <div
       className={`${
         theme === "light" ? "complete-transactionl" : "complete-transactiond"
-      }`}
+        }`}
+      style={{paddingTop:"6.5%",bottom:"25px",position:"relative"}}
     >
       <div className="close">
         <Box>

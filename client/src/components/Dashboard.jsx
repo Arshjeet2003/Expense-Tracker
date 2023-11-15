@@ -71,12 +71,14 @@ const Dashboard = () => {
       <div
         className={`${theme === "light" ? "full-heightl" : "full-heightd"}`}
         style={{
-          overflowX: "hidden",
+          overflow: "hidden",
+          height: "200px",
+          
         }}
       >
         <Navbar dataForNotification={dataForNotification} />
         <Sidebar />
-        <div className="container-fluid">
+        <div className="container-fluid" style={{paddingTop:"4.5%"}}>
           <div className="row full-height">
             {/* Left Side */}
             <div className="col-md-8 full-height bordered">
@@ -104,13 +106,24 @@ const Dashboard = () => {
                       marginLeft: "12%",
                     }}
                   >
-                    <SearchBar propsData={propsData} handleAddMember={handleAddMember} />
+                    <SearchBar
+                      propsData={propsData}
+                      handleAddMember={handleAddMember}
+                    />
                   </div>
                 </div>
                 <div className="container mt-3">
                   <div className="row">
                     <div className="col-12 mb-3 mb-lg-5">
-                      <div className="overflow-hidden card table-nowrap table-card1">
+                      <div
+                        className="overflow-hidden card table-nowrap table-card1"
+                        style={{
+                          color: `${theme === "light" ? "black" : "#fff"}`,
+                          background: `${
+                            theme === "light" ? "white" : "#333d82"
+                          }`,
+                        }}
+                      >
                         <div
                           className="card-header d-flex justify-content-between align-items-center"
                           style={{
@@ -129,13 +142,13 @@ const Dashboard = () => {
                         </div>
                         <div className="table-responsive">
                           <table className="table mb-0">
-                            <div className="container mx-2">
-                              {friends.length === 0 && "No Friends to display"}
-                            </div>
+                            {/* <div className="container mx-2"> */}
+                              {friends.length === 0 && "Make Friends"}
+                            {/* </div> */}
                             <tbody>
                               {friends.map((friend) => (
-                                <tr className="align-middle"  key={friend._id}>
-                                  <td 
+                                <tr className="align-middle" key={friend._id}>
+                                  <td
                                     style={{
                                       color: `${
                                         theme === "light" ? "black" : "#fff"
@@ -172,7 +185,10 @@ const Dashboard = () => {
                                     }}
                                   >
                                     <div className="drodown">
-                                      <button onClick={(e) => handleClickDelete(e, friend._id)}
+                                      <button
+                                        onClick={(e) =>
+                                          handleClickDelete(e, friend._id)
+                                        }
                                         style={{
                                           border: "none",
                                           background: `${

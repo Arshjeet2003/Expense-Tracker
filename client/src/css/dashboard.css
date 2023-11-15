@@ -5,7 +5,7 @@ html, body {
   }
   /* Full height container */
   .full-heightl {
-    min-height: 100vh;
+     min-height: 100vh;
      background: #fff;
   }
 
@@ -26,6 +26,8 @@ html, body {
   width: 90%;
   margin-top: 10%;
   margin-left: 5%;
+  height: 450px;
+  
 }
 .avatar.sm {
   width: 2.25rem;

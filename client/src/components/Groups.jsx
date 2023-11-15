@@ -60,9 +60,11 @@ const Groups = () => {
           theme === "light" ? "complete-groupl" : "complete-groupd"
         }`}
       >
-        <Navbar />
+        
+          <Navbar />
+        
         <Sidebar />
-        <div className="container complete">
+        <div className="container complete" style={{paddingTop:"4.5%"}}>
           <div className="row">
             <div className="col"></div>
             <div className="con">
@@ -154,8 +156,12 @@ const Groups = () => {
           aria-hidden="true"
         >
           <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
+            <div
+              className={`modal-content ${
+                theme === "light" ? "popUpBody1" : "popUpBodyd"
+              }`}
+            >
+              <div className="modal-header" style={{ paddingLeft: "40%" }}>
                 <h5 className="modal-title" id="exampleModalLabel">
                   Create Group
                 </h5>
@@ -214,6 +220,9 @@ const Groups = () => {
                   type="button"
                   onClick={handleClickAdd}
                   className="btn btn-primary"
+                  style={{
+                    background: `${theme === "light" ? "#4d4dff" : "#333d82"}`,
+                  }}
                 >
                   Add Group
                 </button>
