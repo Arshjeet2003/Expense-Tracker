@@ -31,6 +31,7 @@ const Navbar = (props) => {
         <nav
           className="navbar navbar-expand-sm navbar-light"
         id={`${theme === "light" ? "neubarl" : "neubard"}`}
+        style={{zIndex:"200",width : "92.4%",marginLeft:"6.5%",position:"fixed"}}
         >
           <div className="container">
             <a

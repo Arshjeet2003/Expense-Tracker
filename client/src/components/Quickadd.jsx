@@ -143,7 +143,7 @@ const Quickadd = () => {
             </div>
           </div>
 
-          <div className="col-12 col-md-6 forms-container">
+          <div className="col-12 col-md-6 forms-container" style={{paddingTop:"4.5%"}}>
             <div className="p-3 formed">
               <form
                 action="#"

@@ -25,7 +25,8 @@ const Sidebar = () => {
       <div
         className={`${theme === "light" ? "sidebarl" : "sidebard"} ${
           isOpen ? `${theme === "light" ? "openl" : "opend"}` : ""
-        }`}
+          }`}
+        style={{zIndex:300}}
       >
         <div
           className={`${theme === "light" ? "logo-detailsl" : "logo-detailsd"}`}

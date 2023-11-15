@@ -188,7 +188,7 @@ const GroupDetails = () => {
       >
         <Navbar />
         <Sidebar />
-        <div className="container">
+        <div className="container" style={{ paddingTop: "5%" }}>
           <div className="row">
             <div
               className={`col-6 col-md-4 ${
@@ -233,11 +233,14 @@ const GroupDetails = () => {
               className="col-6 col-md-4 .suggestion"
               style={{
                 zIndex: "2",
-                position: "absolute",
+                position: "fixed",
                 marginLeft: "60%",
               }}
             >
-              <SearchBar propsData={propsData} handleAddMember={handleAddMember} />
+              <SearchBar
+                propsData={propsData}
+                handleAddMember={handleAddMember}
+              />
             </div>
           </div>
           <div
@@ -515,7 +518,17 @@ const GroupDetails = () => {
           aria-hidden="true"
         >
           <div className="modal-dialog">
-            <div className="modal-content">
+            <div
+              className="modal-content"
+              style={{
+                borderRadius: "30px",
+                border: `${
+                  theme === "light" ? "5px solid #4d4dff" : "5px solid #333d82"
+                }`,
+                background: `${theme === "light" ? "#fff" : "#25273f"}`,
+                color: `${theme === "light" ? "black" : "#fff"}`,
+              }}
+            >
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">
                   Add Group Transaction
@@ -578,6 +591,13 @@ const GroupDetails = () => {
                   type="button"
                   onClick={handleAddTransaction}
                   className="btn btn-primary"
+                  style={{
+                    background: `${
+                      theme === "light"
+                        ? "#4d4dff"
+                        : "#333d82"
+                    }`,
+                  }}
                 >
                   Add Transaction
                 </button>
