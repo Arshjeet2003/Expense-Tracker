@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
+import axios from "axios";
 import groupContext from "../context/groups/groupContext.js";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,8 +8,12 @@ import { SearchBar } from "./SearchBar.jsx";
 import Navbar from "./Navbar.jsx";
 import Sidebar from "./Sidebar.jsx";
 import "../css/GroupDetails.css";
+import currencyContext from "../context/currency/currencyContext.js";
 
 const GroupDetails = () => {
+  const [exchangeRate, setExchangeRate] = useState(1);
+  const [amount1, setAmount] = useState(1);
+  const [convertedAmount, setConvertedAmount] = useState(1000);
   const { id } = useParams();
   const context = useContext(groupContext);
   const context1 = useContext(themeContext);
@@ -32,6 +37,35 @@ const GroupDetails = () => {
 
   const [propsData, setPropsData] = useState({ value: id });
 
+  const context2 = useContext(currencyContext);
+  const { currentValue, previousValue } = context2;
+
+  // useEffect(() => {
+  //   const fetchExchangeRate = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `https://open.er-api.com/v6/latest/${previousValue}`
+  //       ); // exchangerates api for the
+  //       const rate = response.data.rates[currentValue];
+  //       setExchangeRate(rate);
+  //     } catch (error) {
+  //       console.error("Error fetching exchange rate:", error);
+  //     }
+  //   };
+
+  //   fetchExchangeRate();
+  // }, [previousValue, currentValue]);
+
+  // console.log(exchangeRate);
+
+  // console.log(amount1);
+
+  // useEffect(() => {
+  //   if (exchangeRate !== undefined) {
+  //     setConvertedAmount((amount1 * exchangeRate).toFixed(2));
+  //   }
+  // }, [amount1, exchangeRate]);
+
   useEffect(() => {
     // Fetch group data whenever a member is added or deleted
     getGroup(id)
@@ -47,17 +81,37 @@ const GroupDetails = () => {
     getGroupTransactions(id)
       .then((groupDbTransactions) => {
         const data = []; // Create an array to store the data
+        const fetchExchangeRate = async () => {
+          try {
+            const response = await axios.get(
+              `https://open.er-api.com/v6/latest/${previousValue}`
+            ); // exchangerates api for the
+            const rate = response.data.rates[currentValue];
+            setExchangeRate(rate);
+          } catch (error) {
+            console.error("Error fetching exchange rate:", error);
+          }
+        };
 
+        fetchExchangeRate();
+
+        console.log(exchangeRate);
         for (const DbTransaction of groupDbTransactions) {
           const { groupMember, userId, price } = DbTransaction; // Destructure each transaction
-          data.push([groupMember, userId, price]); // Push the destructured data as an array
+          data.push([groupMember, userId, price * exchangeRate]); // Push the destructured data as an array
         }
         simplifyDebts(data);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, [id, memberChanged, transactionMade]);
+  }, [id, memberChanged, transactionMade, previousValue, currentValue,exchangeRate,getGroup,getGroupTransactions]);
+
+  useEffect(() => {
+    if (exchangeRate !== undefined) {
+      setConvertedAmount((amount1 * exchangeRate).toFixed(2));
+    }
+  }, [amount1, exchangeRate]);
 
   const handleClickDelete = (e, username) => {
     e.preventDefault();
@@ -69,9 +123,9 @@ const GroupDetails = () => {
     setMember({ username: "" });
   };
 
-  const handleAddMember = (value)=>{
+  const handleAddMember = (value) => {
     setMemberChanged(value);
-  }
+  };
 
   const handleToggleMember = (username) => {
     if (selectedMembers.includes(username)) {
@@ -156,6 +210,9 @@ const GroupDetails = () => {
       if (!groupedTransactions[giver]) {
         groupedTransactions[giver] = [];
       }
+      // amount1 = amount;
+
+      // console.log(convertedAmount);
       groupedTransactions[giver].push({ receiver, amount });
     });
     setFinalAns(groupedTransactions);
@@ -355,7 +412,7 @@ const GroupDetails = () => {
                                         }`,
                                       }}
                                     >
-                                      {transaction.amount.toFixed(2)}
+                                      {transaction?.amount?.toFixed(2)}
                                     </td>
                                     <td
                                       className="text-end"
@@ -371,23 +428,24 @@ const GroupDetails = () => {
                                       }}
                                     >
                                       <div className="drodown">
-                                        <i
-                                          className="material-symbols-outlined"
-                                          style={{
-                                            color: `${
-                                              theme === "light"
-                                                ? "black"
-                                                : "white"
-                                            }`,
-                                            background: `${
-                                              theme === "light"
-                                                ? "white"
-                                                : "#333d82"
-                                            }`,
-                                          }}
-                                        >
-                                          currency_rupee
-                                        </i>
+                                        <strong>
+                                          <p
+                                            style={{
+                                              color: `${
+                                                theme === "light"
+                                                  ? "black"
+                                                  : "white"
+                                              }`,
+                                              background: `${
+                                                theme === "light"
+                                                  ? "white"
+                                                  : "#333d82"
+                                              }`,
+                                            }}
+                                          >
+                                            {currentValue}
+                                          </p>
+                                        </strong>
                                       </div>
                                     </td>
                                   </tr>
@@ -545,6 +603,7 @@ const GroupDetails = () => {
                   <div className="mb-3">
                     <label htmlFor="transactionCost" className="form-label">
                       Transaction Cost
+                      <strong>({currentValue})</strong>
                     </label>
                     <input
                       type="number"
@@ -592,11 +651,7 @@ const GroupDetails = () => {
                   onClick={handleAddTransaction}
                   className="btn btn-primary"
                   style={{
-                    background: `${
-                      theme === "light"
-                        ? "#4d4dff"
-                        : "#333d82"
-                    }`,
+                    background: `${theme === "light" ? "#4d4dff" : "#333d82"}`,
                   }}
                 >
                   Add Transaction

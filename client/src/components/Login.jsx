@@ -4,8 +4,6 @@ import authContext from '../context/auth/authContext';
 import '../css/login.css'
 import signup from '../images/signup.svg';
 import login from '../images/login.svg';
-import { GoogleLogin } from '@react-oauth/google';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import { auth, provider } from "../firebase";
 import { signInWithPopup} from "firebase/auth";
 import { getFirestore, doc, getDoc} from "firebase/firestore";
