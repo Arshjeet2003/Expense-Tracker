@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Transaction = require('./Transactions');
 const Groups = require('./Groups');
+const FinancialGoals = require('./FinancialGoals');
 const {Schema} = mongoose;
 
 const UserSchema = new mongoose.Schema(
@@ -12,6 +13,10 @@ const UserSchema = new mongoose.Schema(
         transactions: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Transaction'
+        }],
+        financialGoals: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'FinancialGoals'
         }],
         groups: [{
             type: mongoose.Schema.Types.ObjectId,

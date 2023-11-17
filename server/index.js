@@ -16,6 +16,7 @@ app.use('/api/auth',require('./routes/auth'));
 app.use('/api/transactions',require('./routes/transactions'));
 app.use('/api/friends',require('./routes/friends'));
 app.use('/api/groups',require('./routes/groups'));
+app.use('/api/financialGoals',require('./routes/financialGoals'));
 
 
 app.listen(port, () => {
