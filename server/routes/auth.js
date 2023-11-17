@@ -105,6 +105,17 @@ router.get('/getuser', fetchuser, async (req, res) => {
     }
 });
 
+router.get("/getcurrentuser", fetchuser, async (req, res) => {
+  try {
+      const userId = req.user.id;
+      const user = await User.findById(userId).select("-password");
+      res.send(user);
+    
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal Server Error");
+  }
+});
 // ROUTE 4: Update an existing user using: PUT "/api/auth/updateuser".
 router.put('/updateuser',fetchuser, async (req,res)=>{
     const {name,email,old_password,new_password} = req.body;

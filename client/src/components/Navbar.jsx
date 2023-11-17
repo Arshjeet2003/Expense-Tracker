@@ -93,31 +93,12 @@ const Navbar = (props) => {
                   </a>
                 </li>
                 <li className= {`dropdown ${theme === "light" ? "nav-item1" : "nav-itemd"}`}>
-                  <a
-                    className="nav-link mx-2 dropdown-toggle"
-                    href="#"
-                    id="navbarDropdownMenuLink"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
+                  <Link
+                    className="nav-link mx-2"
+                    to="/profile"
                   >
                     Register
-                  </a>
-                  <ul
-                    className="dropdown-menu"
-                    aria-labelledby="navbarDropdownMenuLink"
-                  >
-                    <li>
-                      <Link className="dropdown-item" to="/login">
-                        Sign-up
-                      </Link>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Log in
-                      </a>
-                    </li>
-                  </ul>
+                  </Link>
                 </li>
               </ul>
             </div>

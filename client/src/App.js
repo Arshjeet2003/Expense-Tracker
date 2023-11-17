@@ -16,7 +16,7 @@ import Quickadd from './components/Quickadd.jsx';
 import Conversions from './components/Conversions.jsx';
 import ThemeState from './context/theme/ThemeState.js';
 import CurrencyState from './context/currency/CurrencyState.js';
-
+import Profile from "./components/Profile.jsx";
 
 function App() {
   return (
@@ -62,6 +62,11 @@ function App() {
                         exact
                         path="/Conversions"
                         element={<Conversions />}
+                      ></Route>
+                      <Route
+                        exact
+                        path="/profile"
+                        element={<Profile/>}
                       ></Route>
                     </Routes>
                   </BrowserRouter>

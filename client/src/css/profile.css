@@ -1,25 +1,43 @@
 .bodyl{
-    background: -webkit-linear-gradient(left, #3931af, rgb(0, 106, 255));
+    background: #fff;
+    min-height: 100vh;
 }
 
 
 
+.h22{
+    margin-right: 90% !important;
+}
+
+.nav-item a{
+    cursor:  pointer !important;
+    color: #4d4dff !important;
+}
 
 .emp-profile{
     padding: 3%;
-    margin-top: 3%;
+    margin-top: 7%;
     margin-bottom: 3%;
     border-radius: 1.7rem;
     background: #fff;
+    max-width: 82%;
+    margin-left: 12%;
+    border: 5px solid #4d4dff;
+    background: whitesmoke;
+     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;;
 }
 .profile-img{
     text-align: center;
+    margin-right: 5%;
 }
 .profile-img img{
-    width: 80%;
-    height: 90%;
+    width: 99%;
+    height: 260px;
     background: gray;
-    margin-top: 5%;
+    border-radius: 30px;
+    margin-top: 6%;
+    margin-right: 8%;
+
 }
 .profile-img .file {
     position: relative;
@@ -88,6 +106,7 @@
     color: #495057;
     font-weight: 600;
     font-size: 14px;
+    
 }
 .profile-work ul{
     list-style: none;
