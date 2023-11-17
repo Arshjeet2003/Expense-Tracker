@@ -44,8 +44,23 @@ const AuthState = (props)=>{
         return json;
     }
 
+    const getUser = async () => {
+      const response = await fetch(
+        `${host}/api/auth/getcurrentuser`,
+        {
+          method: "GET",
+          headers: {
+            "auth-token": localStorage.getItem("token"),
+          },
+        }
+      );
+      const json = await response.json();
+      return json;
+    };
+
+
     return (
-        <AuthContext.Provider value={{userId,loginUser,signupUser,getUsers}}>
+        <AuthContext.Provider value={{userId,loginUser,signupUser,getUsers,getUser}}>
             {props.children}
         </AuthContext.Provider>
     );

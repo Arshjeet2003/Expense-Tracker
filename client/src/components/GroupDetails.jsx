@@ -357,7 +357,7 @@ const GroupDetails = () => {
                                       }`,
                                     }}
                                   >
-                                    Amount(INR)
+                                    Amount
                                   </th>
                                   <th
                                     style={{
