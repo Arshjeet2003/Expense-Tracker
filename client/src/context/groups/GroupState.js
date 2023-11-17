@@ -71,14 +71,14 @@ const GroupState = (props)=>{
         setGroups(groups.concat(group));
     }
 
-    const AddGroupTransaction = async (groupMember, price, grpId)=>{
+    const AddGroupTransaction = async (groupMember, price, grpId, currencyTypeGroup)=>{
       const response = await fetch(`${host}/api/groups/addTransaction/${grpId}`,{
           method: 'POST',
           headers:{
               'Content-Type': 'application/json',
               'auth-token': localStorage.getItem('token')
           },
-          body: JSON.stringify({groupMember, price})
+          body: JSON.stringify({groupMember, price, currencyTypeGroup})
       });
 
       const group = await response.text();

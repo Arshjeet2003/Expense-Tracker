@@ -12,7 +12,8 @@ const GroupSchema = new mongoose.Schema(
         groupTransactions: [{
             groupMember: String,
             userId: String,
-            price: Number
+            price: Number,
+            currencyTypeGroup: String,
         }],
         date:{
             type: Date,

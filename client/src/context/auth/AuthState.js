@@ -58,9 +58,22 @@ const AuthState = (props)=>{
       return json;
     };
 
+    const updateCurrency = async (new_currency)=>{
+        const response = await fetch(`${host}/api/auth/updatecurrency`,{
+            method: 'PUT',
+            headers:{
+                'Content-Type': 'application/json',
+                'auth-token': localStorage.getItem('token')
+            },
+            body: JSON.stringify({new_currency: new_currency})
+        });
+        const json = await response.json();
+        return json;
+    }
+
 
     return (
-        <AuthContext.Provider value={{userId,loginUser,signupUser,getUsers,getUser}}>
+        <AuthContext.Provider value={{userId,loginUser,signupUser,getUsers,getUser,updateCurrency}}>
             {props.children}
         </AuthContext.Provider>
     );

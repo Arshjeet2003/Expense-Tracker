@@ -34,7 +34,8 @@ router.post('/createuser',[
         _id: req.body._id,
         name: req.body.name,
         email: req.body.email,
-        password: secPass
+        password: secPass,
+        currencyType: "INR"
         });
         const data = {
             user: {
@@ -139,6 +140,27 @@ router.put('/updateuser',fetchuser, async (req,res)=>{
         res.json({user_update});
     } 
     catch(error){
+        console.error(error.message);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+// ROUTE 5: Update a currency for a user using: PUT "/api/auth/updatecurrency".
+router.put('/updatecurrency', fetchuser, async (req, res) => {
+    const { new_currency } = req.body;
+
+    try {
+        // Find the user by ID
+        let user = await User.findById(req.user.id);
+
+        // Update the currencyType field
+        user.currencyType = new_currency;
+
+        // Save the updated user
+        const user_update = await user.save();
+
+        res.json({ user_update });
+    } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server Error");
     }

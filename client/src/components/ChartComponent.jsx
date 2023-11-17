@@ -45,7 +45,7 @@ const ChartComponent = (props) => {
   const [selectedDateForPie, setSelectedDateForPie] = useState(today);
   const [selectedMonthForPie, setSelectedMonthForPie] = useState(today);
   const [selectedYearForPie, setSelectedYearForPie] = useState(today);
-  const [selectedWeekForPie, setSelectedWeemForPie] = useState(today);
+  const [selectedWeekForPie, setSelectedWeekForPie] = useState(today);
 
   const backgroundColors = [
     "#003f5c",
@@ -365,7 +365,7 @@ const ChartComponent = (props) => {
   const getWeeklyDataForThisYearForPie = () => {
     if (!transactionData || !selectedWeekForPie) return;
 
-    const startDate = new Date(selectedDateForPie);
+    const startDate = new Date(selectedWeekForPie);
     startDate.setDate(startDate.getDate() - startDate.getDay()); // Get the start of the week for the selected date
     const endDate = new Date(startDate);
     endDate.setDate(endDate.getDate() + 6); // Get the end of the week
@@ -507,8 +507,8 @@ const ChartComponent = (props) => {
     for (const transaction of transactionData) {
       const transactionDate = new Date(transaction.date);
       if (
-        transactionDate.getFullYear() === selectedMonth.getFullYear() &&
-        transactionDate.getMonth() === selectedMonth.getMonth() &&
+        transactionDate.getFullYear() === selectedMonthForPie.getFullYear() &&
+        transactionDate.getMonth() === selectedMonthForPie.getMonth() &&
         transaction.type === "Expense"
       ) {
         const categoryToUpdate = monthlyCategoryDataExpenses.find(
@@ -686,19 +686,19 @@ const ChartComponent = (props) => {
     if (dataTypeForPie === "Daily") {
       const selectedDateNowForPie = new Date(selectedDateForPie);
       selectedDateNowForPie.setDate(selectedDateNowForPie.getDate() - 1); // Subtract 1 days
-      setSelectedDate(selectedDateNowForPie);
+      setSelectedDateForPie(selectedDateNowForPie);
     } else if(dataTypeForPie === "Weekly"){
-      const selectedDateNowForPie = new Date(selectedDateForPie);
+      const selectedDateNowForPie = new Date(selectedWeekForPie);
       selectedDateNowForPie.setDate(selectedDateNowForPie.getDate() - 7); // Subtract 7 days
-      setSelectedDate(selectedDateNowForPie);
+      setSelectedWeekForPie(selectedDateNowForPie);
     } else if (dataTypeForPie === "Monthly") {
       const selectedMonthNowForPie = new Date(selectedMonthForPie);
       selectedMonthNowForPie.setMonth(selectedMonthNowForPie.getMonth() - 1); // Subtract 1 month
       setSelectedMonthForPie(selectedMonthNowForPie);
-    } else {
+    } else if(dataTypeForPie==="Yearly") {
       const selectedYearNowForPie = new Date(selectedYearForPie);
       selectedYearNowForPie.setYear(selectedYearNowForPie.getFullYear() - 1); // Subtract 1 year
-      setSelectedYear(selectedYearNowForPie);
+      setSelectedYearForPie(selectedYearNowForPie);
     }
   };
 
@@ -722,19 +722,19 @@ const ChartComponent = (props) => {
     if (dataTypeForPie === "Daily") {
       const selectedDateNowForPie = new Date(selectedDateForPie);
       selectedDateNowForPie.setDate(selectedDateNowForPie.getDate() + 1); // Add 1 days
-      setSelectedDate(selectedDateNowForPie);
+      setSelectedDateForPie(selectedDateNowForPie);
     } else if(dataTypeForPie === "Weekly"){
-      const selectedDateNowForPie = new Date(selectedDateForPie);
+      const selectedDateNowForPie = new Date(selectedWeekForPie);
       selectedDateNowForPie.setDate(selectedDateNowForPie.getDate() + 7); // Add 7 days
-      setSelectedDate(selectedDateNowForPie);
+      setSelectedWeekForPie(selectedDateNowForPie);
     } else if (dataTypeForPie === "Monthly") {
       const selectedMonthNowForPie = new Date(selectedMonthForPie);
       selectedMonthNowForPie.setMonth(selectedMonthNowForPie.getMonth() + 1); // Add 1 month
       setSelectedMonthForPie(selectedMonthNowForPie);
-    } else {
+    } else if(dataTypeForPie==="Yearly"){
       const selectedYearNowForPie = new Date(selectedYearForPie);
       selectedYearNowForPie.setYear(selectedYearNowForPie.getFullYear() + 1); // Add 1 year
-      setSelectedYear(selectedYearNowForPie);
+      setSelectedYearForPie(selectedYearNowForPie);
     }
   };
 

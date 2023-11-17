@@ -8,16 +8,13 @@ import { SearchBar } from "./SearchBar.jsx";
 import Navbar from "./Navbar.jsx";
 import Sidebar from "./Sidebar.jsx";
 import "../css/GroupDetails.css";
-import currencyContext from "../context/currency/currencyContext.js";
+import authContext from "../context/auth/authContext.js";
 
 const GroupDetails = () => {
-  const [exchangeRate, setExchangeRate] = useState(1);
-  const [amount1, setAmount] = useState(1);
-  const [convertedAmount, setConvertedAmount] = useState(1000);
+
   const { id } = useParams();
+
   const context = useContext(groupContext);
-  const context1 = useContext(themeContext);
-  const { theme } = context1;
   const {
     getGroup,
     addGroupMember,
@@ -25,20 +22,35 @@ const GroupDetails = () => {
     getGroupTransactions,
     AddGroupTransaction,
   } = context;
+
+  const context1 = useContext(themeContext);
+  const { theme } = context1;
+
+
+  const context2 = useContext(authContext);
+  const { getUser } = context2;
+
+  const [currentValue,setCurrentValue] = useState("INR");
+
   const [group, setGroup] = useState({});
+
   const [member, setMember] = useState({ username: "" });
+
   const [memberChanged, setMemberChanged] = useState(false); // State to track member changes
+
   const [selectedMembers, setSelectedMembers] = useState([]); // State to store selected members
+
   const [transactionMade, setTransactionMade] = useState(false);
+
   const [transaction, setTransaction] = useState({ cost: 0, type: "credit" }); // State for transaction details
+
   const [finalAns, setFinalAns] = useState([]);
+
   const ref = useRef(null);
+
   const refClose = useRef(null);
 
   const [propsData, setPropsData] = useState({ value: id });
-
-  const context2 = useContext(currencyContext);
-  const { currentValue, previousValue } = context2;
 
   // useEffect(() => {
   //   const fetchExchangeRate = async () => {
@@ -83,35 +95,33 @@ const GroupDetails = () => {
         const data = []; // Create an array to store the data
         const fetchExchangeRate = async () => {
           try {
-            const response = await axios.get(
-              `https://open.er-api.com/v6/latest/${previousValue}`
-            ); // exchangerates api for the
-            const rate = response.data.rates[currentValue];
-            setExchangeRate(rate);
+            const user = await getUser();
+            setCurrentValue(user.currencyType);
+            console.log(groupDbTransactions);
+          
+            for (const DbTransaction of groupDbTransactions) {
+              const { groupMember, userId, price, currencyTypeGroup } = DbTransaction; // Destructure each transaction
+              try {
+                const response = await axios.get(
+                  `https://open.er-api.com/v6/latest/${currencyTypeGroup}`
+                ); // exchangerates api for the
+                const rate = response.data.rates[user.currencyType];
+                data.push([groupMember, userId, price * rate]); // Push the destructured data as an array
+              } catch (error) {
+                console.error("Error fetching exchange rate:", error);
+              }
+            }
+            simplifyDebts(data);
           } catch (error) {
             console.error("Error fetching exchange rate:", error);
           }
         };
-
         fetchExchangeRate();
-
-        console.log(exchangeRate);
-        for (const DbTransaction of groupDbTransactions) {
-          const { groupMember, userId, price } = DbTransaction; // Destructure each transaction
-          data.push([groupMember, userId, price * exchangeRate]); // Push the destructured data as an array
-        }
-        simplifyDebts(data);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, [id, memberChanged, transactionMade, previousValue, currentValue,exchangeRate,getGroup,getGroupTransactions]);
-
-  useEffect(() => {
-    if (exchangeRate !== undefined) {
-      setConvertedAmount((amount1 * exchangeRate).toFixed(2));
-    }
-  }, [amount1, exchangeRate]);
+  }, [id, memberChanged, transactionMade,getGroup,getGroupTransactions]);
 
   const handleClickDelete = (e, username) => {
     e.preventDefault();
@@ -143,6 +153,10 @@ const GroupDetails = () => {
 
   const handleTransactionTypeChange = (e) => {
     setTransaction({ ...transaction, type: e.target.value });
+  };
+
+  const handleTransactionCurrencyTypeGroupChange = (e) => {
+    setTransaction({ ...transaction, currencyTypeGroup: e.target.value });
   };
 
   const renderMemberCheckboxes = () => {
@@ -210,9 +224,6 @@ const GroupDetails = () => {
       if (!groupedTransactions[giver]) {
         groupedTransactions[giver] = [];
       }
-      // amount1 = amount;
-
-      // console.log(convertedAmount);
       groupedTransactions[giver].push({ receiver, amount });
     });
     setFinalAns(groupedTransactions);
@@ -222,9 +233,9 @@ const GroupDetails = () => {
     const price = transaction.cost / selectedMembers.length;
     for (const groupMember of selectedMembers) {
       if (transaction.type === "debit") {
-        await AddGroupTransaction(groupMember, price, id);
+        await AddGroupTransaction(groupMember, price, id, transaction.currencyTypeGroup);
       } else {
-        await AddGroupTransaction(groupMember, -price, id);
+        await AddGroupTransaction(groupMember, -price, id, transaction.currencyTypeGroup);
       }
     }
     setTransactionMade(true);
@@ -612,6 +623,14 @@ const GroupDetails = () => {
                       name="transactionCost"
                       value={transaction.cost}
                       onChange={handleTransactionCostChange}
+                    />
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="transactioncurrencyTypeGroup"
+                      name="transactioncurrencyTypeGroup"
+                      value={transaction.currencyTypeGroup}
+                      onChange={handleTransactionCurrencyTypeGroupChange}
                     />
                   </div>
                   <div className="mb-3">

@@ -6,24 +6,23 @@ import authContext from "../context/auth/authContext";
 import Navbar from "./Navbar.jsx";
 import Sidebar from "./Sidebar.jsx";
 import "../css/profile.css";
-import currencyContext from "../context/currency/currencyContext.js";
 import Conversion from "../images/Conversion.svg";
 
 const Profile = () => {
   const context3 = useContext(authContext);
-  const { getUser } = context3;
+  const { getUser,updateCurrency } = context3;
 
-  const [currencies, setCurrencies] = useState([]);
+  const [currencies ,setCurrencies] = useState([]);
   const context1 = useContext(themeContext);
   const { theme } = context1;
-  const context2 = useContext(currencyContext);
-  const { currentValue, handleCurrencyChange } = context2;
+  const [currentValue,setCurrentValue] = useState("INR");
   const [user, setUser] = useState({});
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const curr_user = await getUser();
         setUser(curr_user);
+        setCurrentValue(curr_user.currencyType);
       } catch (error) {
         console.error("Error fetching user:", error);
       }
@@ -39,7 +38,18 @@ const Profile = () => {
     };
     fetchUser();
     fetchCurrencies();
-  }, [user]);
+  }, [user,currentValue]);
+
+  const handleCurrencyChange = async (selectedCurrency) => {
+    // Update the currency in the database
+    try {
+      await updateCurrency(selectedCurrency);
+    } catch (error) {
+      console.error("Error updating currency:", error);
+    }
+  };
+
+  
 
   const [activeTab, setActiveTab] = useState("home"); // State to manage active tab
 

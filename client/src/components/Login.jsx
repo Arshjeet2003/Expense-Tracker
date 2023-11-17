@@ -5,16 +5,13 @@ import '../css/login.css'
 import signup from '../images/signup.svg';
 import login from '../images/login.svg';
 import { auth, provider } from "../firebase";
-import { signInWithPopup} from "firebase/auth";
-import { getFirestore, doc, getDoc} from "firebase/firestore";
-
+import { signInWithPopup, signInWithRedirect} from "firebase/auth";
 
 
 const Login = (props) => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const context = useContext(authContext);
   const { loginUser, signupUser } = context;
-  const firestore = getFirestore();
 
   const [credentials, setCredentials] = useState({
     email: "",
@@ -36,34 +33,30 @@ const Login = (props) => {
           return; // Exit early if no user data is available
         }
 
-        const userExists = await checkIfUserExists(user.email);
+        // const userExists = await checkIfUserExists(user.email);
 
-        if (!userExists) {
+        if (!user) {
           // User does not exist, sign them up
-          await signupUser(user.displayName, user.displayName, user.email, user.email);
-          await loginUser(user.email, user.email);
-          navigate("/");
+          // const token = await user.getIdToken();
+          
+          if(await signupUser(user.displayName, user.displayName, user.email, user.email)){
+            if(await loginUser(user.email, user.email)){
+              navigate("/");
+            }
+          }
+          
         } else {
           // User exists, perform login
-          await loginUser(user.email,user.email);
-          navigate("/");
+          // const token = await user.getIdToken();
+          if(await loginUser(user.email,user.email)){
+            navigate("/");
+          }
         }
       })
       .catch((error) => {
         // Handle errors if any
         console.error("Error signing in with Google:", error);
       });
-  };
-
-  // Function to check if a user exists
-  const checkIfUserExists = async (email) => {
-    try {
-      const userDoc = await getDoc(doc(firestore, "users", email));
-      return userDoc.exists();
-    } catch (error) {
-      console.error("Error checking user existence:", error);
-      return false;
-    }
   };
 
   const handleSignInSubmit = async (e) => {
@@ -90,6 +83,7 @@ const Login = (props) => {
   const responseGoogle = (response) => {
     console.log(response);
   };
+  
   return (
     <div>
       <div className={`c ${isSignUpMode ? "sign-up-mode" : ""}`}>

@@ -21,7 +21,8 @@ const UserSchema = new mongoose.Schema(
             type: Date,
             default: Date.now
         },
-        imageUrl: String
+        imageUrl: String,
+        currencyType: String
     }
 )
 const User = mongoose.model('user',UserSchema);

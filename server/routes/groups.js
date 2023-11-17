@@ -224,11 +224,11 @@ router.post('/addTransaction/:grpId',fetchuser,async (req,res)=>{
     try {
         const grpIdToAdd = req.params.grpId;
         const userId = req.user.id;
-        const {groupMember,price} = req.body;
+        const {groupMember,price,currencyTypeGroup} = req.body;
 
         // Step 1: Find the grp by ID
         const toAddGrp = await Groups.findById(grpIdToAdd);
-        toAddGrp.groupTransactions.push({groupMember,userId,price});
+        toAddGrp.groupTransactions.push({groupMember,userId,price,currencyTypeGroup});
         await toAddGrp.save();
         res.send(toAddGrp);
     }

@@ -17,7 +17,8 @@ const TransactionSchema = new mongoose.Schema(
         dueDate:{
             type: Date,
             default: null
-        }
+        },
+        currencyTypeGroup: String
     }
 )
 const Transaction = mongoose.model('transaction',TransactionSchema);
