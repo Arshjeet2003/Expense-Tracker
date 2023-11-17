@@ -27,91 +27,102 @@ const Navbar = (props) => {
     
   }, [setClicked,notificationClicked]);
   return (
-      <div>
-        <nav
-          className="navbar navbar-expand-sm navbar-light"
+    <div>
+      <nav
+        className="navbar navbar-expand-sm navbar-light"
         id={`${theme === "light" ? "neubarl" : "neubard"}`}
-        style={{zIndex:"200",width : "92.4%",marginLeft:"6.5%",position:"fixed"}}
-        >
-          <div className="container">
-            <a
-              className={`${
-                theme === "light" ? "navbar-brandl" : "navbar-brandd"
-              }`}
-              href="#"
-            >
-              <img src="image" height="60" alter="logo" />
-            </a>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNavDropdown"
-              aria-controls="navbarNavDropdown"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
+        style={{
+          zIndex: "200",
+          width: "92.4%",
+          marginLeft: "6.5%",
+          position: "fixed",
+        }}
+      >
+        <div className="container">
+          <a
+            className={`${
+              theme === "light" ? "navbar-brandl" : "navbar-brandd"
+            }`}
+            href="#"
+          >
+            <img src="image" height="60" alter="logo" />
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-            <div className=" collapse navbar-collapse" id="navbarNavDropdown">
-              <ul className="navbar-nav ms-auto ">
-                <li
-                  className={`${theme === "light" ? "nav-iteml" : "nav-itemd"}`}
+          <div className=" collapse navbar-collapse" id="navbarNavDropdown">
+            <ul className="navbar-nav ms-auto ">
+              <li
+                className={`${theme === "light" ? "nav-iteml" : "nav-itemd"}`}
+              >
+                <Link
+                  className={`nav-link mx-2 ${
+                    theme === "light" ? "activel" : "actived"
+                  }`}
+                  aria-current="page"
+                  to="/quickadd"
                 >
-                  <Link
-                    className={`nav-link mx-2 ${
-                      theme === "light" ? "activel" : "actived"
-                    }`}
-                    aria-current="page"
-                    to="/quickadd"
-                  >
-                    Quick Add
-                    <span className="material-symbols-outlined plus-sign">
-                      add
-                    </span>
-                  </Link>
-                </li>
-                <li
-                  className={`${theme === "light" ? "nav-item1" : "nav-itemd"}`}
-                >
-                  <a onClick={toggleTheme} className="nav-link mx-2" href="#">
-                    <i className="material-symbols-outlined sun" id="night">
+                  Quick Add
+                  <span className="material-symbols-outlined plus-sign">
+                    add
+                  </span>
+                </Link>
+              </li>
+              <li
+                className={`${theme === "light" ? "nav-item1" : "nav-itemd"}`}
+              >
+                <a onClick={toggleTheme} className="nav-link mx-2" href="#">
+                  <i className="material-symbols-outlined sun" id="night">
                     {theme === "dark" ? "light_mode" : "dark_mode"}
-                    
-                    </i>
-                  </a>
-                  {/* <!-- <span className="material-symbols-outlined">
+                  </i>
+                </a>
+                {/* <!-- <span className="material-symbols-outlined">
                         light_mode
                         </span> --> */}
-                </li>
-                <li
-                  className={`${theme === "light" ? "nav-item1" : "nav-itemd"}`}
-                >
-                  <a onClick={handleNotification} className="nav-link mx-2">
-                    <i className="material-symbols-outlined">notifications</i>
-                  </a>
-                </li>
-                <li className= {`dropdown ${theme === "light" ? "nav-item1" : "nav-itemd"}`}>
-                  <Link
-                    className="nav-link mx-2"
-                    to="/profile"
-                  >
-                    Register
-                  </Link>
-                </li>
-              </ul>
-            </div>
+              </li>
+              <li
+                className={`${theme === "light" ? "nav-item1" : "nav-itemd"}`}
+              >
+                <a onClick={handleNotification} className="nav-link mx-2">
+                  <i className="material-symbols-outlined">notifications</i>
+                </a>
+              </li>
+              <li
+                className={`dropdown ${
+                  theme === "light" ? "nav-item1" : "nav-itemd"
+                }`}
+              >
+                <Link className="nav-link mx-2" to="/profile">
+                  <div className="d-flex align-items-center">
+                    <img
+                      src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                      className="avatar sm rounded-pill me-3 flex-shrink-0"
+                      alt="Customer"
+                    />
+                  </div>
+                </Link>
+              </li>
+            </ul>
           </div>
-        </nav>
-        {notificationClicked ? (
-          <NotificationComp transaction={transaction} />
-        ) : (
-          ""
-        )}
-        ;
-      </div>
-  )
+        </div>
+      </nav>
+      {notificationClicked ? (
+        <NotificationComp transaction={transaction} />
+      ) : (
+        ""
+      )}
+      ;
+    </div>
+  );
 }
 
 export default Navbar;

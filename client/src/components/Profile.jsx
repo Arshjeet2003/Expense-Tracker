@@ -48,10 +48,15 @@ const Profile = () => {
   };
 
   return (
-    <div className="bodyl">
+    <div className={`${theme === "light" ? "bodyl" : "bodyd"}`}>
       <Navbar />
       <Sidebar />
-      <div className="container emp-profile" style={{ paddingTop: "5%" }}>
+      <div
+        className={`container ${
+          theme === "light" ? "emp-profilel" : "emp-profiled"
+        }`}
+        style={{ paddingTop: "5%" }}
+      >
         <div className="row mx-3">
           <div className="col-md-5">
             <div className="profile-img">
@@ -64,17 +69,46 @@ const Profile = () => {
           </div>
           <div className="col-md-7">
             <div className="profile-head">
-              <h2 className="h22">{user.name}</h2>
-              <h6>{user._id}</h6>
-              <p className="proile-rating">
-                Goals achieved : <span>8/10</span>
+              <h2
+                className="h22"
+                style={{
+                  color: `${theme === "light" ? "black" : "#fff"}`,
+                }}
+              >
+                {user.name}
+              </h2>
+              <h6
+                style={{
+                  color: `${theme === "light" ? "black" : "#fadb69"}`,
+                }}
+              >
+                {user._id}
+              </h6>
+              <p
+                className="proile-rating"
+                style={{
+                  color: `${theme === "light" ? "black" : "#fff"}`,
+                }}
+              >
+                Goals achieved :{" "}
+                <span
+                  style={{
+                    color: `${theme === "light" ? "black" : "#fff"}`,
+                  }}
+                >
+                  8/10
+                </span>
               </p>
               <ul className="nav nav-tabs" id="myTab" role="tablist">
                 <li className="nav-item">
-                  <a
+                  <button
                     className={`nav-link ${
                       activeTab === "home" ? "active" : ""
                     }`}
+                    style={{
+                      color: `${theme === "light" ? "#4d4dff" : "#fadb69"}`,
+                      background: `${theme === "light" ? "#fff" : "#333d82"}`,
+                    }}
                     id="home-tab"
                     onClick={() => handleTabClick("home")}
                     role="tab"
@@ -82,13 +116,17 @@ const Profile = () => {
                     aria-selected={activeTab === "home"}
                   >
                     About
-                  </a>
+                  </button>
                 </li>
                 <li className="nav-item">
-                  <a
+                  <button
                     className={`nav-link ${
                       activeTab === "profile" ? "active" : ""
                     }`}
+                    style={{
+                      color: `${theme === "light" ? "#4d4dff" : "#fadb69"}`,
+                      background: `${theme === "light" ? "#fff" : "#333d82"}`,
+                    }}
                     id="profile-tab"
                     onClick={() => handleTabClick("profile")}
                     role="tab"
@@ -96,7 +134,7 @@ const Profile = () => {
                     aria-selected={activeTab === "profile"}
                   >
                     Change Currency
-                  </a>
+                  </button>
                 </li>
               </ul>
               <div className="tab-content profile-tab" id="myTabContent">
@@ -110,37 +148,78 @@ const Profile = () => {
                 >
                   <div className="row">
                     <div className="col-md-6">
-                      <label>User Id</label>
+                      <label
+                        style={{
+                          color: `${theme === "light" ? "black" : "#fff"}`,
+                        }}
+                      >
+                        User Id
+                      </label>
                     </div>
                     <div className="col-md-6">
-                      <p>{user._id}</p>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-6">
-                      <label>Name</label>
-                    </div>
-                    <div className="col-md-6">
-                      <p>{user.name}</p>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-md-6">
-                      <label>Email</label>
-                    </div>
-                    <div className="col-md-6">
-                      <p>{user.email}</p>
+                      <p
+                        style={{
+                          color: `${theme === "light" ? "#4d4dff" : "#fadb69"}`,
+                        }}
+                      >
+                        {user._id}
+                      </p>
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-md-6">
-                      <label>Currency</label>
+                      <label
+                        style={{
+                          color: `${theme === "light" ? "black" : "#fff"}`,
+                        }}
+                      >
+                        Name
+                      </label>
+                    </div>
+                    <div className="col-md-6">
+                      <p
+                        style={{
+                          color: `${theme === "light" ? "#4d4dff" : "#fadb69"}`,
+                        }}
+                      >
+                        {user.name}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <label
+                        style={{
+                          color: `${theme === "light" ? "black" : "#fff"}`,
+                        }}
+                      >
+                        Email
+                      </label>
+                    </div>
+                    <div className="col-md-6">
+                      <p
+                        style={{
+                          color: `${theme === "light" ? "#4d4dff" : "#fadb69"}`,
+                        }}
+                      >
+                        {user.email}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-md-6">
+                      <label
+                        style={{
+                          color: `${theme === "light" ? "black" : "#fff"}`,
+                        }}
+                      >
+                        Currency
+                      </label>
                     </div>
                     <div
                       className="col-md-6"
                       style={{
-                        color: `${theme === "light" ? "#4d4dff" : "#333d82"}`,
-                        // fontWeight:"500px",
+                        color: `${theme === "light" ? "#4d4dff" : "#fadb69"}`,
                       }}
                     >
                       <strong>{currentValue}</strong>
@@ -174,14 +253,18 @@ const Profile = () => {
                         value={currentValue}
                         onChange={(e) => handleCurrencyChange(e.target.value)}
                         style={{
-                          background: `${
-                            theme === "light" ? "#fff" : "#333d82"
-                          }`,
-                          border: "1px solid #25273f",
-                          color: `${theme === "light" ? "black" : "#fff"}`,
+                          background: `${theme === "light" ? "#fff" : "#fff"}`,
+                          // border: "1px solid #25273f",
+                          color: `${theme === "light" ? "black" : "#333d82"}`,
                           width: "50%",
                           marginTop: "-30%",
-                          border: "2px solid #4d4dff",
+
+                          border: `${
+                            theme === "light"
+                              ? "2px solid #4d4dff"
+                              : "4px solid #f4c415"
+                          }`,
+
                           borderRadius: "10px",
                         }}
                       >
