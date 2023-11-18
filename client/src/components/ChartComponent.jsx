@@ -47,6 +47,23 @@ const ChartComponent = (props) => {
   const [selectedYearForPie, setSelectedYearForPie] = useState(today);
   const [selectedWeekForPie, setSelectedWeekForPie] = useState(today);
 
+  const [dateChanged , setDateChanged] = useState(false);
+  const [dateChangedForPie,setDateChangedForPie] = useState(false);
+  const [dateTypeChanged,setDateTypeChanged] = useState(false);
+  const [dateTypeChangedForPie,setDateTypeChangedForPie] = useState(false);
+
+  const [startDateToShow,setStartDateToShow] = useState(today.getDate());
+  const [endDateToShow,setEndDateToShow] = useState(today.getDate());
+
+  const [yearToShow,setYearToShow] = useState(today.getFullYear());
+
+  const [dateToShowForPie,setDateToShowForPie] = useState(today.getDate());
+  const [startDateToShowForPie,setStartDateToShowForPie] = useState(today.getDate());
+  const [endDateToShowForPie,setEndDateToShowForPie] = useState(today.getDate());
+  const [monthToShowForPie,setMonthToShowForPie] = useState(today.getMonth());
+  const [yearToShowForPie,setYearToShowForPie] = useState(today.getYear());
+
+
   const backgroundColors = [
     "#003f5c",
     "#58508d",
@@ -230,7 +247,9 @@ const ChartComponent = (props) => {
     } else {
       getYearlyDataForLastTenYears();
     }
-  }, [selectedDate, selectedMonth, selectedYear, transactionData, dateType]);
+    setDateChanged(false)
+    setDateTypeChanged(false)
+  }, [transactionData, dateTypeChanged ,dateChanged]);
 
   useEffect(() => {
     if (dataTypeForPie === "Daily") {
@@ -243,7 +262,9 @@ const ChartComponent = (props) => {
     else{
       getYearlyDataForPie();
     }
-  },[transactionData ,selectedDateForPie, selectedMonthForPie, selectedYearForPie , selectedWeekForPie, dataTypeForPie])
+    setDateChangedForPie(false);
+    setDateTypeChangedForPie(false);
+  },[transactionData,dateChangedForPie,dateTypeChangedForPie])
 
   const getDailyDataForSelectedDate = () => {
     if (!transactionData || !selectedDate) return;
@@ -255,6 +276,9 @@ const ChartComponent = (props) => {
 
     const dailyPriceExpense = Array(7).fill(0); // Initialize an array with zeros for each day of the week.
     const dailyPriceIncome = Array(7).fill(0);
+
+    setStartDateToShow(startDate.getDate());
+    setEndDateToShow(endDate.getDate());
 
     for (const transaction of transactionData) {
       const transactionDate = new Date(transaction.date);
@@ -334,6 +358,8 @@ const ChartComponent = (props) => {
       { label: "Others", data: 0 },
     ];
 
+    setDateToShowForPie(selectedDateForPie.getDate());
+
     for (const transaction of transactionData) {
       const transactionDate = new Date(transaction.date);
 
@@ -369,6 +395,9 @@ const ChartComponent = (props) => {
     startDate.setDate(startDate.getDate() - startDate.getDay()); // Get the start of the week for the selected date
     const endDate = new Date(startDate);
     endDate.setDate(endDate.getDate() + 6); // Get the end of the week
+
+    setStartDateToShowForPie(startDate.getDate());
+    setEndDateToShowForPie(endDate.getDate());
 
     const weeklyCategoryDataExpenses = [
       { label: "Food", data: 0 },
@@ -414,6 +443,9 @@ const ChartComponent = (props) => {
 
   const getMonthlyDataForThisYear = () => {
     if (!transactionData || !selectedMonth) return;
+
+    setYearToShow(selectedMonth.getFullYear());
+  
 
     const monthlyPriceExpense = Array(12).fill(0); // Initialize an array with zeros for each month.
     const monthlyPriceIncome = Array(12).fill(0);
@@ -503,6 +535,8 @@ const ChartComponent = (props) => {
       { label: "Shopping", data: 0 },
       { label: "Others", data: 0 },
     ];
+
+    setMonthToShowForPie(selectedMonthForPie.getMonth());
 
     for (const transaction of transactionData) {
       const transactionDate = new Date(transaction.date);
@@ -613,6 +647,8 @@ const ChartComponent = (props) => {
       { label: "Others", data: 0 },
     ];
 
+    setYearToShowForPie(selectedYearForPie.getFullYear());
+
     for (const transaction of transactionData) {
       const transactionDate = new Date(transaction.date);
       if (
@@ -649,6 +685,7 @@ const ChartComponent = (props) => {
     } else {
       setDataType("Daily");
     }
+    setDateTypeChanged(true);
   };
 
   const changeDateTypeForPie = (e) => {
@@ -663,6 +700,7 @@ const ChartComponent = (props) => {
     else{
       setDataTypeForPie("Daily")
     }
+    setDateTypeChangedForPie(true);
   };
 
   const changeSelectedDate = () => {
@@ -680,6 +718,7 @@ const ChartComponent = (props) => {
       selectedYearNow.setYear(selectedYearNow.getFullYear() - 10); // Subtract 10 years
       setSelectedYear(selectedYearNow);
     }
+    setDateChanged(true);
   };
 
   const changeSelectedDateForPie = () => {
@@ -700,6 +739,7 @@ const ChartComponent = (props) => {
       selectedYearNowForPie.setYear(selectedYearNowForPie.getFullYear() - 1); // Subtract 1 year
       setSelectedYearForPie(selectedYearNowForPie);
     }
+    setDateChangedForPie(true);
   };
 
   const changeSelectedDateNext = () => {
@@ -716,6 +756,7 @@ const ChartComponent = (props) => {
       selectedYearNow.setYear(selectedYearNow.getFullYear() + 10); // Add 10 years
       setSelectedYear(selectedYearNow);
     }
+    setDateChanged(true);
   };
 
   const changeSelectedDateNextForPie = () => {
@@ -736,6 +777,7 @@ const ChartComponent = (props) => {
       selectedYearNowForPie.setYear(selectedYearNowForPie.getFullYear() + 1); // Add 1 year
       setSelectedYearForPie(selectedYearNowForPie);
     }
+    setDateChangedForPie(true);
   };
 
   const chartOptions = {

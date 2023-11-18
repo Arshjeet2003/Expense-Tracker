@@ -1,7 +1,9 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef, useContext, useEffect, useState } from "react";
 import "../css/Goals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import themeContext from "../context/theme/themeContext";
+import financialGoalsContext from "../context/financialGoal/financialGoalContext.js"
+import transactionContext from "../context/transactions/transactionContext.js";
 import Navbar from "./Navbar.jsx";
 import Sidebar from "./Sidebar.jsx";
 import Conversion from "../images/Conversion.svg";
@@ -9,12 +11,120 @@ import Conversion from "../images/Conversion.svg";
 const Goals = () => {
   const ref = useRef(null);
   const refClose = useRef(null);
+
+  const [goals,setGoals] = useState([]);
+  const [transactionData,setTransactionData] = useState([]);
+  const [updatedGoals, setUpdatedGoals] = useState([]);
+
+  const context = useContext(financialGoalsContext);
+  const { addFinancialGoals,getFinancialGoals,deleteFinancialGoal } = context;
+
   const context1 = useContext(themeContext);
   const { theme } = context1;
 
-  const createGroup = (e) => {
+  const context2 = useContext(transactionContext);
+  const { getUserTransactions } = context2;
+
+  const [dataReceive,setDataReceived] = useState(false);
+  const [goalAdded,setGoalAdded] = useState(false);
+
+
+  useEffect(() => {
+    let isMounted = true;
+  
+    const fetchData = async () => {
+      try {
+        const data = await getUserTransactions("");
+  
+        if (isMounted) {
+          setTransactionData(data);
+        }
+  
+        const result = await getFinancialGoals("");
+  
+        if (isMounted) {
+          setGoals(result.financialgoals);
+          calcSavings();
+          setDataReceived(true);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        // Handle the error (e.g., show an error message)
+      }
+    };
+  
+    fetchData();
+  
+    return () => {
+      // Set the mounted flag to false when the component is unmounted
+      isMounted = false;
+    };
+  }, [dataReceive,goalAdded]);
+
+  const isTransactionWithinGoalDates = (transactionDate, goalStartDate, goalEndDate) => {
+  
+    const transactionTime = transactionDate.getTime();
+    const goalStartTime = new Date(goalStartDate).getTime();
+    const goalEndTime = new Date(goalEndDate).getTime();
+  
+    return transactionTime >= goalStartTime && transactionTime <= goalEndTime;
+  };
+
+  const calcSavings = () => {
+    if (transactionData.transactions) {
+      const updatedGoals = goals.map((goal) => {
+        let totalSavings = 0;
+        for (const transaction of transactionData.transactions) {
+          const transactionDate = new Date(transaction.date);
+          if (isTransactionWithinGoalDates(transactionDate, goal.startDate, goal.endDate)) {
+            totalSavings += transaction.price;
+          }
+        }
+
+        return {
+          _id: goal._id,
+          name: goal.name,
+          description: goal.description,
+          startDate: goal.startDate,
+          endDate: goal.endDate,
+          savingsGoal: goal.savingsGoal,
+          totalSavingsTillNow: totalSavings,
+        };
+      });
+      setUpdatedGoals(updatedGoals);
+      setDataReceived(true);
+    }
+  };
+
+  const createGoal = (e) => {
     e.preventDefault();
     ref.current.click();
+  };
+
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    sdate: Date,
+    edate: Date,
+    savingsGoal: ''
+  });
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addFinancialGoals(formData.name,formData.description,formData.sdate,formData.edate,Number(formData.savingsGoal));
+    setGoalAdded(true);
+
+    // console.log(formData);
   };
 
   return (
@@ -27,7 +137,7 @@ const Goals = () => {
           <div className="col-md-2">
             <button
               type="submit"
-              onClick={createGroup}
+              onClick={createGoal}
               className={`btn transparent ${
                 theme === "light" ? "bgroupl" : "bgroupd"
               }`}
@@ -38,116 +148,72 @@ const Goals = () => {
             </button>
           </div>
         </div>
-        <div className="row">
+        
+        {updatedGoals?.map((goal) => (
+        <div className="row" key={goal._id}>
           <div className="col">
             <div className="card carddl p-3 mb-2">
-              <div className="d-flex justify-content-between">
-                <div className="d-flex flex-row align-items-center">
-                  {/* <div class="icon"> <i class="bx bxl-mailchimp"></i> </div> */}
-                  <div className="ms-2 c-details">
-                    <h4 className="mb-0">mission impossible</h4>
-                    <span>1 days ago</span>
+              {/* ... (rest of your goal display code) */}
+              <div className="row ms-2">
+                <div className="col-md-6">
+                  <div className="descc">
+                    <h5>{goal.name}</h5>
                   </div>
+                  <div className="desc">{goal.description}</div>
                 </div>
-                <div className="badge">
-                  <span>Active</span>
-                </div>
-                {/* <div class="badge"> <span>Not achieved</span> </div>
-              <div class="badge"> <span>Completed</span> </div> */}
-              </div>
-              <div className="mt-1">
-                <div className="row ms-2" style={{ paddingBottom: 20 }}>
+                <div className="col-md-3 rightMost">
                   <div
-                    className="col-md-4"
-                    style={{ textAlign: "center", justifyContent: "center" }}
+                    className="this"
+                    style={{ display: "flex", marginTop: "7%" }}
                   >
-                    <i
-                      class="material-symbols-outlined"
-                      style={{ top: "6px", right: "5px", position: "relative" }}
-                    >
-                      calendar_month
-                    </i>
-                    start date : 30th feburary 7014
-                  </div>
-                  <div
-                    className="col-md-4"
-                    style={{ textAlign: "center", justifyContent: "center" }}
-                  >
-                    <i
-                      class="material-symbols-outlined"
-                      style={{ top: "6px", right: "5px", position: "relative" }}
-                    >
-                      calendar_month
-                    </i>
-                    end date : 29th feburary 7014
-                  </div>
-                  <div className="col-md-4"></div>
-                </div>
-                <div className="row ms-2">
-                  <div className="col-md-6">
-                    <div className="descc">
-                      <h5>Description</h5>
+                    <div className="daysLeft mx-3" style={{ fontSize: 60 }}>
+                    {(() => {
+                      const startDate = new Date(goal.startDate);
+                      const endDate = new Date(goal.endDate);
+                      const today = new Date();
+
+                      const daysRemaining = Math.ceil((endDate - today) / (1000 * 60 * 60 * 24));
+
+                      return daysRemaining;
+                    })()}
                     </div>
-                    <div className="desc">
-                      This goal is designed by Lorem ipsum dolor sit amet
-                      consectetur adipisicing elit. Minus quidem tenetur
-                      recusandae odit ipsam repellendus quaerat possimus,
-                      officia inventore Lorem, ipsum dolor sit amet consectetur
-                      adipisicing elit. Veritatis exercitationem ea dolore,
-                      facere vitae optio dolorum libero nisi expedita aliquam
-                      ipsa tempore aut fuga quos iusto voluptatibus iure
-                      necessitatibus architecto. Lorem ipsum dolor sit amet
-                      consectetur adipisicing elit. Eos qui at ipsa rem magnam
-                      et animi quaerat nihil magni ex ad voluptatem optio, odio
-                      cum iusto minus aliquam eligendi doloribus?
-                    </div>
-                  </div>
-                  <div className="col-md-3 rightMost">
                     <div
-                      className="this"
-                      style={{ display: "flex", marginTop: "7%" }}
-                    >
-                      <div className="daysLeft mx-3" style={{ fontSize: 60 }}>
-                        46
-                      </div>
-                      <div
-                        className="left"
-                        style={{
-                          paddingTop: "8%",
-                          paddingLeft: "2%",
-                        }}
-                      >
-                        days left
-                      </div>
-                    </div>
-                                  </div>
-                                  <div className="col-md-3">
-                                      <img src="" alt="" />
-                                  </div>
-                  {/* <h3 class="heading">cardt<br>text<br>gbvnrbh<br>gbfufufuecv</h3> */}
-                  <div className="mt-1 ms-3">
-                    <div className="col-md-12 progress">
-                      <div
-                        className="progress-bar"
-                        role="progressbar"
-                        style={{ width: "60%" }}
-                        aria-valuenow={50}
-                        aria-valuemin={0}
-                        aria-valuemax={100}
-                      />
-                    </div>
-                    <div className="mt-3">
-                      <span className="text1">
-                        current saving
-                        <span className="text2">of target saving</span>
-                      </span>
-                    </div>
+                    className="left"
+                    style={{
+                      paddingTop: "8%",
+                      paddingLeft: "2%",
+                    }}
+                  >
+                    Days Left
+                  </div>
+                  </div>
+                </div>
+                <div className="col-md-3">
+                  <img src="" alt="" />
+                </div>
+                <div className="mt-1 ms-3">
+                  <div className="col-md-12 progress">
+                    <div
+                      className="progress-bar"
+                      role="progressbar"
+                      style={{ width: "60%" }}
+                      aria-valuenow={50}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                    />
+                  </div>
+                  <div className="mt-3">
+                    <span className="text1">
+                      {goal.totalSavingsTillNow} 
+                      <span className="text2">{` ${goal.savingsGoal}`}</span>
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      ))}
       </div>
 
       {/* modal starts */}
@@ -159,7 +225,7 @@ const Goals = () => {
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
       >
-        Update Group
+        Update Goal
       </button>
       <div
         className="modal fade"
@@ -186,71 +252,89 @@ const Goals = () => {
               ></button>
             </div>
             <div className="modal-body">
-              <form className="my-3">
-                <div className="mb-3">
-                  <label htmlFor="ename" className="form-label">
-                    Title
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    required
-                    id="ename"
-                    name="name"
-                    // value={group1.name}
-                    aria-describedby="emailHelp"
-                    // onChange={onChange1}
-                  />
-                </div>
-                <div className="mb-3" style={{ paddingLeft: 10 }}>
-                  <label htmlFor="edescription" className="form-label">
-                    Description
-                  </label>
-                  <textarea
-                    rows="5"
-                    cols="25"
-                    type=""
-                    className="form-control"
-                    required
-                    id="edescription"
-                    name="description"
-                    // value={group1.description}
-                    // onChange={onChange1}
-                  ></textarea>
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="ename" className="form-label">
-                    Start Date
-                  </label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    required
-                    id="ename"
-                    name="name"
-                    // value={group1.name}
-                    aria-describedby="emailHelp"
-                    // onChange={onChange1}
-                  />
-                </div>
+            <form className="my-3" onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="ename" className="form-label">
+                  Title
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  required
+                  id="ename"
+                  name="name"
+                  aria-describedby="emailHelp"
+                  onChange={handleInputChange}
+                  value={formData.name}
+                />
+              </div>
+              <div className="mb-3" style={{ paddingLeft: 10 }}>
+                <label htmlFor="edescription" className="form-label">
+                  Description
+                </label>
+                <textarea
+                  rows="5"
+                  cols="25"
+                  className="form-control"
+                  required
+                  id="edescription"
+                  name="description"
+                  onChange={handleInputChange}
+                  value={formData.description}
+                ></textarea>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="sdate" className="form-label">
+                  Start Date
+                </label>
+                <input
+                  type="date"
+                  className="form-control"
+                  required
+                  id="sdate"
+                  name="sdate"
+                  aria-describedby="emailHelp"
+                  onChange={handleInputChange}
+                  value={formData.sdate}
+                />
+              </div>
 
-                <div className="mb-3">
-                  <label htmlFor="ename" className="form-label">
-                    End Date
-                  </label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    required
-                    id="ename"
-                    name="name"
-                    // value={group1.name}
-                    aria-describedby="emailHelp"
-                    // onChange={onChange1}
-                  />
-                </div>
-              </form>
-            </div>
+        <div className="mb-3">
+          <label htmlFor="edate" className="form-label">
+            End Date
+          </label>
+          <input
+            type="date"
+            className="form-control"
+            required
+            id="edate"
+            name="edate"
+            aria-describedby="emailHelp"
+            onChange={handleInputChange}
+            value={formData.edate}
+          />
+        </div>
+        <div className="mb-3">
+                <label htmlFor="ename" className="form-label">
+                  Savings Goal
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  required
+                  id="savingsGoal"
+                  name="savingsGoal"
+                  aria-describedby="emailHelp"
+                  onChange={handleInputChange}
+                  value={formData.savingsGoal}
+                />
+              </div>
+
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </form>
+    </div>
             <div className="modal-footer">
               <button
                 type="button"

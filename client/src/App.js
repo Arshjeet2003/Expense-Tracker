@@ -17,11 +17,13 @@ import Conversions from "./components/Conversions.jsx";
 import ThemeState from "./context/theme/ThemeState.js";
 import Profile from "./components/Profile.jsx";
 import Goals from "./components/Goals.jsx";
+import FinancialGoalsState from "./context/financialGoal/FinancialGoalState.js";
 
 function App() {
   return (
     <div>
       <ThemeState>
+        <FinancialGoalsState>
         <FriendState>
           <AuthState>
             <GroupState>
@@ -63,6 +65,7 @@ function App() {
             </GroupState>
           </AuthState>
         </FriendState>
+        </FinancialGoalsState>
       </ThemeState>
     </div>
   );

@@ -22,6 +22,7 @@ const Dashboard = () => {
   const [data, setData] = useState({});
   const [hasNotification,hasNotificationUpdate] = useState(false);
   const [dataForNotification, setDataForNotification] = useState([]);
+  
   useEffect(() => {
     getUserFriends();
     handleAddMember(false);

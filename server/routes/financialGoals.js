@@ -41,7 +41,7 @@ try {
 // ROUTE 2: Add a new financial goal using: POST "/api/financialGoals/addfinancialGoals".
 router.post('/addfinancialGoals',fetchuser,async (req,res)=>{
     try {
-        const {name,description,savingsGoal,startDate,endDate} = req.body;
+        const {name,description,startDate,endDate,savingsGoal} = req.body;
         const errors = validationResult(req);
         if(!errors.isEmpty()){
             return res.status(400).json({ errors: errors.array() });

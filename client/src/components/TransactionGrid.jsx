@@ -40,6 +40,11 @@ const TransactionGrid = () => {
         flex: 1,
       },
       {
+        field: "type",
+        headerName: "Type",
+        flex: 0.5,
+      },
+      {
         field: "category",
         headerName: "Category",
         flex: 0.5,
@@ -47,6 +52,16 @@ const TransactionGrid = () => {
       {
         field: "date",
         headerName: "Date",
+        flex: 1,
+        renderCell: (params) => (
+          <div>
+            {new Date(params.value).toLocaleDateString(undefined, options)}
+          </div>
+        ),
+      },
+      {
+        field: "dueDate",
+        headerName: "Due Date",
         flex: 1,
         renderCell: (params) => (
           <div>
@@ -63,7 +78,7 @@ const TransactionGrid = () => {
       {
         field: "billUrl",
         headerName: "Bill",
-        flex: 1,
+        flex: 0.2,
         renderCell: (params) => {return (
           <a
             style={{ color: `${theme === "light" ? "#4D4DFF" : "#8989f5"}` }}
