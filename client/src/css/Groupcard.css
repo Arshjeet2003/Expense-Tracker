@@ -69,9 +69,10 @@ p.card-text {
   transition: 0.5s;
   cursor: pointer;
   border-radius: 50px;
-  border: 5px solid #4d4dff;
+  border:  5px solid #4d4dff;
   margin-left: 20px;
   margin-top: 20px;
+  
 }
 .card-titlel {
   font-size: 22px;
@@ -111,7 +112,7 @@ p.card-text {
   left: 0;
   transform: scale3d(0, 0, 1);
   transition: transform 0.3s ease-out 0s;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 0, 0);
   content: "";
   pointer-events: none;
 }

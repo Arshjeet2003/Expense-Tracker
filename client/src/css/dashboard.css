@@ -12,6 +12,7 @@ html, body {
   .full-heightd{
     min-height: 100vh;
     background: #25273f;
+    
   }
 
   .upper{
@@ -26,7 +27,9 @@ html, body {
   width: 90%;
   margin-top: 10%;
   margin-left: 5%;
-  height: 450px;
+  height: fit-content;
+  max-height: 450px;
+  overflow: auto;
   
 }
 .avatar.sm {

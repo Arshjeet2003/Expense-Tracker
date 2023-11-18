@@ -1,0 +1,93 @@
+body {
+  background-color: #eee;
+}
+
+.carddl {
+  border: none;
+  border-radius: 30px;
+}
+
+.c-details span {
+  font-weight: 300;
+  font-size: 13px;
+  /* color: #ffffff5d */
+}
+
+
+.badge span {
+  background-color: #fffbec;
+  width: 60px;
+  height: 25px;
+  padding-bottom: 3px;
+  border-radius: 5px;
+  display: flex;
+  color: #fed85d;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress {
+  height: 10px;
+  border-radius: 10px;
+}
+
+.progress div {
+  background-color: red;
+}
+
+.text1 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.text2 {
+  color: #a5aec0;
+}
+
+.desc {
+  overflow: auto;
+  max-height: 100px;
+  max-width: 100%;
+}
+
+.date {
+  justify-content: center;
+  text-align: center;
+  /* padding-top: 50px; */
+}
+
+.dustbin {
+  border-radius: 30px;
+  border: 1px solid rgba(82, 76, 76, 0.137);
+  height: 80%;
+  width: 90%;
+  margin-top: 20%;
+}
+
+.upper {
+  height: 80%;
+  font-size: 65px;
+  color: rgba(33, 28, 28, 0.365);
+  margin-right: 50%;
+  position: relative;
+  /* padding-top: 10%; */
+}
+
+.lower {
+  height: 20%;
+  border-radius: 30px;
+  background: red;
+  border-bottom-left-radius: 350px;
+  border-bottom-right-radius: 350px;
+}
+
+.rightMost {
+  height: 30vh;
+}
+
+.rightMost img {
+  height: 27vh;
+  width: 100%;
+  background-color: rgb(0, 145, 255);
+}
+
