@@ -25,14 +25,14 @@ const Sidebar = () => {
       <div
         className={`${theme === "light" ? "sidebarl" : "sidebard"} ${
           isOpen ? `${theme === "light" ? "openl" : "opend"}` : ""
-          }`}
-        style={{zIndex:300}}
+        }`}
+        style={{ zIndex: 300 }}
       >
         <div
           className={`${theme === "light" ? "logo-detailsl" : "logo-detailsd"}`}
         >
           <div className={`${theme === "light" ? "logo_namel" : "logo_named"}`}>
-            Project-name/logo
+            Budget Buddy
           </div>
           <i
             className={`bx ${isOpen ? "bx-menu" : "bx-menu-alt-right"}`}
@@ -102,7 +102,7 @@ const Sidebar = () => {
             <span className="tooltip">Transactions</span>
           </li>
           <li>
-            <a href="#">
+            <Link to="/goals">
               <i className="material-symbols-outlined" style={{ fontSize: 24 }}>
                 sports_score
               </i>
@@ -113,7 +113,7 @@ const Sidebar = () => {
               >
                 Goals
               </span>
-            </a>
+            </Link>
             <span className="tooltip">Goals</span>
           </li>
           <li>
@@ -161,6 +161,7 @@ const Sidebar = () => {
               className="bx bx-log-out"
               onClick={handleLogout}
               id={`${theme === "light" ? "log_outl" : "log_outd"}`}
+              style={{ cursor: "pointer" }}
             />
           </li>
         </ul>

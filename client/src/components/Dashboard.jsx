@@ -9,6 +9,7 @@ import ChartComponent from "./ChartComponent.jsx";
 import themeContext from "../context/theme/themeContext.js";
 import friendContext from "../context/friend/friendContext.js";
 
+
 const Dashboard = () => {
   const context = useContext(transactionContext);
   const context1 = useContext(themeContext);
@@ -78,7 +79,7 @@ const Dashboard = () => {
       >
         <Navbar dataForNotification={dataForNotification} />
         <Sidebar />
-        <div className="container-fluid" style={{paddingTop:"4.5%"}}>
+        <div className="container-fluid" style={{ paddingTop: "4.5%" }}>
           <div className="row full-height">
             {/* Left Side */}
             <div className="col-md-8 full-height bordered">
@@ -143,7 +144,22 @@ const Dashboard = () => {
                         <div className="table-responsive">
                           <table className="table mb-0">
                             {/* <div className="container mx-2"> */}
-                              {friends.length === 0 && "Make Friends"}
+                            {friends.length === 0 && (
+                              <div
+                                style={{
+                                  height: "300px",
+                                  justifyContent: "center",
+                                  textAlign: "center",
+                                  paddingTop: "30%",
+                                  fontSize: "30px",
+                                  color: `${
+                                    theme === "light" ? "rgb(102, 103, 115)" : "#ffffff4f"
+                                  }`,
+                                }}
+                              >
+                                <strong>No Friends to show...</strong>
+                              </div>
+                            )}
                             {/* </div> */}
                             <tbody>
                               {friends.map((friend) => (

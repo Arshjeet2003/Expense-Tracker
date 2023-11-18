@@ -364,3 +364,8 @@ a {
   /* min-height: 100vh;
   overflow: hidden; */
 }
+
+
+input[type=date] {
+    color: #999;
+}

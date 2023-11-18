@@ -75,8 +75,7 @@ const Conversions = () => {
       >
         <div className="row">
           <Navbar />
-          <div className="col"
-          style={{paddingTop:"4.5%"}}>
+          <div className="col" style={{ paddingTop: "7.5%" }}>
             <img
               src={Conversion}
               alt=""
@@ -86,7 +85,8 @@ const Conversions = () => {
               }}
             />
           </div>
-          <div className="col">
+          <div className="col" style={{ paddingTop: "6%" }}>
+            
             <div>
               <div
                 className={`container mt-5 ${
@@ -149,10 +149,7 @@ const Conversions = () => {
                     }}
                   >
                     {currencies.map((currency) => (
-                      <option
-                        key={currency}
-                        value={currency}
-                      >
+                      <option key={currency} value={currency}>
                         {currency}
                       </option>
                     ))}

@@ -89,7 +89,7 @@ const Quickadd = () => {
   const setDate = (e) => {
     const newDate = new Date(e.target.value);
     transaction.dueDate = newDate;
-  }
+  };
 
   // Effect to change the color based on the selected option
   useEffect(() => {
@@ -143,7 +143,10 @@ const Quickadd = () => {
             </div>
           </div>
 
-          <div className="col-12 col-md-6 forms-container" style={{paddingTop:"4.5%"}}>
+          <div
+            className="col-12 col-md-6 forms-container"
+            style={{ paddingTop: "4.5%" }}
+          >
             <div className="p-3 formed">
               <form
                 action="#"
@@ -280,7 +283,6 @@ const Quickadd = () => {
                 <div className=" checkBox container-fluid col-md-12 ">
                   <label
                     className="mr-1"
-                    
                     style={{
                       color: `${theme === "light" ? "black" : "#fff"}`,
                     }}
@@ -348,6 +350,7 @@ const Quickadd = () => {
                     className="material-symbols-outlined"
                     style={{ fontSize: 24 }}
                   >
+                    calendar_month
                   </i>
                   <input
                     type="date"
