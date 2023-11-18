@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Transaction = require('./Transactions');
 const Groups = require('./Groups');
 const FinancialGoals = require('./FinancialGoals');
-const {Schema} = mongoose;
-
+const { Schema } = mongoose;
+const Stocks = require('./Stocks');
 const UserSchema = new mongoose.Schema(
     {
         _id: String,
@@ -22,7 +22,11 @@ const UserSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Groups'
         }],
-        date:{
+        stocks: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Stocks'
+        }],
+        date: {
             type: Date,
             default: Date.now
         },
@@ -30,5 +34,5 @@ const UserSchema = new mongoose.Schema(
         currencyType: String
     }
 )
-const User = mongoose.model('user',UserSchema);
+const User = mongoose.model('user', UserSchema);
 module.exports = User;

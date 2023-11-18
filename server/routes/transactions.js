@@ -5,7 +5,6 @@ const { body, validationResult } = require('express-validator');
 const User = require('../models/User.js');
 const Transaction = require('../models/Transactions');
 
-// ROUTE 1: Get all the transactions of user using: GET "/api/transactions/gettransactions".
 router.get('/gettransactions', fetchuser, async (req, res) => {
     const userId = req.user.id;
     const { search = "" } = req.query;
@@ -18,6 +17,7 @@ try {
         // Handle the case where the user is not found
         return res.status(404).json({ message: "User not found" });
     }
+
 
     // Step 2: Retrieve the transaction IDs from the user's transactions
     const transactionIds = user.transactions;

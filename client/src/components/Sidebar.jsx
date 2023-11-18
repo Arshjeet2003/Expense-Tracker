@@ -132,7 +132,7 @@ const Sidebar = () => {
             <span className="tooltip">Conversions</span>
           </li>
           <li>
-            <Link to="#">
+            <Link to="/Stocks">
               <i className="material-symbols-outlined" style={{ fontSize: 24 }}>
                 currency_bitcoin
               </i>
