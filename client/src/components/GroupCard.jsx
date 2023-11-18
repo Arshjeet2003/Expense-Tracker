@@ -1,21 +1,39 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import groupContext from "../context/groups/groupContext.js";
 import { Link } from "react-router-dom";
 import login from "../images/login.svg";
 import themeContext from "../context/theme/themeContext";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "../css/Groupcard.css";
 const GroupCard = (props) => {
-  const { group, updateGroup } = props;
+  
+  const { group, updateGroup, animationData } = props;
+  console.log(animationData);
   const context = useContext(groupContext);
   const context1 = useContext(themeContext);
   const { theme } = context1;
   const { deleteGroup } = context;
+
+  useEffect(() => {
+    AOS.init({
+      // Global settings for AOS initialization
+      // For example:
+      offset: 200, // Change offset to trigger animations sooner or later
+      duration: 1000, // Animation duration
+      easing: "ease-in-out", // Easing option
+      delay: 400, // Delay animation
+    });
+  }, []);
+
   return (
     <div
       className="col-md-3"
       style={{
         color: `${theme === "light" ? "#fff" : "#333d82"}`,
         minHeight: "100",
+        overflow: "hidden"
+        
       }}
     >
       {/* <div className="card my-3 card-complete">
@@ -28,6 +46,24 @@ const GroupCard = (props) => {
             </div> */}
       <div
         className={` card ${theme === "light" ? "card-blockl" : "card-blockd"}`}
+        data-aos={
+          animationData === 0
+            ? "fade-down-right"
+            : animationData === 1
+            ? "fade-up-left"
+            : animationData === 2
+            ? "fade-up-right"
+            : "fade-down-left"
+        }
+        // data-aos-anchor-placement={
+        //   animationData === 0
+        //     ? "top-center"
+        //     : animationData === 1
+        //     ? "bottom-bottom"
+        //     : animationData === 2
+        //     ? "top-bottom"
+        //     : "center-bottom"
+        // }
       >
         <Link to={`/group/${group._id}`}>
           <h5

@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
-@import "index.css";
+/* @import "index.css"; */
 
 .first {
   text-align: center;
@@ -26,8 +26,15 @@
 }
 
 
+/* #root{
+  background-image: url('../images/background.jpg') no repeat;
+  padding: 1rem;
+} */
+
 .complete-groupl{
   background-color: #F4F7FD;
+  /* background-image: url('../images/background.jpg') no repeat;
+  padding: 1rem; */
 }
 
 .card-headingl h2{

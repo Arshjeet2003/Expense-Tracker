@@ -6,7 +6,12 @@ html, body {
   /* Full height container */
   .full-heightl {
      min-height: 100vh;
-     background: #fff;
+     /* background: #fff; */
+     /* background-image: url('../images/background.jpg') no repeat;
+     background-size: cover; */
+     color: green;
+     /* padding: 1rem; */
+     /* display: flex; */
   }
 
   .full-heightd{

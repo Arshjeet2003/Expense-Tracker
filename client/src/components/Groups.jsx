@@ -17,6 +17,7 @@ const Groups = () => {
   const [group1, setGroup1] = useState({ name: "", description: "" });
   const ref = useRef(null);
   const refClose = useRef(null);
+  let idx = 0;
   useEffect(() => {
     getGroups("");
   }, []);
@@ -42,6 +43,9 @@ const Groups = () => {
     // props.showAlert("Note Added successfully","success");
   };
 
+
+  const [animationData, setAnimationData] = useState(0);
+  
   const createGroup = (e) => {
     e.preventDefault();
     ref.current.click();
@@ -60,11 +64,10 @@ const Groups = () => {
           theme === "light" ? "complete-groupl" : "complete-groupd"
         }`}
       >
-        
-          <Navbar />
-        
+        <Navbar />
+
         <Sidebar />
-        <div className="container complete" style={{paddingTop:"4.5%"}}>
+        <div className="container complete" style={{ paddingTop: "4.5%" }}>
           <div className="row">
             <div className="col"></div>
             <div className="con">
@@ -86,17 +89,57 @@ const Groups = () => {
               theme === "light" ? "card-headingl" : "card-headingd"
             }`}
           >
-            <h2 style={{ paddingLeft: 40 }}>My Groups</h2>
+            <h2 style={{ paddingLeft: 10 }}>My Groups</h2>
+
             <div className="container mx-2">
-              {groups.length === 0 && "No groups to display"}
+              {groups.length === 0 && (
+                <div
+                  style={{
+                    height: "300px",
+                    justifyContent: "center",
+                    textAlign: "center",
+                    paddingTop: "10%",
+                    fontSize: "30px",
+                    color: `${
+                      theme === "light" ? "rgb(102, 103, 115)" : "#ffffff4f"
+                    }`,
+                  }}
+                >
+                  <strong>No Groups to show...</strong>
+                </div>
+              )}
             </div>
+           
             {groups.map((group) => {
+              let animationData = idx % 4;
+              idx++;
+              // setAnimationData(animationData);
               return (
-                <GroupCard
-                  key={group._id}
-                  updateGroup={updateGroup}
-                  group={group}
-                />
+                <>
+{/*                   
+                  <div
+                    className="row"
+                    style={{
+                      maxWidth: "100%",
+                      height: "200px",
+                      textAlign: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <span
+                      className="material-symbols-outlined"
+                      style={{ paddingTop: "5%", fontSize: "100px" }}
+                    >
+                      arrow_circle_down
+                    </span>
+                  </div> */}
+                  <GroupCard
+                    key={group._id}
+                    updateGroup={updateGroup}
+                    group={group}
+                    animationData={animationData}
+                  />
+                </>
               );
             })}
           </div>

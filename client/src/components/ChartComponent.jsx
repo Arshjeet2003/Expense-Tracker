@@ -805,7 +805,7 @@ const ChartComponent = (props) => {
 
   return (
     <div
-    style={{position:"fixed"}}>
+    >
       <div className={`graphs ${theme === "light" ? "sliderl" : "sliderd"}`}>
         <div className="slides">
           <input
