@@ -88,7 +88,7 @@ const ChartComponent = (props) => {
         borderWidth: 1,
       },
       {
-        label: "Savings per day",
+        label: "Income per day",
         data: ["10", "20", "30", "40", "50", "60", "20"],
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgba(255, 99, 132, 1)",
@@ -134,7 +134,7 @@ const ChartComponent = (props) => {
         borderWidth: 1,
       },
       {
-        label: "Savings per month",
+        label: "Income per month",
         data: [
           "10",
           "20",
@@ -180,7 +180,7 @@ const ChartComponent = (props) => {
         borderWidth: 1,
       },
       {
-        label: "Savings per year",
+        label: "Income per year",
         data: [
           "10",
           "20",
@@ -290,7 +290,7 @@ const ChartComponent = (props) => {
           borderWidth: 1,
         },
         {
-          label: "Savings per day",
+          label: "Income per day",
           data: dailyPriceIncome,
           backgroundColor: "rgba(255, 99, 132, 0.2)",
           borderColor: "rgba(255, 99, 132, 1)",
@@ -458,7 +458,7 @@ const ChartComponent = (props) => {
           borderWidth: 1,
         },
         {
-          label: "Savings per month",
+          label: "Income per month",
           data: monthlyPriceIncome,
           backgroundColor: "rgba(255, 99, 132, 0.2)",
           borderColor: "rgba(255, 99, 132, 1)",
@@ -566,7 +566,7 @@ const ChartComponent = (props) => {
           borderWidth: 1,
         },
         {
-          label: "Savings per year",
+          label: "Income per year",
           data: lastTenYearsDataIncome,
           backgroundColor: "rgba(255, 99, 132, 0.2)",
           borderColor: "rgba(255, 99, 132, 1)",

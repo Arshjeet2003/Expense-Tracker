@@ -11,7 +11,7 @@ import { signInWithPopup, signInWithRedirect} from "firebase/auth";
 const Login = (props) => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const context = useContext(authContext);
-  const { loginUser, signupUser } = context;
+  const { loginUser, signupUser, getUser } = context;
 
   const [credentials, setCredentials] = useState({
     email: "",
@@ -23,19 +23,22 @@ const Login = (props) => {
 
   const handleClickForGoogle = (e) => {
     e.preventDefault();
-    // console.log("click");
     signInWithPopup(auth, provider)
       .then(async (result) => {
         const user = result.user;
+
+        const mongoUser = await getUser();
 
         if (user === null) {
           console.error("No user data received.");
           return; // Exit early if no user data is available
         }
 
+        console.log(mongoUser);
+
         // const userExists = await checkIfUserExists(user.email);
 
-        if (!user) {
+        if (!mongoUser) {
           // User does not exist, sign them up
           // const token = await user.getIdToken();
           
@@ -69,12 +72,16 @@ const Login = (props) => {
   };
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
-    await signupUser(
+    if(await signupUser(
       credentials.username,
       credentials.name,
       credentials.email,
       credentials.password
-    );
+    )){
+      if(await loginUser(credentials.email, credentials.password)){
+        navigate("/");
+      }
+    }
     // navigate("/login");
   };
   const onChange = (e) => {

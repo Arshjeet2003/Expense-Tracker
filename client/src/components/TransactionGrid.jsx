@@ -17,6 +17,7 @@ const TransactionGrid = () => {
      const context1 = useContext(themeContext);
      const { theme } = context1;
     const [searchInput, setSearchInput] = useState("");
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
     useEffect(() => {
       const fetchData = async () => {
@@ -47,6 +48,11 @@ const TransactionGrid = () => {
         field: "date",
         headerName: "Date",
         flex: 1,
+        renderCell: (params) => (
+          <div>
+            {new Date(params.value).toLocaleDateString(undefined, options)}
+          </div>
+        ),
       },
       {
         field: "price",

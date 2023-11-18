@@ -39,6 +39,7 @@ const GroupDetails = () => {
   const [memberChanged, setMemberChanged] = useState(false); // State to track member changes
 
   const [selectedMembers, setSelectedMembers] = useState([]); // State to store selected members
+  const [selectedMembersWithNumbers, setSelectedMembersWithNumbers] = useState([]);
 
   const [transactionMade, setTransactionMade] = useState(false);
 
@@ -97,7 +98,6 @@ const GroupDetails = () => {
           try {
             const user = await getUser();
             setCurrentValue(user.currencyType);
-            console.log(groupDbTransactions);
           
             for (const DbTransaction of groupDbTransactions) {
               const { groupMember, userId, price, currencyTypeGroup } = DbTransaction; // Destructure each transaction
@@ -106,7 +106,12 @@ const GroupDetails = () => {
                   `https://open.er-api.com/v6/latest/${currencyTypeGroup}`
                 ); // exchangerates api for the
                 const rate = response.data.rates[user.currencyType];
-                data.push([groupMember, userId, price * rate]); // Push the destructured data as an array
+                if(price>0){
+                  data.push([groupMember, userId, price * rate]); // Push the destructured data as an array
+                }
+                else{
+                  data.push([userId, groupMember, (-price) * rate]) //Giver,Receiver,Amount
+                }
               } catch (error) {
                 console.error("Error fetching exchange rate:", error);
               }
@@ -138,13 +143,57 @@ const GroupDetails = () => {
   };
 
   const handleToggleMember = (username) => {
-    if (selectedMembers.includes(username)) {
-      setSelectedMembers(
-        selectedMembers.filter((member) => member !== username)
-      );
+    const memberIndex = selectedMembersWithNumbers.findIndex((member) => member.username === username);
+  
+    if (memberIndex !== -1) {
+      // If the user is already selected, remove them
+      setSelectedMembersWithNumbers((prevMembers) => [
+        ...prevMembers.slice(0, memberIndex),
+        ...prevMembers.slice(memberIndex + 1),
+      ]);
     } else {
-      setSelectedMembers([...selectedMembers, username]);
+      // If the user is not selected, add them with a default number (you can set the number based on your requirement)
+      setSelectedMembersWithNumbers((prevMembers) => [
+        ...prevMembers,
+        { username, number: 0 }, // You can set a default number or initialize it based on your requirements
+      ]);
     }
+  };
+  
+  // Rendering checkboxes
+  const renderMemberCheckboxes = () => {
+    return group.users?.map((user, index) => (
+      <div key={index} className="form-check">
+        <input
+          type="checkbox"
+          className="form-check-input"
+          id={`checkbox-${index}`}
+          checked={selectedMembersWithNumbers.some((member) => member.username === user)}
+          onChange={() => handleToggleMember(user)}
+        />
+        <label className="form-check-label" htmlFor={`checkbox-${index}`}>
+          {user}
+          {/* Input field for the associated number */}
+          <input
+            type="number"
+            value={selectedMembersWithNumbers.find((member) => member.username === user)?.number}
+            onChange={(e) => handleInputChange(e, user)}
+          />
+        </label>
+      </div>
+    ));
+  };
+  
+  const handleInputChange = (e, username) => {
+    const inputValue = parseInt(e.target.value, 10) || 0;
+    setSelectedMembersWithNumbers((prevMembers) => {
+      const updatedMembers = [...prevMembers];
+      const memberIndex = updatedMembers.findIndex((member) => member.username === username);
+      if (memberIndex !== -1) {
+        updatedMembers[memberIndex].number = inputValue;
+      }
+      return updatedMembers;
+    });
   };
 
   const handleTransactionCostChange = (e) => {
@@ -157,23 +206,6 @@ const GroupDetails = () => {
 
   const handleTransactionCurrencyTypeGroupChange = (e) => {
     setTransaction({ ...transaction, currencyTypeGroup: e.target.value });
-  };
-
-  const renderMemberCheckboxes = () => {
-    return group.users?.map((user, index) => (
-      <div key={index} className="form-check">
-        <input
-          type="checkbox"
-          className="form-check-input"
-          id={`checkbox-${index}`}
-          checked={selectedMembers.includes(user)}
-          onChange={() => handleToggleMember(user)}
-        />
-        <label className="form-check-label" htmlFor={`checkbox-${index}`}>
-          {user}
-        </label>
-      </div>
-    ));
   };
 
   //Function to simplify debts
@@ -220,7 +252,7 @@ const GroupDetails = () => {
     const groupedTransactions = {};
 
     answer.forEach((transaction) => {
-      const [receiver, giver, amount] = transaction; // Note the order of receiver and giver
+      const [giver, receiver, amount] = transaction; // Note the order of receiver and giver
       if (!groupedTransactions[giver]) {
         groupedTransactions[giver] = [];
       }
@@ -230,16 +262,28 @@ const GroupDetails = () => {
   }
 
   const handleAddTransaction = async () => {
-    const price = transaction.cost / selectedMembers.length;
-    for (const groupMember of selectedMembers) {
-      if (transaction.type === "debit") {
-        await AddGroupTransaction(groupMember, price, id, transaction.currencyTypeGroup);
-      } else {
-        await AddGroupTransaction(groupMember, -price, id, transaction.currencyTypeGroup);
+    const totalCost = transaction.cost;
+    
+    selectedMembersWithNumbers.forEach(async (memberData) => {
+      const { username, number } = memberData;
+  
+      // Calculate the amount for each member based on the percentage of the total cost
+      const amount = (totalCost * number) / 100;
+  
+      try {
+        if (transaction.type === "debit") {
+          await AddGroupTransaction(username, amount, id, transaction.currencyTypeGroup);
+        } else {
+          await AddGroupTransaction(username, -amount, id, transaction.currencyTypeGroup);
+        }
+      } catch (error) {
+        console.error(`Error adding transaction for ${username}:`, error);
       }
-    }
+    });
+  
     setTransactionMade(true);
   };
+  
 
   const AddGroupTransaction12 = (e) => {
     e.preventDefault();
