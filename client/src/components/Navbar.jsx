@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 import "../css/navbar.css";
 import NotificationComp from './NotificationComp.jsx';
 import themeContext from "../context/theme/themeContext";
+import plussolid from "../images/plussolid.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faBell, faSun,faMoon } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = (props) => {
 
@@ -72,9 +75,21 @@ const Navbar = (props) => {
                   to="/quickadd"
                 >
                   Quick Add
-                  <span className="material-symbols-outlined plus-sign">
-                    add
-                  </span>
+                  {/* <FontAwesomeIcon
+                    icon="fa-solid fa-plus"
+                    spin
+                    style={{ color: "#ffffff" }}
+                  /> */}
+                  {/* <img src={plussolid} alt="" style={{ height: "30px" }} /> */}
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    spin
+                    style={{
+                      color: "#ffffff",
+                      marginLeft: "5px",
+                      fontSize: "20px",
+                    }}
+                  />
                 </Link>
               </li>
               <li
@@ -84,6 +99,7 @@ const Navbar = (props) => {
                   <i className="material-symbols-outlined sun" id="night">
                     {theme === "dark" ? "light_mode" : "dark_mode"}
                   </i>
+                  {/* <FontAwesomeIcon icon={`${theme === "light" ? faSun : faMoon}`} style={{ color: "#f3ef12",fontSize:"20px" }} /> */}
                 </a>
                 {/* <!-- <span className="material-symbols-outlined">
                         light_mode
@@ -93,7 +109,13 @@ const Navbar = (props) => {
                 className={`${theme === "light" ? "nav-item1" : "nav-itemd"}`}
               >
                 <a onClick={handleNotification} className="nav-link mx-2">
-                  <i className="material-symbols-outlined">notifications</i>
+                  <FontAwesomeIcon
+                    icon={faBell}
+                    shake
+                    style={{ color: "#e8eaed" }}
+                    fontSize={"20px"}
+                    cursor={"pointer"}
+                  />
                 </a>
               </li>
               <li

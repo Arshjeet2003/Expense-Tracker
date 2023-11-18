@@ -24,3 +24,11 @@ body {
   --primary-color4: #333;
   --primary-color5: #1f255e;
 }
+
+/* 
+#root{
+  background-image: url('../images/background.jpg');
+  background-position: center;
+  background-size: cover;
+  display: flex;
+} */
