@@ -12,12 +12,12 @@
 }
 
 .converter-containerl {
-    max-width: 400px;
+    max-width: 70vh;
     margin: auto;
-    padding: 20px;
+    padding: 2%;
     border: 5px solid #4d4dff;
     border-radius: 30px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0 0 0 /53%);
   }
 
 
@@ -63,9 +63,9 @@
 }
 
     .converter-containerd {
-    max-width: 400px;
+    max-width: 70vh;
     margin: auto;
-    padding: 20px;
+    padding: 2%;
     background: #333d82;
     border: 5px solid #fadb69;
     border-radius: 30px;

@@ -342,7 +342,7 @@ const GroupDetails = () => {
               </div>
             </div>
             <div
-              className="col-6 col-md-4 .suggestion"
+              className="col-6 col-md-4 .suggestion hides"
               style={{
                 zIndex: "2",
                 position: "fixed",
@@ -517,7 +517,7 @@ const GroupDetails = () => {
               <div className="col-6">
                 <div style={{ display: "flex", justifyContent: "flex-end" }}>
                   <div
-                    className={`fixed-description ${
+                    className={`fixed-description hides ${
                       theme === "light" ? "card-squarel" : "card-squared"
                     }`}
                   >
@@ -546,7 +546,7 @@ const GroupDetails = () => {
                   </div>
 
                   <div
-                    className={`fixed-members ${
+                    className={`fixed-members hides ${
                       theme === "light" ? "card-membersl" : "card-membersd"
                     }`}
                   >

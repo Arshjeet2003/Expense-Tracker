@@ -18,7 +18,7 @@
 }
 
 .btns {
-  top: -50px;
+  top: -5vh;
   position: relative;
   margin-left: 10px;
 }
@@ -35,7 +35,7 @@
 
 .slides {
   width: 500%;
-  height: 300px;
+  height: 40vh;
   display: flex;
 }
 
@@ -64,8 +64,8 @@
 
 .navigation-manual {
   position: absolute;
-  width: 640px;
-  margin-top: 400px;
+  width: 100%;
+  margin-top: 61vh;
   display: flex;
   justify-content: center;
 }
@@ -119,13 +119,14 @@
 
 .sliderl {
   width: 85%;
-  height: 75vh;
+  height: 70vh;
   border-radius: 50px;
   box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.4);
-  top: 10px;
+  top: 9vh;
   overflow: hidden;
   border: 5px solid #4d4dff;
-  margin-left: 100px;
+  margin-left: 13%;
+  margin-right: 20%;
    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -183,13 +184,14 @@
 
 .sliderd {
   width: 85%;
-  height: 75vh;
+  height: 70vh;
   border-radius: 50px;
   box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.4);
-  top: 10px;
+  top: 9vh;
   overflow: hidden;
   border: 5px solid #fadb69;
-  margin-left: 100px;
+  margin-left: 13%;
+  margin-right: 20%;
 }
 
 .manual-btnd {

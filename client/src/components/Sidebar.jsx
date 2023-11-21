@@ -43,7 +43,10 @@ const Sidebar = () => {
         <ul className="nav-list">
           <li>
             <Link to="/">
-              <i className="material-symbols-outlined" style={{ fontSize: 24 }}>
+              <i
+                className="material-symbols-outlined"
+                style={{ fontSize: "150%" }}
+              >
                 dashboard
               </i>
               <span
@@ -51,7 +54,7 @@ const Sidebar = () => {
                   theme === "light" ? "links_namel" : "links_named"
                 }`}
               >
-                Dashboard
+                <strong>Dashboard</strong>
               </span>
             </Link>
             <span className="tooltip">Dashboard</span>
@@ -73,7 +76,10 @@ const Sidebar = () => {
           </li> */}
           <li>
             <Link to="/groups">
-              <i className="material-symbols-outlined" style={{ fontSize: 24 }}>
+              <i
+                className="material-symbols-outlined"
+                style={{ fontSize: "150%" }}
+              >
                 groups
               </i>
               <span
@@ -81,14 +87,17 @@ const Sidebar = () => {
                   theme === "light" ? "links_namel" : "links_named"
                 }`}
               >
-                Groups
+                <strong>Groups</strong>
               </span>
             </Link>
             <span className="tooltip">Groups</span>
           </li>
           <li>
             <Link to="/transactions">
-              <i className="material-symbols-outlined" style={{ fontSize: 24 }}>
+              <i
+                className="material-symbols-outlined"
+                style={{ fontSize: "150%" }}
+              >
                 receipt_long
               </i>
               <span
@@ -96,14 +105,17 @@ const Sidebar = () => {
                   theme === "light" ? "links_namel" : "links_named"
                 }`}
               >
-                Transactions
+                <strong>Transactions</strong>
               </span>
             </Link>
             <span className="tooltip">Transactions</span>
           </li>
           <li>
             <Link to="/goals">
-              <i className="material-symbols-outlined" style={{ fontSize: 24 }}>
+              <i
+                className="material-symbols-outlined"
+                style={{ fontSize: "150%" }}
+              >
                 sports_score
               </i>
               <span
@@ -111,14 +123,17 @@ const Sidebar = () => {
                   theme === "light" ? "links_namel" : "links_named"
                 }`}
               >
-                Goals
+                <strong>Goals</strong>
               </span>
             </Link>
             <span className="tooltip">Goals</span>
           </li>
           <li>
             <Link to="/Conversions">
-              <i className="material-symbols-outlined" style={{ fontSize: 24 }}>
+              <i
+                className="material-symbols-outlined"
+                style={{ fontSize: "150%" }}
+              >
                 conversion_path
               </i>
               <span
@@ -126,14 +141,17 @@ const Sidebar = () => {
                   theme === "light" ? "links_namel" : "links_named"
                 }`}
               >
-                Conversions
+                <strong>Conversions</strong>
               </span>
             </Link>
             <span className="tooltip">Conversions</span>
           </li>
           <li>
             <Link to="/Stocks">
-              <i className="material-symbols-outlined" style={{ fontSize: 24 }}>
+              <i
+                className="material-symbols-outlined"
+                style={{ fontSize: "150%" }}
+              >
                 currency_bitcoin
               </i>
               <span
@@ -141,7 +159,7 @@ const Sidebar = () => {
                   theme === "light" ? "links_namel" : "links_named"
                 }`}
               >
-                Stocks
+                <strong>Stocks</strong>
               </span>
             </Link>
             <span className="tooltip">Stocks</span>
@@ -153,7 +171,7 @@ const Sidebar = () => {
                   onClick={handleLogout}
                   className={`${theme === "light" ? "namel" : "named"}`}
                 >
-                  Log Out
+                  <strong>Log Out</strong>
                 </div>
               </div>
             </div>

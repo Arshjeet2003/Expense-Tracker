@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import groupContext from "../context/groups/groupContext.js";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import login from "../images/login.svg";
 import themeContext from "../context/theme/themeContext";
@@ -20,20 +21,19 @@ const GroupCard = (props) => {
       // Global settings for AOS initialization
       // For example:
       offset: 200, // Change offset to trigger animations sooner or later
-      duration: 1000, // Animation duration
+      duration: 700, // Animation duration
       easing: "ease-in-out", // Easing option
-      delay: 400, // Delay animation
+      delay: 300, // Delay animation
     });
   }, []);
 
   return (
     <div
-      className="col-md-3"
+      className="col-md-6 my-3"
       style={{
         color: `${theme === "light" ? "#fff" : "#333d82"}`,
         minHeight: "100",
-        overflow: "hidden"
-        
+        overflow: "hidden",
       }}
     >
       {/* <div className="card my-3 card-complete">
@@ -45,77 +45,80 @@ const GroupCard = (props) => {
             </div>
             </div> */}
       <div
-        className={` card ${theme === "light" ? "card-blockl" : "card-blockd"}`}
+        className={`carr card ${
+          theme === "light" ? "card-blockl" : "card-blockd"
+        } ${animationData === 1 ? "my-4" : ""}`}
+        // style={{ marginTop: `${animationData === 1 ? "600px" : "0vh"}` }}
         data-aos={
           animationData === 0
-            ? "fade-down-right"
-            : animationData === 1
-            ? "fade-up-left"
-            : animationData === 2
-            ? "fade-up-right"
-            : "fade-down-left"
+            ? "fade-right"
+            // : animationData === 1
+            // ? "fade-up-left"
+            // : animationData === 2
+            // ? "fade-up-right"
+            : "fade-left"
         }
-        // data-aos-anchor-placement={
-        //   animationData === 0
-        //     ? "top-center"
-        //     : animationData === 1
-        //     ? "bottom-bottom"
-        //     : animationData === 2
-        //     ? "top-bottom"
-        //     : "center-bottom"
-        // }
       >
-        <Link to={`/group/${group._id}`}>
-          <h5
-            className={` text-right ${
-              theme === "light" ? "card-titlel" : "card-titled"
-            }`}
-          >
-            {group.name}
-          </h5>
-        </Link>
-        <Link to={`/group/${group._id}`}>
-          <div className="img-box">
-            <img className="image-of-card" src={login} alt="" />
-          </div>
-        </Link>
-        {/* <h5 className="card-title mt-3 mb-3"></h5> */}
-        <Link to={`/group/${group._id}`}>
-          <p
-            className="card-text"
-            style={{ color: `${theme === "light" ? "black" : "#fff"}` }}
-          >
-            {group.description}
-          </p>
-        </Link>
-        <div className="footer">
-          <div
-            className={`${
-              theme === "light" ? "card-bottom1l" : "card-bottom1d"
-            }`}
-          >
-            <i
-              className="material-symbols-outlined"
-              onClick={() => {
-                updateGroup(group);
-              }}
+        <div className="car">
+          <Link to={`/group/${group._id}`}>
+            <h5
+              className={` text-right ${
+                theme === "light" ? "card-titlel" : "card-titled"
+              }`}
             >
-              edit_document
-            </i>
+              <strong>{group.name}</strong>
+            </h5>
+          </Link>
+          <div className="row">
+            <div className="col-md-5">
+              <Link to={`/group/${group._id}`}>
+                <div className="img-box">
+                  <img className="image-of-card" src={login} alt="" />
+                </div>
+              </Link>
+            </div>
+            {/* <h5 className="card-title mt-3 mb-3"></h5> */}
+            <div className="col-md-7 my-3 des">
+              <Link to={`/group/${group._id}`}>
+                <p
+                  className="card-text"
+                  style={{ color: `${theme === "light" ? "black" : "#fff"}` }}
+                >
+                  {group.description}
+                </p>
+              </Link>
+            </div>
           </div>
-          <div
-            className={`${
-              theme === "light" ? "card-bottom2l" : "card-bottom2d"
-            }`}
-          >
-            <i
-              className="material-symbols-outlined"
-              onClick={() => {
-                deleteGroup(group._id);
-              }}
+
+          <div className="footer">
+            <div
+              className={`${
+                theme === "light" ? "card-bottom1l" : "card-bottom1d"
+              }`}
             >
-              delete
-            </i>
+              <i
+                className="material-symbols-outlined"
+                onClick={() => {
+                  updateGroup(group);
+                }}
+              >
+                edit_document
+              </i>
+            </div>
+            <div
+              className={`${
+                theme === "light" ? "card-bottom2l" : "card-bottom2d"
+              }`}
+            >
+              <i
+                className="material-symbols-outlined"
+                onClick={() => {
+                  deleteGroup(group._id);
+                }}
+              >
+                delete
+              </i>
+            </div>
           </div>
         </div>
       </div>

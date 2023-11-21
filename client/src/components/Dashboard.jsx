@@ -73,9 +73,8 @@ const Dashboard = () => {
       <div
         className={`${theme === "light" ? "full-heightl" : "full-heightd"}`}
         style={{
-          overflow: "hidden",
+          overflowX: "hidden",
           height: "200px",
-          
         }}
       >
         <Navbar dataForNotification={dataForNotification} />
@@ -102,6 +101,7 @@ const Dashboard = () => {
                 >
                   {/* Upper Right Content here */}
                   <div
+                    className="hides"
                     style={{
                       width: "100%",
                       paddingLeft: "1.5%",
@@ -140,7 +140,9 @@ const Dashboard = () => {
                             }`,
                           }}
                         >
-                          <h5 className="mb-0">Friends</h5>
+                          <h5 className="mb-0">
+                            <strong>Friends</strong>
+                          </h5>
                         </div>
                         <div className="table-responsive">
                           <table className="table mb-0">
@@ -154,7 +156,9 @@ const Dashboard = () => {
                                   paddingTop: "30%",
                                   fontSize: "30px",
                                   color: `${
-                                    theme === "light" ? "rgb(102, 103, 115)" : "#ffffff4f"
+                                    theme === "light"
+                                      ? "rgb(102, 103, 115)"
+                                      : "#ffffff4f"
                                   }`,
                                 }}
                               >

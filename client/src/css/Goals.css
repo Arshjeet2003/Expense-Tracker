@@ -1,16 +1,22 @@
-body {
-  background-color: #eee;
-}
+@import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
 
 .carddl {
-  border: none;
+  border: 5px solid #4d4dff;
   border-radius: 30px;
 }
+
+/* .page{
+  background: yellow;
+} */
 
 .c-details span {
   font-weight: 300;
   font-size: 13px;
   /* color: #ffffff5d */
+}
+
+.des{
+  font-family: 'Handlee', cursive;
 }
 
 
@@ -32,7 +38,7 @@ body {
 }
 
 .progress div {
-  background-color: red;
+  background-color: green;
 }
 
 .text1 {
@@ -41,7 +47,7 @@ body {
 }
 
 .text2 {
-  color: #a5aec0;
+  color: rgb(102, 103, 115);
 }
 
 .desc {
@@ -81,13 +87,19 @@ body {
   border-bottom-right-radius: 350px;
 }
 
-.rightMost {
-  height: 30vh;
-}
+
 
 .rightMost img {
-  height: 27vh;
+  
   width: 100%;
+  padding-top: 10vh;
   background-color: rgb(0, 145, 255);
+}
+
+
+@media only screen and (max-width: 1000px) {
+  .hides {
+    display: none;
+  }
 }
 

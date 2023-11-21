@@ -6,8 +6,21 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import themeContext from "../context/theme/themeContext";
 import Conversion from "../images/Conversion.svg";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Conversions = () => {
+  useEffect(() => {
+    AOS.init({
+      // Global settings for AOS initialization
+      // For example:
+      offset: 200, // Change offset to trigger animations sooner or later
+      duration: 700, // Animation duration
+      easing: "ease-in-out", // Easing option
+      delay: 300, // Delay animation
+    });
+  }, []);
+
   const [amount, setAmount] = useState(1);
   const [fromCurrency, setFromCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("EUR");
@@ -75,18 +88,21 @@ const Conversions = () => {
       >
         <div className="row">
           <Navbar />
-          <div className="col" style={{ paddingTop: "7.5%" }}>
+          <div
+            className="col"
+            style={{ paddingTop: "7.5%" }}
+            data-aos={"fade-right"}
+          >
             <img
               src={Conversion}
               alt=""
               style={{
-                height: "450px",
-                paddingLeft: "20px",
+                height: "75vh",
+                paddingLeft: "2%",
               }}
             />
           </div>
           <div className="col" style={{ paddingTop: "6%" }}>
-            
             <div>
               <div
                 className={`container mt-5 ${
@@ -94,6 +110,7 @@ const Conversions = () => {
                     ? "converter-containerl"
                     : "converter-containerd"
                 }`}
+                data-aos={"fade-left"}
               >
                 <h3
                   style={{
@@ -102,7 +119,7 @@ const Conversions = () => {
                     textAlign: "center",
                   }}
                 >
-                  Convert your currency
+                  <strong>Convert your currency</strong>
                 </h3>
                 <div
                   className={`${
@@ -197,7 +214,7 @@ const Conversions = () => {
                       color: `${theme === "light" ? "black" : "#fff"}`,
                     }}
                   >
-                    Conversion Result:
+                    <strong>Conversion Result:</strong>
                   </h4>
                   <p
                     style={{
