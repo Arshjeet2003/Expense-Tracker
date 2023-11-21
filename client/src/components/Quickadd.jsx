@@ -129,7 +129,7 @@ const Quickadd = () => {
   };
 
   return (
-    <>
+    <div id={`${theme === "light" ? "quickAddBodyl" : "quickAddBodyd"}`}>
       <Navbar />
       <Sidebar />
       <div
@@ -436,7 +436,7 @@ const Quickadd = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

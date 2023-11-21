@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import "../css/navbar.css";
 import NotificationComp from './NotificationComp.jsx';
 import themeContext from "../context/theme/themeContext";
-import plussolid from "../images/plussolid.svg";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faBell, faSun,faMoon } from "@fortawesome/free-solid-svg-icons";
 
@@ -74,7 +74,7 @@ const Navbar = (props) => {
                   aria-current="page"
                   to="/quickadd"
                 >
-                  Quick Add
+                  <strong>Quick Add</strong>
                   {/* <FontAwesomeIcon
                     icon="fa-solid fa-plus"
                     spin

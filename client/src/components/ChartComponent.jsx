@@ -785,9 +785,9 @@ const ChartComponent = (props) => {
   };
 
   const chartContainerStyles = {
-    height: "225px",
-    width: "275px",
-    marginLeft: "20px",
+    height: "45vh",
+    width: "38%",
+    marginLeft: "2%",
     borderRadius: "30px",
     // border:"1px solid black",
     // boxShadow: "black",

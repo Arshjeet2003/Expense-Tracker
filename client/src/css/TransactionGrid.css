@@ -3,11 +3,13 @@
 .complete-transactionl{
     background: #fff;
     min-height: 100vh;
+   
 }
 
 .complete-transactiond{
     background: #25273f;
     min-height: 100vh;
+    
 }
 
 
@@ -33,4 +35,32 @@
 
 .css-jycsbp .MuiDataGrid-toolbarContainer .MuiButton-text{
     color: #4D4DFF;
+}
+.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar{
+    color: #8289ee;
+}
+
+.css-78c6dr-MuiToolbar-root-MuiTablePagination-toolbar .MuiTablePagination-actions{
+    margin-top: 4vh;
+}
+
+.css-zylse7-MuiButtonBase-root-MuiIconButton-root.Mui-disabled{
+  color: #8289ee;
+}
+
+.css-rtrcn9-MuiTablePagination-root .MuiTablePagination-input{
+    margin-top: 3vh;
+    
+}
+
+.css-zylse7-MuiButtonBase-root-MuiIconButton-root.Mui-disabled{
+   color: #8289ee !important;
+}
+
+.css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon{
+    color: #8289ee !important;
+}
+
+.css-ptkaw2-MuiDataGrid-root .MuiDataGrid-columnHeader:focus, .css-ptkaw2-MuiDataGrid-root .MuiDataGrid-cell:focus{
+    outline: none !important;
 }

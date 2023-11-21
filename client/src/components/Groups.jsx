@@ -7,8 +7,46 @@ import themeContext from "../context/theme/themeContext";
 import GroupCard from "./GroupCard.jsx";
 import Navbar from "./Navbar.jsx";
 import "../css/Groups.css";
+import Man from "../images/Man.svg";
+import slide1 from "../images/slide1.jpg";
+import slide2 from "../images/slide2.jpg";
+import slide3 from "../images/slide3.jpeg";
+import slide4 from "../images/slide4.jpg";
+import slide5 from "../images/slide5.jpeg";
+import slide6 from "../images/slide6.jpeg";
+import slide7 from "../images/slide7.jpg";
+import slide8 from "../images/slide8.jpg";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Groups = () => {
+   const settings = {
+    //  dots: true,
+     infinite: true,
+     speed: 500,
+     slidesToShow: 1,
+     slidesToScroll: 1,
+     autoplay: true,
+     autoplaySpeed: 3000,
+     adaptiveHeight: true,
+     responsive: [
+       {
+         breakpoint: 768,
+         settings: {
+           slidesToShow: 1,
+           slidesToScroll: 1,
+         },
+       },
+       {
+         breakpoint: 480,
+         settings: {
+           slidesToShow: 1,
+           slidesToScroll: 1,
+         },
+       },
+     ],
+   };
   const context = useContext(groupContext);
   const { groups, addGroup, getGroups, deleteGroup, editGroup } = context;
   const context1 = useContext(themeContext);
@@ -80,7 +118,7 @@ const Groups = () => {
                 id="Create-group"
                 style={{ marginRight: 150 }}
               >
-                Create Group
+                <strong>Create Group</strong>
               </button>
             </div>
           </div>
@@ -89,7 +127,203 @@ const Groups = () => {
               theme === "light" ? "card-headingl" : "card-headingd"
             }`}
           >
-            <h2 style={{ paddingLeft: 10 }}>My Groups</h2>
+            <h2 style={{ paddingLeft: 10 }}>
+              <strong>My Groups</strong>
+            </h2>
+
+            <div className="row mt-3">
+              <div className="col-md-5">
+                <img src={Man} alt="" style={{ height: "90%" }} className="hides"/>
+              </div>
+              <div className="col-md-7 mt-5">
+                <div className="carousel-container">
+                  <Slider {...settings}>
+                    <div className="slid">
+                      <img src={slide1} alt="Slide 1" />
+                      <div className="slide-content">
+                        <h5 className="text">
+                          Welcome to our Group Management section, where you
+                          have the power to effortlessly organize and simplify
+                          your shared financial experiences. Here's a glimpse of
+                          the features that empower you within this space:
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="slid">
+                      <img src={slide2} alt="Slide 2" />
+                      <div className="slide-content">
+                        <h4 className="text">
+                          <strong>Add Various Groups</strong>
+                        </h4>
+                        <p>
+                          Create multiple groups tailored to different purposes
+                          or activities. Enjoy the flexibility to organize and
+                          manage various aspects of your life.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="slid">
+                      <img
+                        src={slide3}
+                        alt="Slide 3"
+                      />
+                      <div className="slide-content">
+                        <h4 className="text">
+                          <strong>Add Members to the Group</strong>
+                        </h4>
+                        <p>
+                          {" "}
+                          Expand your community effortlessly by inviting new
+                          members. Foster collaboration and inclusivity within
+                          your financial activities, enhancing group dynamics
+                          and shared experiences.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="slid">
+                      <img
+                        src={slide4}
+                        alt="Slide 4"
+                      />
+                      <div className="slide-content">
+                        <h4 className="text">
+                          <strong>Remove Members from the Group</strong>
+                        </h4>
+                        <p>
+                          Maintain control over your group's composition by
+                          easily managing its members. Remove individuals who
+                          are no longer part of shared financial activities,
+                          ensuring the security and privacy of your financial
+                          interactions.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="slid">
+                      <img
+                        src={slide5}
+                        alt="Slide 5"
+                      />
+                      <div className="slide-content">
+                        <h4 className="text">
+                          <strong>Add Group Description</strong>
+                        </h4>
+                        <p>
+                          Provide a clear overview of your group's purpose and
+                          activities. Communicate important guidelines and
+                          expectations to all members, fostering a sense of
+                          community by sharing the group's mission and
+                          objectives.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="slid">
+                      <img
+                        src={slide6}
+                        alt="Slide 6"
+                      />
+                      <div className="slide-content">
+                        <h4 className="text">
+                          {" "}
+                          <strong>Simplify Debts</strong>
+                        </h4>
+                        <p>
+                          Streamline your group's financial transactions with
+                          ease. Manage debts and credits seamlessly, ensuring
+                          accurate and hassle-free settlements among members.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="slid">
+                      <img
+                        src={slide7}
+                        alt="Slide 7"
+                      />
+                      <div className="slide-content">
+                        <h4 className="text">
+                          {" "}
+                          <strong>Split Expenses</strong>
+                        </h4>
+                        <p>
+                          Effortlessly divide and distribute shared expenses
+                          among group members. Track and manage various
+                          expenditures to maintain financial transparency,
+                          making the process of splitting bills fair and
+                          convenient for everyone.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="slid">
+                      <img
+                        src={slide8}
+                        alt="Slide 8"
+                      />
+                      <div className="slide-content">
+                        <h5 className="text">
+                          {" "}
+                          In this organized and feature-rich environment, our
+                          Group Management section empowers you to create,
+                          organize, and streamline your financial activities
+                          within various groups. Enjoy a seamless,
+                          collaborative, and tailored experience that meets your
+                          unique needs!
+                        </h5>
+                      </div>
+                    </div>
+                    {/* Add more slides as needed */}
+                  </Slider>
+                </div>
+              </div>
+              {/* <div className="col-md-5">
+                <img src={Man} style={{ height: "70vh" }} alt="" />
+              </div>
+              <div className="col-md-7">
+                <p>
+                  Welcome to our Group Management section, where you have the
+                  power to effortlessly organize and simplify your shared
+                  financial experiences. Here's a glimpse of the features that
+                  empower you within this space:
+                </p>
+                <br />
+                <p>
+                  Add Various Groups: Create multiple groups tailored to
+                  different purposes or activities. Enjoy the flexibility to
+                  organize and manage various aspects of your life.
+                  <br />
+                  Add Members
+                  to the Group: Expand your community effortlessly by inviting
+                  new members. Foster collaboration and inclusivity within your
+                  financial activities, enhancing group dynamics and shared
+                  experiences.
+                  <br />
+                  Remove Members from the Group: Maintain control
+                  over your group's composition by easily managing its members.
+                  Remove individuals who are no longer part of shared financial
+                  activities, ensuring the security and privacy of your
+                  financial interactions.
+                  <br />
+                  Add Group Description: Provide a clear
+                  overview of your group's purpose and activities. Communicate
+                  important guidelines and expectations to all members,
+                  fostering a sense of community by sharing the group's mission
+                  and objectives.
+                  <br />
+                  Simplify Debts: Streamline your group's
+                  financial transactions with ease. Manage debts and credits
+                  seamlessly, ensuring accurate and hassle-free settlements
+                  among members. Split Expenses: Effortlessly divide and
+                  distribute shared expenses among group members.
+                  <br />
+                  Track and
+                  manage various expenditures to maintain financial
+                  transparency, making the process of splitting bills fair and
+                  convenient for everyone. In this organized and feature-rich
+                  environment, our Group Management section empowers you to
+                  create, organize, and streamline your financial activities
+                  within various groups. Enjoy a seamless, collaborative, and
+                  tailored experience that meets your unique needs!
+                </p>
+              </div> */}
+            </div>
 
             <div className="container mx-2">
               {groups.length === 0 && (
@@ -109,14 +343,14 @@ const Groups = () => {
                 </div>
               )}
             </div>
-           
+
             {groups.map((group) => {
-              let animationData = idx % 4;
+              let animationData = idx % 2;
               idx++;
               // setAnimationData(animationData);
               return (
                 <>
-{/*                   
+                  {/*                   
                   <div
                     className="row"
                     style={{

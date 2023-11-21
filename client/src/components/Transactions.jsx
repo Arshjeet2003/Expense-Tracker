@@ -5,7 +5,7 @@ import Navbar from './Navbar.jsx';
 
 const Transactions = () => {
   return (
-    <div>
+    <div >
       <Navbar/>
       <Sidebar/>
       <TransactionGrid/>

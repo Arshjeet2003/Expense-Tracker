@@ -189,7 +189,7 @@ input{
 }
 
 .sidebarl .nav-list{
-  margin-top: 20px;
+  margin-top: 5vh;
   height: 100%;
 }
 .sidebarl li{
@@ -434,7 +434,7 @@ input{
 }
 
 .sidebard .nav-list{
-  margin-top: 20px;
+  margin-top: 5vh;
   height: 100%;
 }
 .sidebard li{
