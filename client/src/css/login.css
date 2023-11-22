@@ -16,10 +16,6 @@ a{
   color: var(--primary-color1);
 }
 
-body,
-input {
-  font-family: "Poppins", sans-serif;
-}
 
 .c{
   position: relative;

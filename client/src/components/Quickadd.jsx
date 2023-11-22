@@ -25,7 +25,7 @@ const Quickadd = () => {
   const [Recurring, setRecurring] = useState("No");
   const [fileNames, setFileNames] = useState([]);
   const [files, setFiles] = useState({});
-
+  const [recurring1, setRecurring1] = useState("");
   const [transaction, setTransaction] = useState({
     name: "",
     type: "",
@@ -85,6 +85,7 @@ const Quickadd = () => {
   };
   const handleNo = (e) => {
     e.preventDefault();
+    
     setShowRepeat(false);
     setRecurring("No");
   };
@@ -297,11 +298,14 @@ const Quickadd = () => {
                     className="btn-check button"
                     name="rec_yes"
                     id="yes"
+                    checked={recurring1 === "Yes"} // Change this to reflect the state for 'Yes'
                     autoComplete="off"
                     onClick={handleYes}
                   />
                   <label
-                    className="btn btn-sm btn-outline-secondary check"
+                    className={`btn btn-sm btn-outline-secondary check ${
+                      recurring1 === "Yes" ? "selected-color" : ""
+                    }`}
                     htmlFor="yes"
                     style={{
                       color: `${theme === "light" ? "black" : "white"}`,
@@ -314,11 +318,14 @@ const Quickadd = () => {
                     className="btn-check"
                     name="rec_no"
                     id="no"
+                    checked={recurring1 === "No"} // Change this to reflect the state for 'No'
                     autoComplete="off"
                     onClick={handleNo}
                   />
                   <label
-                    className="btn btn-sm btn-outline-secondary check"
+                    className={`btn btn-sm btn-outline-secondary check ${
+                      recurring1 === "No" ? "selected-color" : ""
+                    }`}
                     htmlFor="no"
                     style={{
                       color: `${theme === "light" ? "black" : "white"}`,
@@ -326,8 +333,9 @@ const Quickadd = () => {
                   >
                     No
                   </label>
+
                   <div
-                    className={`input-field special ${
+                    className={`input-field special mx-2 ${
                       showRepeat === false ? "d-none" : ""
                     }`}
                     id="content"
@@ -406,7 +414,7 @@ const Quickadd = () => {
                         className={`${
                           theme === "light"
                             ? "small text-muted"
-                            : "dull-white-small-text"
+                            : "small text-white"
                         }`}
                       >
                         {name}

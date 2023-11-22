@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import "../css/navbar.css";
 import NotificationComp from './NotificationComp.jsx';
 import themeContext from "../context/theme/themeContext";
-
+import logo from "../images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faBell, faSun,faMoon } from "@fortawesome/free-solid-svg-icons";
 
@@ -42,14 +42,24 @@ const Navbar = (props) => {
         }}
       >
         <div className="container">
-          <a
+          <h3
+            style={{
+              color: "#fff",
+            }}
+          >
+            <strong style={{ color: "green" }}>B</strong>
+            udget <strong style={{ color: "green" }}>B</strong>uddy
+          </h3>
+          {/* <Link
             className={`${
               theme === "light" ? "navbar-brandl" : "navbar-brandd"
             }`}
-            href="#"
+            to="/"
           >
-            <img src="image" height="60" alter="logo" />
-          </a>
+            <img src={logo} alt="logo" style={{
+              height:"7vh"
+            }}/>
+          </Link> */}
           <button
             className="navbar-toggler"
             type="button"

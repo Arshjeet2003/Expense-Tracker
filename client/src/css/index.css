@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Atma&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -5,30 +7,5 @@
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Atma' !important;
 }
-
-:root {
-  --primary-color1: #fff;
-  --primary-color2: #acacac;
-  --primary-color3: #aaa;
-  --primary-color4: #333;
-  --primary-color5: #4d4dff;
-  --background-color : #25273f
-}
-
-.dark-theme-front {
-  --primary-color1: #fff;
-  --primary-color2: #acacac;
-  --primary-color3: #aaa;
-  --primary-color4: #333;
-  --primary-color5: #1f255e;
-}
-
-/* 
-#root{
-  background-image: url('../images/background.jpg');
-  background-position: center;
-  background-size: cover;
-  display: flex;
-} */

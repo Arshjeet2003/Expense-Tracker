@@ -7,10 +7,23 @@ import transactionContext from "../context/transactions/transactionContext.js";
 import Navbar from "./Navbar.jsx";
 import Sidebar from "./Sidebar.jsx";
 import Scope from "../images/Scope.svg";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import "../css/Groupcard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Goals = () => {
+  useEffect(() => {
+    AOS.init({
+      // Global settings for AOS initialization
+      // For example:
+      offset: 200, // Change offset to trigger animations sooner or later
+      duration: 700, // Animation duration
+      easing: "ease-in-out", // Easing option
+      delay: 300, // Delay animation
+    });
+  }, []);
   const ref = useRef(null);
   const refClose = useRef(null);
 
@@ -158,6 +171,7 @@ const Goals = () => {
     <div
       style={{
         background: `${theme === "light" ? "#eee" : "#25273f"}`,
+        minHeight: "100vh",
       }}
     >
       <Navbar />
@@ -181,7 +195,7 @@ const Goals = () => {
         </div>
 
         {updatedGoals?.map((goal) => (
-          <div className="row " key={goal._id}>
+          <div className="row " key={goal._id} data-aos="fade-right">
             <div className="col">
               <div
                 className="card page carddl p-3 mb-2 mt-4"
@@ -203,9 +217,9 @@ const Goals = () => {
                         color: `${theme === "light" ? "black" : "#fff"}`,
                       }}
                     >
-                      <h5>
+                      <h4>
                         <strong>{goal.name}</strong>
-                      </h5>
+                      </h4>
                     </div>
                     <div className="row ms-1 my-2">
                       <div
@@ -284,10 +298,14 @@ const Goals = () => {
                           let daysRemaining;
                           if (startDate > today) {
                             // Calculate days remaining from endDate to startDate
-                            daysRemaining = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+                            daysRemaining = Math.ceil(
+                              (endDate - startDate) / (1000 * 60 * 60 * 24)
+                            );
                           } else {
                             // Calculate days remaining from endDate to today
-                            daysRemaining = Math.ceil((endDate - today) / (1000 * 60 * 60 * 24));
+                            daysRemaining = Math.ceil(
+                              (endDate - today) / (1000 * 60 * 60 * 24)
+                            );
                           }
 
                           return daysRemaining;
@@ -318,7 +336,11 @@ const Goals = () => {
                         className="progress-bar"
                         role="progressbar"
                         style={{
-                          width: `${(goal.totalSavingsTillNow * 1.0 / goal.savingsGoal) * 100}%`,
+                          width: `${
+                            ((goal.totalSavingsTillNow * 1.0) /
+                              goal.savingsGoal) *
+                            100
+                          }%`,
                         }}
                         aria-valuenow={50}
                         aria-valuemin={0}
@@ -341,14 +363,14 @@ const Goals = () => {
                             style={{ border: "none", background: "none" }}
                             // onClick={}
                           >
-                            <FontAwesomeIcon onClick={(e) => handleDelete(e,goal._id)}
+                            <FontAwesomeIcon
+                              onClick={(e) => handleDelete(e, goal._id)}
                               style={{
-                                color: "#9f8e23",
+                                color: "rgba(255, 0, 0, 0.726)",
                                 fontSize: "22px",
                                 marginLeft: "60%",
                               }}
                               icon={faTrash}
-                              fade
                             />
                           </button>
                         </div>
@@ -477,12 +499,19 @@ const Goals = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary">
-                  Submit
+                <button
+                  type="submit"
+                  // onClick={handleClickAdd}
+                  className="btn btn-primary"
+                  style={{
+                    background: `${theme === "light" ? "#4d4dff" : "#333d82"}`,
+                  }}
+                >
+                  Add Goal
                 </button>
               </form>
             </div>
-            <div className="modal-footer">
+            {/* <div className="modal-footer">
               <button
                 type="button"
                 ref={refClose}
@@ -501,7 +530,7 @@ const Goals = () => {
               >
                 Add Goal
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
