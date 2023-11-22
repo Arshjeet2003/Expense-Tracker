@@ -39,6 +39,8 @@ const Quickadd = () => {
   const handleClick = (e) => {
     e.preventDefault(); //So that page does not reload
 
+    //Add loading
+
     if (files[0] == null) return;
     const imageRef = ref(storage, `images/${v4()}`);
     uploadBytes(imageRef, files[0]).then((snapshot) => {
@@ -66,6 +68,7 @@ const Quickadd = () => {
         setSelectedValue("");
         setRecurring("No");
         setFileNames([]);
+        //Loading complete
         alert("Transaction added");
       });
     });

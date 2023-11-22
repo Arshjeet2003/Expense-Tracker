@@ -49,20 +49,27 @@ const Dashboard = () => {
     const notifications = [];
     if (data.transactions) {
       for (const transaction of data.transactions) {
+        const transactionDate = new Date(transaction.date);
+    
         if (transaction.recurring === "Yes") {
-          const Repeat = transaction.repeat;
-          const transactionDate = new Date(transaction.date);
-          if (today.getDate() === transactionDate.getDate() + Number(Repeat)) {
+          const repeatDays = Number(transaction.repeat);
+    
+          // Calculate the number of days between today and the transaction date
+          const daysDifference = Math.floor((today - transactionDate) / (24 * 60 * 60 * 1000));
+    
+          // Check if today is one of the recurring dates
+          if (daysDifference % repeatDays === 0 && today >= transactionDate) {
             notifications.push(transaction);
           }
         } else {
-          const Due_date = new Date(transaction.dueDate);
-          if (today.getDate() === Due_date.getDate()) {
+          const dueDate = new Date(transaction.dueDate);
+    
+          if (today.getDate() === dueDate.getDate()) {
             notifications.push(transaction);
           }
         }
       }
-    }
+    }    
     hasNotificationUpdate(true);
     setDataForNotification(notifications);
     // console.log(notifications);

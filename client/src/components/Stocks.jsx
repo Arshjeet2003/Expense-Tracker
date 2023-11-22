@@ -32,7 +32,6 @@ const CryptoTracker = () => {
       )
       .then((res) => {
         setCoins(res.data);
-        console.log(res.data);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -59,7 +58,7 @@ const CryptoTracker = () => {
         color: `${theme === "light" ? "black" : "#fff"}`,
       }}
     >
-      {console.log(theme)}
+      {/* {console.log(theme)} */}
       <Navbar />
       <Sidebar />
       <div className="container crypto-tracker mt-5">

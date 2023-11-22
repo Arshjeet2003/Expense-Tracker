@@ -5,7 +5,7 @@ import '../css/login.css'
 import signup from '../images/signup.svg';
 import login from '../images/login.svg';
 import { auth, provider } from "../firebase";
-import { signInWithPopup, signInWithRedirect} from "firebase/auth";
+import { signInWithPopup} from "firebase/auth";
 
 
 const Login = (props) => {
@@ -34,7 +34,7 @@ const Login = (props) => {
           return; // Exit early if no user data is available
         }
 
-        console.log(mongoUser);
+        // console.log(mongoUser);
 
         // const userExists = await checkIfUserExists(user.email);
 
@@ -81,14 +81,14 @@ const Login = (props) => {
       if(await loginUser(credentials.email, credentials.password)){
         navigate("/");
       }
+      else{
+        console.log("Wrong username or password");
+      }
     }
     // navigate("/login");
   };
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
-  };
-  const responseGoogle = (response) => {
-    console.log(response);
   };
   
   return (
@@ -125,18 +125,6 @@ const Login = (props) => {
               />
               <p className="social-text">Or Log in with social platforms</p>
               <div className="social-media">
-                {/* <GoogleOAuthProvider clientId="65767957886-0pl6c7uhm7t6vec85g4to2np08gc022m.apps.googleusercontent.com">
-                  <GoogleLogin
-                    onSuccess={(credentialResponse) => {
-                      console.log(credentialResponse);
-                    }}
-                    onError={() => {
-                      console.log("Login Failed");
-                    }}
-                  />
-                  ;
-                </GoogleOAuthProvider> */}
-                {/* ; */}
                 <a href="#" className="social-icon">
                   <i className="fab fa-facebook-f" />
                 </a>

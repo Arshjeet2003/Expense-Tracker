@@ -27,8 +27,9 @@ const Goals = () => {
   const context2 = useContext(transactionContext);
   const { getUserTransactions } = context2;
 
-  const [dataReceive, setDataReceived] = useState(false);
+  const [dataReceived, setDataReceived] = useState(false);
   const [goalAdded, setGoalAdded] = useState(false);
+  const [goalDeleted, setGoalDeleted] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -47,6 +48,12 @@ const Goals = () => {
           setGoals(result.financialgoals);
           calcSavings();
           setDataReceived(true);
+          if (goalDeleted) {
+            setGoalDeleted(false);
+          }
+          if(goalAdded){
+            setGoalAdded(false);
+          }
         }
       } catch (error) {
         console.error("Error:", error);
@@ -55,12 +62,17 @@ const Goals = () => {
     };
 
     fetchData();
+    
 
     return () => {
       // Set the mounted flag to false when the component is unmounted
       isMounted = false;
     };
-  }, [dataReceive, goalAdded]);
+  }, [dataReceived,goalAdded,goalDeleted]);
+
+  useEffect(() => {
+
+  },[goalAdded,goalDeleted])
 
   const isTransactionWithinGoalDates = (
     transactionDate,
@@ -104,6 +116,12 @@ const Goals = () => {
       setDataReceived(true);
     }
   };
+
+  const handleDelete = async (e,id) => {
+    e.preventDefault();
+    await deleteFinancialGoal(id);
+    setGoalDeleted(true);
+  }
 
   const createGoal = (e) => {
     e.preventDefault();
@@ -263,9 +281,14 @@ const Goals = () => {
                           const endDate = new Date(goal.endDate);
                           const today = new Date();
 
-                          const daysRemaining = Math.ceil(
-                            (endDate - today) / (1000 * 60 * 60 * 24)
-                          );
+                          let daysRemaining;
+                          if (startDate > today) {
+                            // Calculate days remaining from endDate to startDate
+                            daysRemaining = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+                          } else {
+                            // Calculate days remaining from endDate to today
+                            daysRemaining = Math.ceil((endDate - today) / (1000 * 60 * 60 * 24));
+                          }
 
                           return daysRemaining;
                         })()}
@@ -295,8 +318,7 @@ const Goals = () => {
                         className="progress-bar"
                         role="progressbar"
                         style={{
-                          
-                          width: "60%",
+                          width: `${(goal.totalSavingsTillNow * 1.0 / goal.savingsGoal) * 100}%`,
                         }}
                         aria-valuenow={50}
                         aria-valuemin={0}
@@ -319,7 +341,7 @@ const Goals = () => {
                             style={{ border: "none", background: "none" }}
                             // onClick={}
                           >
-                            <FontAwesomeIcon
+                            <FontAwesomeIcon onClick={(e) => handleDelete(e,goal._id)}
                               style={{
                                 color: "#9f8e23",
                                 fontSize: "22px",
