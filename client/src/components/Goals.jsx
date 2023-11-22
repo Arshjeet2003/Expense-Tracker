@@ -80,14 +80,13 @@ const Goals = () => {
         let totalSavings = 0;
         for (const transaction of transactionData.transactions) {
           const transactionDate = new Date(transaction.date);
-          if (
-            isTransactionWithinGoalDates(
-              transactionDate,
-              goal.startDate,
-              goal.endDate
-            )
-          ) {
-            totalSavings += transaction.price;
+          if (isTransactionWithinGoalDates(transactionDate, goal.startDate, goal.endDate)) {
+            if(transaction.type==="Expense"){
+              totalSavings -= transaction.price;
+            }
+            else{
+              totalSavings += transaction.price;
+            }
           }
         }
 
@@ -129,15 +128,9 @@ const Goals = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addFinancialGoals(
-      formData.name,
-      formData.description,
-      formData.sdate,
-      formData.edate,
-      Number(formData.savingsGoal)
-    );
+    await addFinancialGoals(formData.name,formData.description,formData.sdate,formData.edate,Number(formData.savingsGoal));
     setGoalAdded(true);
 
     // console.log(formData);
