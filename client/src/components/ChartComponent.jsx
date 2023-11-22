@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/chartComponent.css";
 import themeContext from "../context/theme/themeContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarDays} from "@fortawesome/free-solid-svg-icons";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -804,9 +806,60 @@ const ChartComponent = (props) => {
   const options = {};
 
   return (
-    <div
-    >
-      <div className={`graphs ${theme === "light" ? "sliderl" : "sliderd"}`}>
+    <div>
+      <div className={`graphs container ${theme === "light" ? "sliderl" : "sliderd"}`}>
+        {/* <div className="row ms-1 my-2">
+          <div
+            className="col-md-6"
+            style={{
+              color: `${theme === "light" ? "black" : "#fff"}`,
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faCalendarDays}
+              style={{ color: "#9f8e23", marginRight: "10px" }}
+            />
+            Start Date :
+            <span
+              style={{
+                fontSize: "15px",
+                marginLeft: "5px",
+                color: `${
+                  theme === "light"
+                    ? "rgb(102, 103, 115)"
+                    : "rgba(255, 255, 255, 0.596)"
+                }`,
+              }}
+            >
+              <strong>start date</strong>
+            </span>
+          </div>
+          <div
+            className="col-md-6"
+            style={{
+              color: `${theme === "light" ? "black" : "#fff"}`,
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faCalendarDays}
+              style={{ color: "#9f8e23", marginRight: "10px" }}
+            />
+            End Date :
+            <span
+              style={{
+                fontSize: "15px",
+                marginLeft: "5px",
+                color: `${
+                  theme === "light"
+                    ? "rgb(102, 103, 115)"
+                    : "rgba(255, 255, 255, 0.596)"
+                }`,
+              }}
+            >
+              <strong>end date</strong>
+            </span>
+          </div>
+        </div> */}
         <div className="slides">
           <input
             type="radio"

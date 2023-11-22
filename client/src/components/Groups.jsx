@@ -8,14 +8,8 @@ import GroupCard from "./GroupCard.jsx";
 import Navbar from "./Navbar.jsx";
 import "../css/Groups.css";
 import Man from "../images/Man.svg";
-import slide1 from "../images/slide1.jpg";
-import slide2 from "../images/slide2.jpg";
-import slide3 from "../images/slide3.jpeg";
-import slide4 from "../images/slide4.jpg";
-import slide5 from "../images/slide5.jpeg";
-import slide6 from "../images/slide6.jpeg";
-import slide7 from "../images/slide7.jpg";
-import slide8 from "../images/slide8.jpg";
+import slidedark from "../images/slidedark.png";
+import slidelight from "../images/slidelight.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -28,7 +22,7 @@ const Groups = () => {
      slidesToShow: 1,
      slidesToScroll: 1,
      autoplay: true,
-     autoplaySpeed: 3000,
+     autoplaySpeed: 5000,
      adaptiveHeight: true,
      responsive: [
        {
@@ -133,29 +127,54 @@ const Groups = () => {
 
             <div className="row mt-3">
               <div className="col-md-5">
-                <img src={Man} alt="" style={{ height: "90%" }} className="hides"/>
+                <img
+                  src={Man}
+                  alt=""
+                  style={{ height: "90%" }}
+                  className="hides"
+                  data-aos="zoom-in"
+                />
               </div>
               <div className="col-md-7 mt-5">
                 <div className="carousel-container">
                   <Slider {...settings}>
                     <div className="slid">
-                      <img src={slide1} alt="Slide 1" />
-                      <div className="slide-content">
-                        <h5 className="text">
+                      <img
+                        src={theme === "light" ? slidelight : slidedark}
+                        alt=""
+                      />
+
+                      <div
+                        className={`${
+                          theme === "light"
+                            ? "slide-contentl"
+                            : "slide-contentd"
+                        }`}
+                      >
+                        <h4 className="text">
                           Welcome to our Group Management section, where you
                           have the power to effortlessly organize and simplify
                           your shared financial experiences. Here's a glimpse of
                           the features that empower you within this space:
-                        </h5>
+                        </h4>
                       </div>
                     </div>
                     <div className="slid">
-                      <img src={slide2} alt="Slide 2" />
-                      <div className="slide-content">
-                        <h4 className="text">
+                      <img
+                        src={theme === "light" ? slidelight : slidedark}
+                        alt=""
+                      />
+                      <div
+                        className={`${
+                          theme === "light"
+                            ? "slide-contentl"
+                            : "slide-contentd"
+                        }`}
+                      >
+                        <h3 className="text">
                           <strong>Add Various Groups</strong>
-                        </h4>
-                        <p>
+                        </h3>
+                        <p style={{ fontSize: "20px" }}>
                           Create multiple groups tailored to different purposes
                           or activities. Enjoy the flexibility to organize and
                           manage various aspects of your life.
@@ -164,14 +183,20 @@ const Groups = () => {
                     </div>
                     <div className="slid">
                       <img
-                        src={slide3}
-                        alt="Slide 3"
+                        src={theme === "light" ? slidelight : slidedark}
+                        alt=""
                       />
-                      <div className="slide-content">
-                        <h4 className="text">
+                      <div
+                        className={`${
+                          theme === "light"
+                            ? "slide-contentl"
+                            : "slide-contentd"
+                        }`}
+                      >
+                        <h3 className="text">
                           <strong>Add Members to the Group</strong>
-                        </h4>
-                        <p>
+                        </h3>
+                        <p style={{ fontSize: "20px" }}>
                           {" "}
                           Expand your community effortlessly by inviting new
                           members. Foster collaboration and inclusivity within
@@ -182,14 +207,20 @@ const Groups = () => {
                     </div>
                     <div className="slid">
                       <img
-                        src={slide4}
-                        alt="Slide 4"
+                        src={theme === "light" ? slidelight : slidedark}
+                        alt=""
                       />
-                      <div className="slide-content">
-                        <h4 className="text">
+                      <div
+                        className={`${
+                          theme === "light"
+                            ? "slide-contentl"
+                            : "slide-contentd"
+                        }`}
+                      >
+                        <h3 className="text">
                           <strong>Remove Members from the Group</strong>
-                        </h4>
-                        <p>
+                        </h3>
+                        <p style={{ fontSize: "20px" }}>
                           Maintain control over your group's composition by
                           easily managing its members. Remove individuals who
                           are no longer part of shared financial activities,
@@ -200,14 +231,20 @@ const Groups = () => {
                     </div>
                     <div className="slid">
                       <img
-                        src={slide5}
-                        alt="Slide 5"
+                        src={theme === "light" ? slidelight : slidedark}
+                        alt=""
                       />
-                      <div className="slide-content">
-                        <h4 className="text">
+                      <div
+                        className={`${
+                          theme === "light"
+                            ? "slide-contentl"
+                            : "slide-contentd"
+                        }`}
+                      >
+                        <h3 className="text">
                           <strong>Add Group Description</strong>
-                        </h4>
-                        <p>
+                        </h3>
+                        <p style={{ fontSize: "20px" }}>
                           Provide a clear overview of your group's purpose and
                           activities. Communicate important guidelines and
                           expectations to all members, fostering a sense of
@@ -218,15 +255,21 @@ const Groups = () => {
                     </div>
                     <div className="slid">
                       <img
-                        src={slide6}
-                        alt="Slide 6"
+                        src={theme === "light" ? slidelight : slidedark}
+                        alt=""
                       />
-                      <div className="slide-content">
-                        <h4 className="text">
+                      <div
+                        className={`${
+                          theme === "light"
+                            ? "slide-contentl"
+                            : "slide-contentd"
+                        }`}
+                      >
+                        <h3 className="text">
                           {" "}
                           <strong>Simplify Debts</strong>
-                        </h4>
-                        <p>
+                        </h3>
+                        <p style={{ fontSize: "20px" }}>
                           Streamline your group's financial transactions with
                           ease. Manage debts and credits seamlessly, ensuring
                           accurate and hassle-free settlements among members.
@@ -235,15 +278,21 @@ const Groups = () => {
                     </div>
                     <div className="slid">
                       <img
-                        src={slide7}
-                        alt="Slide 7"
+                        src={theme === "light" ? slidelight : slidedark}
+                        alt=""
                       />
-                      <div className="slide-content">
-                        <h4 className="text">
+                      <div
+                        className={`${
+                          theme === "light"
+                            ? "slide-contentl"
+                            : "slide-contentd"
+                        }`}
+                      >
+                        <h3 className="text">
                           {" "}
                           <strong>Split Expenses</strong>
-                        </h4>
-                        <p>
+                        </h3>
+                        <p style={{ fontSize: "20px" }}>
                           Effortlessly divide and distribute shared expenses
                           among group members. Track and manage various
                           expenditures to maintain financial transparency,
@@ -254,11 +303,17 @@ const Groups = () => {
                     </div>
                     <div className="slid">
                       <img
-                        src={slide8}
-                        alt="Slide 8"
+                        src={theme === "light" ? slidelight : slidedark}
+                        alt=""
                       />
-                      <div className="slide-content">
-                        <h5 className="text">
+                      <div
+                        className={`${
+                          theme === "light"
+                            ? "slide-contentl"
+                            : "slide-contentd"
+                        }`}
+                      >
+                        <h4 className="text">
                           {" "}
                           In this organized and feature-rich environment, our
                           Group Management section empowers you to create,
@@ -266,7 +321,7 @@ const Groups = () => {
                           within various groups. Enjoy a seamless,
                           collaborative, and tailored experience that meets your
                           unique needs!
-                        </h5>
+                        </h4>
                       </div>
                     </div>
                     {/* Add more slides as needed */}

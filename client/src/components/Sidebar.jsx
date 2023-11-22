@@ -32,7 +32,10 @@ const Sidebar = () => {
           className={`${theme === "light" ? "logo-detailsl" : "logo-detailsd"}`}
         >
           <div className={`${theme === "light" ? "logo_namel" : "logo_named"}`}>
-            Budget Buddy
+            <h3>
+              <strong style={{ color: "green" }}>B</strong>udget{" "}
+              <strong style={{ color: "green" }}>B</strong>uddy
+            </h3>
           </div>
           <i
             className={`bx ${isOpen ? "bx-menu" : "bx-menu-alt-right"}`}

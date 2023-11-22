@@ -105,12 +105,12 @@ const Conversions = () => {
           <div className="col" style={{ paddingTop: "6%" }}>
             <div>
               <div
+                data-aos={"fade-left"}
                 className={`container mt-5 ${
                   theme === "light"
                     ? "converter-containerl"
                     : "converter-containerd"
                 }`}
-                data-aos={"fade-left"}
               >
                 <h3
                   style={{

@@ -249,13 +249,17 @@ a {
 /************night mode************/
 
 #quickAddBodyd {
-  overflow: hidden;
+  /* overflow-x: hidden; */
   min-height: 100vh;
   min-width: 100vh;
   
   background: #25273f;
 }
 
+
+/* .selected-color{
+  color: red;
+} */
 
 
 a {

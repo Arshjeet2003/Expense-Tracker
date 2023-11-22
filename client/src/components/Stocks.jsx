@@ -86,7 +86,9 @@ const CryptoTracker = () => {
               <input
                 type="text"
                 placeholder="Search"
-                className="stock-input"
+                className={`${
+                  theme === "light" ? "stock-inputl" : "stock-inputd" 
+                }`}
                 onChange={handleChange}
               />
             </form>
