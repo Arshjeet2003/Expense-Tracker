@@ -210,7 +210,9 @@ input{
 }
 
 
-
+.bx-menu-alt-right:before{
+  color: #fff;
+}
 
 
 
@@ -454,7 +456,13 @@ input{
   display: none;
 }
 
+bx-menu-alt-right{
+  color: white !important;
+}
 
+.bx-menu:before{
+  color: white !important;
+}
 
 
 
