@@ -3,8 +3,19 @@
   /* display: flex; */
   text-align: center;
   justify-content: center;
+  top: -18vh;
+  position: relative;
+}
 
-  padding-top: 20px;
+.buttons-for{
+   text-align: center;
+  justify-content: center;
+ padding-top: 20px;
+}
+
+.dateed{
+  top: 15vh;
+  position: relative;
 }
 
 .total-buttons {

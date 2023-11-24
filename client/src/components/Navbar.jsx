@@ -6,7 +6,11 @@ import NotificationComp from './NotificationComp.jsx';
 import themeContext from "../context/theme/themeContext";
 import logo from "../images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faBell, faSun,faMoon } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlus,
+  faBell,
+  faDollarSign,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = (props) => {
 
@@ -47,8 +51,35 @@ const Navbar = (props) => {
               color: "#fff",
             }}
           >
-            <strong style={{ color: "green" }}>B</strong>
-            udget <strong style={{ color: "green" }}>B</strong>uddy
+            <strong
+              style={{
+                color: `${
+                  theme === "light"
+                    ? "rgb(107, 240, 107)"
+                    : "rgb(107, 240, 107)"
+                }`,
+              }}
+            >
+              B
+            </strong>
+            udget{" "}
+            <strong
+              style={{
+                color: `${
+                  theme === "light"
+                    ? "rgb(107, 240, 107)"
+                    : "rgb(107, 240, 107)"
+                }`,
+              }}
+            >
+              B
+            </strong>
+            uddy
+            <FontAwesomeIcon
+              icon={faDollarSign}
+              flip
+              style={{ color: "#6bf06b",marginLeft:"5px" }}
+            />
           </h3>
           {/* <Link
             className={`${

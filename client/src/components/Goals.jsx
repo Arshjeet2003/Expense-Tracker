@@ -14,6 +14,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Goals = () => {
+   const formatDate = (dateString) => {
+     const options = { year: "numeric", month: "long", day: "numeric" };
+     return new Date(dateString).toLocaleDateString(undefined, options);
+   };
   useEffect(() => {
     AOS.init({
       // Global settings for AOS initialization
@@ -230,7 +234,12 @@ const Goals = () => {
                       >
                         <FontAwesomeIcon
                           icon={faCalendarDays}
-                          style={{ color: "#9f8e23", marginRight: "10px" }}
+                          style={{
+                            color: `${
+                              theme === "light" ? "#4d4dff" : "#9f8e23"
+                            }`,
+                            marginRight: "10px",
+                          }}
                         />
                         Start Date :
                         <span
@@ -244,7 +253,7 @@ const Goals = () => {
                             }`,
                           }}
                         >
-                          <strong>{goal.startDate}</strong>
+                          <strong>{formatDate(goal.startDate)}</strong>
                         </span>
                       </div>
                       <div
@@ -255,7 +264,12 @@ const Goals = () => {
                       >
                         <FontAwesomeIcon
                           icon={faCalendarDays}
-                          style={{ color: "#9f8e23", marginRight: "10px" }}
+                          style={{
+                            color: `${
+                              theme === "light" ? "#4d4dff" : "#9f8e23"
+                            }`,
+                            marginRight: "10px",
+                          }}
                         />
                         End Date :
                         <span
@@ -269,7 +283,7 @@ const Goals = () => {
                             }`,
                           }}
                         >
-                          <strong>{goal.endDate}</strong>
+                          <strong>{formatDate(goal.endDate)}</strong>
                         </span>
                       </div>
                     </div>
@@ -350,11 +364,25 @@ const Goals = () => {
                     <div className="mt-3">
                       <div className="row">
                         <div className="col-md-11">
-                          <span className="text1">
-                            {goal.totalSavingsTillNow}
+                          <span className="text1" style={{ fontSize: "16px" }}>
+                            <span style={{ color: "green" }}>
+                              {goal.totalSavingsTillNow}
+                            </span>
                             <span className="text2">
                               {" "}
-                              of <strong>{` ${goal.savingsGoal}`}</strong>
+                              <span>
+                                <span
+                                  style={{
+                                    paddingLeft: "4px",
+                                    paddingRight: "4px",
+                                  }}
+                                >
+                                  of
+                                </span>{" "}
+                                <strong
+                                  style={{ color: "rgba(255, 0, 0, 0.726)" }}
+                                >{` ${goal.savingsGoal}`}</strong>
+                              </span>
                             </span>
                           </span>
                         </div>

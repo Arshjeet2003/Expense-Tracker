@@ -11,6 +11,7 @@ import { storage } from "../firebase";
 
 import EWallet from "../images/E-Wallet.svg";
 const Quickadd = () => {
+  const [loading, setLoading] = useState(false);
   const context = useContext(transactionContext);
   const context1 = useContext(themeContext);
   const { addTransactions } = context;
@@ -39,7 +40,7 @@ const Quickadd = () => {
   const handleClick = (e) => {
     e.preventDefault(); //So that page does not reload
 
-    //Add loading
+   setLoading(true); //Add loading
 
     if (files[0] == null) return;
     const imageRef = ref(storage, `images/${v4()}`);
@@ -68,7 +69,7 @@ const Quickadd = () => {
         setSelectedValue("");
         setRecurring("No");
         setFileNames([]);
-        //Loading complete
+        setLoading(false); //Loading complete
         alert("Transaction added");
       });
     });
@@ -136,19 +137,34 @@ const Quickadd = () => {
     <div id={`${theme === "light" ? "quickAddBodyl" : "quickAddBodyd"}`}>
       <Navbar />
       <Sidebar />
+      {loading && (
+        <div
+          className="loader"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "40%",
+            transform: "translate(-50%, -50%)",
+            zIndex: 9999, // Set a high z-index to ensure it appears on top
+            background: "transparent",
+            backdropFilter:"blur(10px)",
+          }}
+        ></div>
+      )}
       <div
         className="container co container1"
         id={`${theme === "light" ? "quickAddBodyl" : "quickAddBodyd"}`}
+        style={{ position: "fixed", height: "800px" }}
       >
         <div className="row">
-          <div className="col-12 col-md-6 d-none d-md-block">
+          <div className="col-md-6 d-none d-md-block">
             <div className="p-3">
-              <img src={EWallet} style={{ height: 600 }} alt="gif" />
+              <img className = "hides" src={EWallet} style={{ height: 600 }} alt="gif" />
             </div>
           </div>
 
           <div
-            className="col-12 col-md-6 forms-container"
+            className="col-md-6 forms-container"
             style={{ paddingTop: "4.5%" }}
           >
             <div className="p-3 formed">
@@ -156,7 +172,7 @@ const Quickadd = () => {
                 action="#"
                 className="inner-formed"
                 method="post"
-                style={{ marginTop: 600 }}
+                style={{ marginTop: 540 }}
               >
                 <div className="input-field">
                   <i className="fas fa-user" />

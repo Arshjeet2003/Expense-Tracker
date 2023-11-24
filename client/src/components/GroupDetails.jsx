@@ -667,7 +667,7 @@ const GroupDetails = () => {
                 border: `${
                   theme === "light" ? "5px solid #4d4dff" : "5px solid #fadb69"
                 }`,
-                background: `${theme === "light" ? "#fff" : "#25273f"}`,
+                background: `${theme === "light" ? "#eee" : "#25273f"}`,
                 color: `${theme === "light" ? "black" : "#fff"}`,
               }}
             >

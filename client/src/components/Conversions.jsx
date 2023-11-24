@@ -94,6 +94,7 @@ const Conversions = () => {
             data-aos={"fade-right"}
           >
             <img
+              className="hides"
               src={Conversion}
               alt=""
               style={{

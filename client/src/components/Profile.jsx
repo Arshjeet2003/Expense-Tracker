@@ -6,7 +6,7 @@ import authContext from "../context/auth/authContext";
 import Navbar from "./Navbar.jsx";
 import Sidebar from "./Sidebar.jsx";
 import "../css/profile.css";
-import Conversion from "../images/Conversion.svg";
+import Robot from "../images/Robot.svg";
 
 const Profile = () => {
   const context3 = useContext(authContext);
@@ -70,11 +70,11 @@ const Profile = () => {
         <div className="row mx-3">
           <div className="col-md-5">
             <div className="profile-img">
-              <img src={Conversion} alt="" />
-              <div className="file btn btn-lg btn-primary">
+              <img src={Robot} alt="" />
+              {/* <div className="file btn btn-lg btn-primary">
                 Change Photo
                 <input type="file" name="file" />
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="col-md-7">
