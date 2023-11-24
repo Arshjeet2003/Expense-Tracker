@@ -11,7 +11,6 @@ import "../css/GroupDetails.css";
 import authContext from "../context/auth/authContext.js";
 
 const GroupDetails = () => {
-
   const { id } = useParams();
 
   const context = useContext(groupContext);
@@ -26,11 +25,10 @@ const GroupDetails = () => {
   const context1 = useContext(themeContext);
   const { theme } = context1;
 
-
   const context2 = useContext(authContext);
   const { getUser } = context2;
 
-  const [currentValue,setCurrentValue] = useState("INR");
+  const [currentValue, setCurrentValue] = useState("INR");
 
   const [group, setGroup] = useState({});
 
@@ -39,7 +37,9 @@ const GroupDetails = () => {
   const [memberChanged, setMemberChanged] = useState(false); // State to track member changes
 
   const [selectedMembers, setSelectedMembers] = useState([]); // State to store selected members
-  const [selectedMembersWithNumbers, setSelectedMembersWithNumbers] = useState([]);
+  const [selectedMembersWithNumbers, setSelectedMembersWithNumbers] = useState(
+    []
+  );
 
   const [transactionMade, setTransactionMade] = useState(false);
 
@@ -98,19 +98,19 @@ const GroupDetails = () => {
           try {
             const user = await getUser();
             setCurrentValue(user.currencyType);
-          
+
             for (const DbTransaction of groupDbTransactions) {
-              const { groupMember, userId, price, currencyTypeGroup } = DbTransaction; // Destructure each transaction
+              const { groupMember, userId, price, currencyTypeGroup } =
+                DbTransaction; // Destructure each transaction
               try {
                 const response = await axios.get(
                   `https://open.er-api.com/v6/latest/${currencyTypeGroup}`
                 ); // exchangerates api for the
                 const rate = response.data.rates[user.currencyType];
-                if(price>0){
+                if (price > 0) {
                   data.push([groupMember, userId, price * rate]); // Push the destructured data as an array
-                }
-                else{
-                  data.push([userId, groupMember, (-price) * rate]) //Giver,Receiver,Amount
+                } else {
+                  data.push([userId, groupMember, -price * rate]); //Giver,Receiver,Amount
                 }
               } catch (error) {
                 console.error("Error fetching exchange rate:", error);
@@ -126,7 +126,7 @@ const GroupDetails = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, [id, memberChanged, transactionMade,getGroup,getGroupTransactions]);
+  }, [id, memberChanged, transactionMade, getGroup, getGroupTransactions]);
 
   const handleClickDelete = (e, username) => {
     e.preventDefault();
@@ -143,8 +143,10 @@ const GroupDetails = () => {
   };
 
   const handleToggleMember = (username) => {
-    const memberIndex = selectedMembersWithNumbers.findIndex((member) => member.username === username);
-  
+    const memberIndex = selectedMembersWithNumbers.findIndex(
+      (member) => member.username === username
+    );
+
     if (memberIndex !== -1) {
       // If the user is already selected, remove them
       setSelectedMembersWithNumbers((prevMembers) => [
@@ -159,36 +161,54 @@ const GroupDetails = () => {
       ]);
     }
   };
-  
+
   // Rendering checkboxes
   const renderMemberCheckboxes = () => {
     return group.users?.map((user, index) => (
-      <div key={index} className="form-check">
+      <div key={index} className="form-check mt-2" >
         <input
           type="checkbox"
           className="form-check-input"
           id={`checkbox-${index}`}
-          checked={selectedMembersWithNumbers.some((member) => member.username === user)}
+          checked={selectedMembersWithNumbers.some(
+            (member) => member.username === user
+          )}
           onChange={() => handleToggleMember(user)}
         />
-        <label className="form-check-label" htmlFor={`checkbox-${index}`}>
+        <label className="form-check-label" htmlFor={`checkbox-${index}`} style={{display:"flex"}}>
           {user}
           {/* Input field for the associated number */}
-          <input
-            type="number"
-            value={selectedMembersWithNumbers.find((member) => member.username === user)?.number}
-            onChange={(e) => handleInputChange(e, user)}
-          />
+
+          <div className="mb-3">
+            
+            <input
+              type="number"
+              className="form-control mx-4"
+              placeholder="%"
+              style={{
+                width: "30%",
+              }}
+              value={
+                selectedMembersWithNumbers.find(
+                  (member) => member.username === user
+                )?.number
+                
+              }
+              onChange={(e) => handleInputChange(e, user)}
+            />
+          </div>
         </label>
       </div>
     ));
   };
-  
+
   const handleInputChange = (e, username) => {
     const inputValue = parseInt(e.target.value, 10) || 0;
     setSelectedMembersWithNumbers((prevMembers) => {
       const updatedMembers = [...prevMembers];
-      const memberIndex = updatedMembers.findIndex((member) => member.username === username);
+      const memberIndex = updatedMembers.findIndex(
+        (member) => member.username === username
+      );
       if (memberIndex !== -1) {
         updatedMembers[memberIndex].number = inputValue;
       }
@@ -263,27 +283,36 @@ const GroupDetails = () => {
 
   const handleAddTransaction = async () => {
     const totalCost = transaction.cost;
-    
+
     selectedMembersWithNumbers.forEach(async (memberData) => {
       const { username, number } = memberData;
-  
+
       // Calculate the amount for each member based on the percentage of the total cost
       const amount = (totalCost * number) / 100;
-  
+
       try {
         if (transaction.type === "debit") {
-          await AddGroupTransaction(username, amount, id, transaction.currencyTypeGroup);
+          await AddGroupTransaction(
+            username,
+            amount,
+            id,
+            transaction.currencyTypeGroup
+          );
         } else {
-          await AddGroupTransaction(username, -amount, id, transaction.currencyTypeGroup);
+          await AddGroupTransaction(
+            username,
+            -amount,
+            id,
+            transaction.currencyTypeGroup
+          );
         }
       } catch (error) {
         console.error(`Error adding transaction for ${username}:`, error);
       }
     });
-  
+
     setTransactionMade(true);
   };
-  
 
   const AddGroupTransaction12 = (e) => {
     e.preventDefault();
@@ -636,7 +665,7 @@ const GroupDetails = () => {
               style={{
                 borderRadius: "30px",
                 border: `${
-                  theme === "light" ? "5px solid #4d4dff" : "5px solid #333d82"
+                  theme === "light" ? "5px solid #4d4dff" : "5px solid #fadb69"
                 }`,
                 background: `${theme === "light" ? "#fff" : "#25273f"}`,
                 color: `${theme === "light" ? "black" : "#fff"}`,
@@ -658,7 +687,6 @@ const GroupDetails = () => {
                   <div className="mb-3">
                     <label htmlFor="transactionCost" className="form-label">
                       Transaction Cost
-                      <strong>({currentValue})</strong>
                     </label>
                     <input
                       type="number"
@@ -668,6 +696,11 @@ const GroupDetails = () => {
                       value={transaction.cost}
                       onChange={handleTransactionCostChange}
                     />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="transactionCost" className="form-label">
+                      Currency
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -694,9 +727,11 @@ const GroupDetails = () => {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="transactionMembers" className="form-label">
-                      Group Member to Include
+                      <h5>Group Member to Include</h5>
                     </label>
-                    <ul className="list-group">{renderMemberCheckboxes()}</ul>
+                    <div style={{ overflowY: "auto", maxHeight: "40vh",overflowX:"hidden"}}>
+                      <ul className="list-group">{renderMemberCheckboxes()}</ul>
+                    </div>
                   </div>
                 </form>
               </div>
