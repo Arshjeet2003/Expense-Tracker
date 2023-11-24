@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import groupContext from "../context/groups/groupContext.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
-import login from "../images/login.svg";
+import Group from "../images/Group.svg";
 import themeContext from "../context/theme/themeContext";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -29,7 +29,7 @@ const GroupCard = (props) => {
 
   return (
     <div
-      className="col-md-6 my-3"
+      className="col-md-6 my-2"
       style={{
         color: `${theme === "light" ? "#fff" : "#333d82"}`,
         minHeight: "100",
@@ -73,7 +73,7 @@ const GroupCard = (props) => {
             <div className="col-md-5">
               <Link to={`/group/${group._id}`}>
                 <div className="img-box">
-                  <img className="image-of-card" src={login} alt="" />
+                  <img className="image-of-card" src={Group} alt="" />
                 </div>
               </Link>
             </div>

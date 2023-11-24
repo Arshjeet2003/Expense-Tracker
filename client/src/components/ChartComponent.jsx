@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/chartComponent.css";
 import themeContext from "../context/theme/themeContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDays} from "@fortawesome/free-solid-svg-icons";
+import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -49,22 +49,26 @@ const ChartComponent = (props) => {
   const [selectedYearForPie, setSelectedYearForPie] = useState(today);
   const [selectedWeekForPie, setSelectedWeekForPie] = useState(today);
 
-  const [dateChanged , setDateChanged] = useState(false);
-  const [dateChangedForPie,setDateChangedForPie] = useState(false);
-  const [dateTypeChanged,setDateTypeChanged] = useState(false);
-  const [dateTypeChangedForPie,setDateTypeChangedForPie] = useState(false);
+  const [dateChanged, setDateChanged] = useState(false);
+  const [dateChangedForPie, setDateChangedForPie] = useState(false);
+  const [dateTypeChanged, setDateTypeChanged] = useState(false);
+  const [dateTypeChangedForPie, setDateTypeChangedForPie] = useState(false);
 
-  const [startDateToShow,setStartDateToShow] = useState(today.getDate());
-  const [endDateToShow,setEndDateToShow] = useState(today.getDate());
+  const [startDateToShow, setStartDateToShow] = useState(today.getDate());
+  const [endDateToShow, setEndDateToShow] = useState(today.getDate());
 
-  const [yearToShow,setYearToShow] = useState(today.getFullYear());
+  const [yearToShow, setYearToShow] = useState(today.getFullYear());
 
-  const [dateToShowForPie,setDateToShowForPie] = useState(today.getDate());
-  const [startDateToShowForPie,setStartDateToShowForPie] = useState(today.getDate());
-  const [endDateToShowForPie,setEndDateToShowForPie] = useState(today.getDate());
-  const [monthToShowForPie,setMonthToShowForPie] = useState(today.getMonth());
-  const [yearToShowForPie,setYearToShowForPie] = useState(today.getYear());
+  const [dateToShowForPie, setDateToShowForPie] = useState(today.getDate());
 
+  const [startDateToShowForPie, setStartDateToShowForPie] = useState(
+    today.getDate()
+  );
+  const [endDateToShowForPie, setEndDateToShowForPie] = useState(
+    today.getDate()
+  );
+  const [monthToShowForPie, setMonthToShowForPie] = useState(today.getMonth());
+  const [yearToShowForPie, setYearToShowForPie] = useState(today.getYear());
 
   const backgroundColors = [
     "#003f5c",
@@ -249,24 +253,23 @@ const ChartComponent = (props) => {
     } else {
       getYearlyDataForLastTenYears();
     }
-    setDateChanged(false)
-    setDateTypeChanged(false)
-  }, [transactionData, dateTypeChanged ,dateChanged]);
+    setDateChanged(false);
+    setDateTypeChanged(false);
+  }, [transactionData, dateTypeChanged, dateChanged]);
 
   useEffect(() => {
     if (dataTypeForPie === "Daily") {
       getDailyDataForSelectedDateForPie();
     } else if (dataTypeForPie === "Weekly") {
       getWeeklyDataForThisYearForPie();
-    } else if (dataTypeForPie === "Monthly"){
+    } else if (dataTypeForPie === "Monthly") {
       getMonthlyDataForThisYearForPie();
-    }
-    else{
+    } else {
       getYearlyDataForPie();
     }
     setDateChangedForPie(false);
     setDateTypeChangedForPie(false);
-  },[transactionData,dateChangedForPie,dateTypeChangedForPie])
+  }, [transactionData, dateChangedForPie, dateTypeChangedForPie]);
 
   const getDailyDataForSelectedDate = () => {
     if (!transactionData || !selectedDate) return;
@@ -293,7 +296,6 @@ const ChartComponent = (props) => {
       ) {
         const dayOfWeek = transactionDate.getDay(); // 0 (Sunday) to 6 (Saturday)
         dailyPriceExpense[dayOfWeek] += transaction.price;
-
       } else if (
         transactionDate >= startDate &&
         transactionDate <= endDate &&
@@ -421,7 +423,6 @@ const ChartComponent = (props) => {
         transactionDate.getFullYear() === startDate.getFullYear() &&
         transaction.type === "Expense"
       ) {
-
         const categoryToUpdate = weeklyCategoryDataExpenses.find(
           (item) => item.label === transaction.category
         );
@@ -442,12 +443,10 @@ const ChartComponent = (props) => {
     });
   };
 
-
   const getMonthlyDataForThisYear = () => {
     if (!transactionData || !selectedMonth) return;
 
     setYearToShow(selectedMonth.getFullYear());
-  
 
     const monthlyPriceExpense = Array(12).fill(0); // Initialize an array with zeros for each month.
     const monthlyPriceIncome = Array(12).fill(0);
@@ -553,7 +552,7 @@ const ChartComponent = (props) => {
         if (categoryToUpdate) {
           categoryToUpdate.data += transaction.price;
         }
-      } 
+      }
     }
 
     setPieData1({
@@ -663,7 +662,7 @@ const ChartComponent = (props) => {
         if (categoryToUpdate) {
           categoryToUpdate.data += transaction.price;
         }
-      } 
+      }
     }
 
     setPieData1({
@@ -676,7 +675,6 @@ const ChartComponent = (props) => {
       ],
     });
   };
-
 
   const changeDateType = (e) => {
     e.preventDefault();
@@ -696,11 +694,10 @@ const ChartComponent = (props) => {
       setDataTypeForPie("Weekly");
     } else if (dataTypeForPie === "Weekly") {
       setDataTypeForPie("Monthly");
-    } else if (dataTypeForPie === "Monthly"){
+    } else if (dataTypeForPie === "Monthly") {
       setDataTypeForPie("Yearly");
-    }
-    else{
-      setDataTypeForPie("Daily")
+    } else {
+      setDataTypeForPie("Daily");
     }
     setDateTypeChangedForPie(true);
   };
@@ -728,7 +725,7 @@ const ChartComponent = (props) => {
       const selectedDateNowForPie = new Date(selectedDateForPie);
       selectedDateNowForPie.setDate(selectedDateNowForPie.getDate() - 1); // Subtract 1 days
       setSelectedDateForPie(selectedDateNowForPie);
-    } else if(dataTypeForPie === "Weekly"){
+    } else if (dataTypeForPie === "Weekly") {
       const selectedDateNowForPie = new Date(selectedWeekForPie);
       selectedDateNowForPie.setDate(selectedDateNowForPie.getDate() - 7); // Subtract 7 days
       setSelectedWeekForPie(selectedDateNowForPie);
@@ -736,7 +733,7 @@ const ChartComponent = (props) => {
       const selectedMonthNowForPie = new Date(selectedMonthForPie);
       selectedMonthNowForPie.setMonth(selectedMonthNowForPie.getMonth() - 1); // Subtract 1 month
       setSelectedMonthForPie(selectedMonthNowForPie);
-    } else if(dataTypeForPie==="Yearly") {
+    } else if (dataTypeForPie === "Yearly") {
       const selectedYearNowForPie = new Date(selectedYearForPie);
       selectedYearNowForPie.setYear(selectedYearNowForPie.getFullYear() - 1); // Subtract 1 year
       setSelectedYearForPie(selectedYearNowForPie);
@@ -766,7 +763,7 @@ const ChartComponent = (props) => {
       const selectedDateNowForPie = new Date(selectedDateForPie);
       selectedDateNowForPie.setDate(selectedDateNowForPie.getDate() + 1); // Add 1 days
       setSelectedDateForPie(selectedDateNowForPie);
-    } else if(dataTypeForPie === "Weekly"){
+    } else if (dataTypeForPie === "Weekly") {
       const selectedDateNowForPie = new Date(selectedWeekForPie);
       selectedDateNowForPie.setDate(selectedDateNowForPie.getDate() + 7); // Add 7 days
       setSelectedWeekForPie(selectedDateNowForPie);
@@ -774,7 +771,7 @@ const ChartComponent = (props) => {
       const selectedMonthNowForPie = new Date(selectedMonthForPie);
       selectedMonthNowForPie.setMonth(selectedMonthNowForPie.getMonth() + 1); // Add 1 month
       setSelectedMonthForPie(selectedMonthNowForPie);
-    } else if(dataTypeForPie==="Yearly"){
+    } else if (dataTypeForPie === "Yearly") {
       const selectedYearNowForPie = new Date(selectedYearForPie);
       selectedYearNowForPie.setYear(selectedYearNowForPie.getFullYear() + 1); // Add 1 year
       setSelectedYearForPie(selectedYearNowForPie);
@@ -807,59 +804,11 @@ const ChartComponent = (props) => {
 
   return (
     <div>
-      <div className={`graphs container ${theme === "light" ? "sliderl" : "sliderd"}`}>
-        {/* <div className="row ms-1 my-2">
-          <div
-            className="col-md-6"
-            style={{
-              color: `${theme === "light" ? "black" : "#fff"}`,
-            }}
-          >
-            <FontAwesomeIcon
-              icon={faCalendarDays}
-              style={{ color: "#9f8e23", marginRight: "10px" }}
-            />
-            Start Date :
-            <span
-              style={{
-                fontSize: "15px",
-                marginLeft: "5px",
-                color: `${
-                  theme === "light"
-                    ? "rgb(102, 103, 115)"
-                    : "rgba(255, 255, 255, 0.596)"
-                }`,
-              }}
-            >
-              <strong>start date</strong>
-            </span>
-          </div>
-          <div
-            className="col-md-6"
-            style={{
-              color: `${theme === "light" ? "black" : "#fff"}`,
-            }}
-          >
-            <FontAwesomeIcon
-              icon={faCalendarDays}
-              style={{ color: "#9f8e23", marginRight: "10px" }}
-            />
-            End Date :
-            <span
-              style={{
-                fontSize: "15px",
-                marginLeft: "5px",
-                color: `${
-                  theme === "light"
-                    ? "rgb(102, 103, 115)"
-                    : "rgba(255, 255, 255, 0.596)"
-                }`,
-              }}
-            >
-              <strong>end date</strong>
-            </span>
-          </div>
-        </div> */}
+      <div
+        className={`graphs container ${
+          theme === "light" ? "sliderl" : "sliderd"
+        }`}
+      >
         <div className="slides">
           <input
             type="radio"
@@ -875,20 +824,104 @@ const ChartComponent = (props) => {
             checked={counter === 2}
             onChange={handleRadioClick}
           />
+
           <div
             className="slide first"
-            style={{ display: "flex", top: "25%", position: "relative" }}
+            style={{ display: "flex", top: "12%", position: "relative" }}
           >
             <div style={chartContainerStyles}>
+              <div className="row ms-1" style={{ maxHeight: "6vh" }}>
+                <div
+                  // className="col-md-6"
+                  style={{
+                    color: `${theme === "light" ? "black" : "#fff"}`,
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faCalendarDays}
+                    style={{
+                      color: `${theme === "light" ? "#4d4dff" : "#9f8e23"}`,
+                      marginRight: "10px",
+                    }}
+                  />
+                  {dateType === "Daily" && <span>Start Date :</span>}
+                  {dateType === "Yearly" && <span>Start Date :</span>}
+                  {dateType === "Monthly" && <span>Year : </span>}
+
+                  <span
+                    style={{
+                      fontSize: "15px",
+                      marginLeft: "5px",
+                      color: `${
+                        theme === "light"
+                          ? "rgb(102, 103, 115)"
+                          : "rgba(255, 255, 255, 0.596)"
+                      }`,
+                    }}
+                  >
+                    {dateType === "Daily" && <strong>{startDateToShow}</strong>}
+                    {dateType === "Weekly" && (
+                      <strong>{startDateToShow}</strong>
+                    )}
+                    {dateType === "Yearly" && (
+                      <strong>{startDateToShow}</strong>
+                    )}
+                    {dateType === "Monthly" && <strong>{yearToShow}</strong>}
+                  </span>
+                </div>
+              </div>
               <Bar data={data1} options={chartOptions} />
             </div>
             <div style={chartContainerStyles}>
+              <div
+                className="row ms-1 "
+                style={{ maxHeight: "6vh", height: "4vh" }}
+              >
+                {(dateType === "Daily" || dateType === "Yearly") && (
+                  <div
+                    // className="col-md-6"
+                    style={{
+                      color: `${theme === "light" ? "black" : "#fff"}`,
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faCalendarDays}
+                      style={{
+                        color: `${theme === "light" ? "#4d4dff" : "#9f8e23"}`,
+                        marginRight: "10px",
+                      }}
+                    />
+                    End Date :
+                    <span
+                      style={{
+                        fontSize: "15px",
+                        marginLeft: "5px",
+                        color: `${
+                          theme === "light"
+                            ? "rgb(102, 103, 115)"
+                            : "rgba(255, 255, 255, 0.596)"
+                        }`,
+                      }}
+                    >
+                      {dateType === "Daily" && <strong>{endDateToShow}</strong>}
+                      {dateType === "Weekly" && (
+                        <strong>{endDateToShow}</strong>
+                      )}
+                      {dateType === "Yearly" && (
+                        <strong>{endDateToShow}</strong>
+                      )}
+                      {dateType === "Monthly" && <strong>{yearToShow}</strong>}
+                    </span>
+                  </div>
+                )}
+              </div>
+
               <Bar data={data2} options={chartOptions} />
             </div>
 
             <div className="row btns">
               <div className="col-6 ghghg">
-                <div className="buttons-for-graph">
+                <div className="buttons-for">
                   <button
                     className={`single-button ${
                       theme === "light" ? "bchartl" : "bchartd"
@@ -921,6 +954,93 @@ const ChartComponent = (props) => {
             <div style={chartContainerStylesPie}>
               <Pie data={PieData1} options={options}></Pie>
               <div className="row btns">
+                <div className="dateed">
+                  <div
+                    //  className="dateed"
+                    style={{
+                      color: `${theme === "light" ? "black" : "#fff"}`,
+                      display: "flex",
+                      width: "200px",
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faCalendarDays}
+                      style={{
+                        color: `${theme === "light" ? "#4d4dff" : "#9f8e23"}`,
+                        marginRight: "4px",
+                        fontSize: "11px",
+                      }}
+                    />
+                    <p style={{ fontSize: "11px" }}>
+                      {dataTypeForPie === "Daily" && <span>Start Date :</span>}
+                      {dataTypeForPie === "Weekly" && <span>Start Date :</span>}
+                      {dataTypeForPie === "Yearly" && <span>Yearly :</span>}
+                      {dataTypeForPie === "Monthly" && <span>Month : </span>}
+                    </p>
+                    <span
+                      style={{
+                        fontSize: "11px",
+                        marginLeft: "5px",
+                        color: `${
+                          theme === "light"
+                            ? "rgb(102, 103, 115)"
+                            : "rgba(255, 255, 255, 0.596)"
+                        }`,
+                      }}
+                    >
+                      {" "}
+                      {dataTypeForPie === "Daily" && (
+                        <strong>{dateToShowForPie}</strong>
+                      )}
+                      {dataTypeForPie === "Weekly" && (
+                        <strong>{startDateToShowForPie}</strong>
+                      )}
+                      {dataTypeForPie === "Yearly" && (
+                        <strong>{yearToShowForPie}</strong>
+                      )}
+                      {dataTypeForPie === "Monthly" && (
+                        <strong>{monthToShowForPie}</strong>
+                      )}
+                    </span>
+                  </div>
+                  {dataTypeForPie === "Weekly" && (
+                    <div
+                      className="mt-2"
+                      style={{
+                        color: `${theme === "light" ? "black" : "#fff"}`,
+                        display: "flex",
+                        width: "200px",
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faCalendarDays}
+                        style={{
+                          color: `${theme === "light" ? "#4d4dff" : "#9f8e23"}`,
+                          marginRight: "4px",
+                          fontSize: "11px",
+                        }}
+                      />
+                      <p style={{ fontSize: "11px" }}>End Date :</p>
+                      <span
+                        style={{
+                          fontSize: "11px",
+                          marginLeft: "5px",
+                          color: `${
+                            theme === "light"
+                              ? "rgb(102, 103, 115)"
+                              : "rgba(255, 255, 255, 0.596)"
+                          }`,
+                        }}
+                      >
+                        {" "}
+                        {dataTypeForPie === "Weekly" && (
+                          <strong>{endDateToShowForPie}</strong>
+                        )}
+                        
+                      </span>
+                    </div>
+                  )}
+                </div>
                 <div className="col-6 ghgh">
                   <div className="buttons-for-graph">
                     <button

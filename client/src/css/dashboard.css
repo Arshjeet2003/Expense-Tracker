@@ -8,7 +8,7 @@ html, body {
   /* Full height container */
   .full-heightl {
      min-height: 100vh;
-     /* background: #fff; */
+     background: #eee;
      /* background-image: url('../images/background.jpg') no repeat;
      background-size: cover; */
      max-height: fit-content;

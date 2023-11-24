@@ -4,6 +4,8 @@ import { useState,useContext } from 'react';
 import "../css/sidebar.css";
 import { Link, useNavigate } from 'react-router-dom';
 import themeContext from '../context/theme/themeContext';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,8 +35,35 @@ const Sidebar = () => {
         >
           <div className={`${theme === "light" ? "logo_namel" : "logo_named"}`}>
             <h3>
-              <strong style={{ color: "green" }}>B</strong>udget{" "}
-              <strong style={{ color: "green" }}>B</strong>uddy
+              <strong
+                style={{
+                  color: `${
+                    theme === "light"
+                      ? "rgb(107, 240, 107)"
+                      : "rgb(107, 240, 107)"
+                  }`,
+                }}
+              >
+                B
+              </strong>
+              udget{" "}
+              <strong
+                style={{
+                  color: `${
+                    theme === "light"
+                      ? "rgb(107, 240, 107)"
+                      : "rgb(107, 240, 107)"
+                  }`,
+                }}
+              >
+                B
+              </strong>
+              uddy
+              <FontAwesomeIcon
+                icon={faDollarSign}
+                flip
+                style={{ color: "#6bf06b", marginLeft: "5px" }}
+              />
             </h3>
           </div>
           <i

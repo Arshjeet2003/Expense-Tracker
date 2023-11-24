@@ -8,7 +8,8 @@
   justify-content: center;
 }
 .image-of-card {
-  height: 40vh;
+  height: 35vh;
+  width: 120%;
 }
 div [class^="col-"] {
   padding-left: 5px;
@@ -49,7 +50,7 @@ p.card-text {
 } */
 
 .footer {
-  margin-top: 17vh;
+  margin-top: 8vh;
   display: flex;
   justify-content: space-between;
 }
@@ -93,7 +94,7 @@ p.card-text {
   margin-left: 20px;
   margin-top: 20px;
   /* background-color: rgba(245, 216, 216, 0.267); */
-   height: 62vh;
+   height: 50vh;
 }
 .card-titlel {
   font-size: 22px;
@@ -173,6 +174,7 @@ p.card-text {
   margin-left: 20px;
   margin-top: 20px;
   background: #333d82;
+  height: 50vh;
 }
 .card-titled {
   font-size: 22px;
