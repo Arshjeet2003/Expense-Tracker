@@ -91,6 +91,23 @@ const ChartComponent = (props) => {
     ],
   });
 
+  function formatDate(date) {
+    // Format the date using toLocaleDateString
+    return date.toLocaleDateString('en-US', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+  }
+
+  function formatDateMonth(date) {
+    // Format the date using toLocaleDateString
+    return date.toLocaleDateString('en-US', {
+      month: 'long',
+      year: 'numeric',
+    });
+  }
+
   const generateYearLabels = () => {
     const currentYear = selectedYear.getFullYear();
     const labels = [];
@@ -282,8 +299,8 @@ const ChartComponent = (props) => {
     const dailyPriceExpense = Array(7).fill(0); // Initialize an array with zeros for each day of the week.
     const dailyPriceIncome = Array(7).fill(0);
 
-    setStartDateToShow(startDate.getDate());
-    setEndDateToShow(endDate.getDate());
+    setStartDateToShow(formatDate(startDate));
+    setEndDateToShow(formatDate(endDate));
 
     for (const transaction of transactionData) {
       const transactionDate = new Date(transaction.date);
@@ -362,7 +379,7 @@ const ChartComponent = (props) => {
       { label: "Others", data: 0 },
     ];
 
-    setDateToShowForPie(selectedDateForPie.getDate());
+    setDateToShowForPie(formatDate(selectedDateForPie));
 
     for (const transaction of transactionData) {
       const transactionDate = new Date(transaction.date);
@@ -400,8 +417,8 @@ const ChartComponent = (props) => {
     const endDate = new Date(startDate);
     endDate.setDate(endDate.getDate() + 6); // Get the end of the week
 
-    setStartDateToShowForPie(startDate.getDate());
-    setEndDateToShowForPie(endDate.getDate());
+    setStartDateToShowForPie(formatDate(startDate));
+    setEndDateToShowForPie(formatDate(endDate));
 
     const weeklyCategoryDataExpenses = [
       { label: "Food", data: 0 },
@@ -537,7 +554,7 @@ const ChartComponent = (props) => {
       { label: "Others", data: 0 },
     ];
 
-    setMonthToShowForPie(selectedMonthForPie.getMonth());
+    setMonthToShowForPie(formatDateMonth(selectedMonthForPie));
 
     for (const transaction of transactionData) {
       const transactionDate = new Date(transaction.date);
