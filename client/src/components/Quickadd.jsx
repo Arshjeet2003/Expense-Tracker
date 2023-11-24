@@ -36,7 +36,7 @@ const Quickadd = () => {
     price: "",
     dueDate: new Date(),
   });
-
+  
   const handleClick = (e) => {
     e.preventDefault(); //So that page does not reload
 
@@ -73,6 +73,7 @@ const Quickadd = () => {
         alert("Transaction added");
       });
     });
+    
   };
   const onChange = (e) => {
     setTransaction({ ...transaction, [e.target.name]: e.target.value });
@@ -137,19 +138,22 @@ const Quickadd = () => {
     <div id={`${theme === "light" ? "quickAddBodyl" : "quickAddBodyd"}`}>
       <Navbar />
       <Sidebar />
-      {loading && (
+     
+        {loading && (
+         <div className="wwe">
         <div
           className="loader"
           style={{
-            position: "absolute",
-            top: "50%",
-            left: "40%",
-            transform: "translate(-50%, -50%)",
+            position:"absolute",
+            top: "30%",
+            left: "45%",
+            transform: "translate(-40%, -40%)",
             zIndex: 9999, // Set a high z-index to ensure it appears on top
-            background: "transparent",
-            backdropFilter:"blur(10px)",
+            
           }}
-        ></div>
+          ></div>
+          </div> 
+        
       )}
       <div
         className="container co container1"

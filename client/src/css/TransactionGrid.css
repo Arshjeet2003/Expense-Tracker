@@ -64,3 +64,12 @@
 .css-ptkaw2-MuiDataGrid-root .MuiDataGrid-columnHeader:focus, .css-ptkaw2-MuiDataGrid-root .MuiDataGrid-cell:focus{
     outline: none !important;
 }
+
+label[data-shrink=false]+.MuiInputBase-formControl .css-1x51dt5-MuiInputBase-input-MuiInput-input{
+    background: #8289ee !important;
+    
+}
+.css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root{
+    color: #fff;
+    z-index: 999;
+}
