@@ -6,8 +6,9 @@
 
 
 ## Introduction:
-The platform enables companies to seamlessly integrate their spaceships, offering an expansive fleet for users to explore. Administrators hold the authority to authenticate and authorize companies, ensuring a secure and reliable network of space travel options. Users, in turn, gain the ability to effortlessly book their preferred spaceships for exhilarating journeys across the cosmos.<br />
-Within the platform, users not only have the freedom to book individual rides but can also schedule recurring journeys, providing a convenient and customizable space travel experience. The ability to reserve specific seats enhances personalization, while the integration of secure payment systems ensures a reliable and streamlined transaction process for every interstellar adventure.
+Welcome to our cutting-edge expense tracker website, where financial management meets simplicity and innovation. Seamlessly add and categorize transactions, gaining instant clarity on your spending habits. With the ability to add group members and split expenses effortlessly, our platform transforms shared financial responsibilities, ensuring transparency and accuracy in group spending. Simplify your debts with intuitive tools that help organize repayments and prioritize outstanding balances.
+
+Setting and achieving financial goals has never been easier. Our platform empowers you to establish objectives and provides real-time tracking, helping you stay on course towards financial success. Dive into the world of cryptocurrency with ease, as our website allows you to not only track your favorite crypto but also view detailed graphs to stay informed about market trends and make informed decisions.
 
 
 ## Demo Video Link:
