@@ -2,7 +2,7 @@
 <p align="center">
 </p>
 <p align="center">
-<a href="https://sac.mnnit.ac.in/codesangam"> <img src="https://github.com/NishuSharma18/GalaxyGlider/assets/93839989/318decb7-b9e7-4e09-a8ba-f88f3d3f5db1" height=120px> </a>
+
 
 
 ## Introduction:
@@ -12,7 +12,7 @@ Setting and achieving financial goals has never been easier. Our platform empowe
 
 
 ## Demo Video Link:
-  <a href="https://drive.google.com/file/d/1idFIf_yK-5jECi2X5RRkSi6HsS2yCCHm/view">https://drive.google.com/file/d/1idFIf_yK-5jECi2X5RRkSi6HsS2yCCHm/view</a>
+  <a href="https://drive.google.com/file/d/1y7VbdbPSI5O-5MbSN9H50kXBvmIjaJgu/view?usp=sharing">https://drive.google.com/file/d/1y7VbdbPSI5O-5MbSN9H50kXBvmIjaJgu/view?usp=sharing</a>
 
 ## Technology Stack:
   1) React
@@ -24,28 +24,37 @@ Setting and achieving financial goals has never been easier. Our platform empowe
   7) Bootstrap
 
 
+
+
+
+
+
+
+
+
+
 ## Screenshots:
 <p>
-<img src="https://drive.google.com/file/d/1uyjzl9UKANoLB93sp_x2iKiCJ3Swu_wS/view?usp=sharing" width="700" height="500" hspace="10"> 
-<img src="https://drive.google.com/file/d/1StFFxhuRSXt1PCT5LuUnLi1Cwen-Gada/view?usp=sharing" width="700" height="500" hspace="10"> 
+<img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/0f222a65-b9d1-4c72-aba2-9c46bc3f5905" width="700" height="500" hspace="10"> 
+<img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/daaa57a5-a5c1-4aa2-ad03-3ac3b7bf6d65" width="700" height="500" hspace="10"> 
 </p>
 
 
 <p>
- <img src="https://drive.google.com/file/d/1nXw1e8ZzQ0ScPFVW8hsf9D6jLz-qc7xf/view?usp=sharing" width="700" height="500" hspace="10"> 
-<img src="https://drive.google.com/file/d/1NkirNUmxMUVbrG_p3nU-tKNOeuaQCk_P/view?usp=sharing" width="700" height="500" hspace="10">   
+ <img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/3f2bfb40-58ca-4f05-b329-2d7abd476d74" width="700" height="500" hspace="10"> 
+<img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/4df31281-9f5f-4aa7-a532-3d8656936767" width="700" height="500" hspace="10">   
 </p>
 
 
 <p>
-<img src="https://drive.google.com/file/d/1ZSMwUINAYNaIjX8MU9LMTNOTd-T6SNpT/view?usp=sharing" width="700" height="500" hspace="10"> 
- <img src="https://drive.google.com/file/d/1hhhsVnbw8oAjr2dwQDVCFFeiQJn16EgX/view?usp=sharing" width="700" height="500" hspace="10"> 
+<img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/3df35138-72f7-4f0e-bf21-b8e3efe16e84" width="700" height="500" hspace="10"> 
+ <img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/5cbcdc87-8906-43ff-b6c8-1b9a3b9400a0" width="700" height="500" hspace="10"> 
 </p>
 
 
 <p>
-<img src="https://drive.google.com/file/d/1ZSMwUINAYNaIjX8MU9LMTNOTd-T6SNpT/view?usp=sharing" width="700" height="500" hspace="10"> 
-
+<img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/9298a68f-0d35-4967-82e0-00708c1ac976" width="700" height="500" hspace="10"> 
+<img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/dfe08b3a-f63b-4b58-ac3d-121d3e6b9980" width="700" height="500" hspace="10"> 
 </p>
 
 
@@ -61,5 +70,8 @@ Team Name: WebSquad
 * [Vinayak Sharma](https://github.com/vinayak-0206)
 
 
+
+
+
 ### Made at:
-<a href="https://sac.mnnit.ac.in/codesangam"> <img src="https://github.com/NishuSharma18/GalaxyGlider/assets/93839989/318decb7-b9e7-4e09-a8ba-f88f3d3f5db1" height=120px> </a>
+<a href="https://sac.mnnit.ac.in/codesangam"> <img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/8ab40b26-fbab-4dd9-98fc-cf06b213023b" height=770px> </a>
