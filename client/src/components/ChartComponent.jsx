@@ -847,45 +847,52 @@ const ChartComponent = (props) => {
             style={{ display: "flex", top: "12%", position: "relative" }}
           >
             <div style={chartContainerStyles}>
-              <div className="row ms-1" style={{ maxHeight: "6vh" }}>
-                <div
-                  // className="col-md-6"
-                  style={{
-                    color: `${theme === "light" ? "black" : "#fff"}`,
-                  }}
-                >
-                  <FontAwesomeIcon
-                    icon={faCalendarDays}
+              <div
+                className="row ms-1"
+                style={{ maxHeight: "6vh", height: "4vh" }}
+              >
+                {(dateType === "Daily" || dateType === "Monthly") && (
+                  <div
+                    // className="col-md-6"
                     style={{
-                      color: `${theme === "light" ? "#4d4dff" : "#9f8e23"}`,
-                      marginRight: "10px",
-                    }}
-                  />
-                  {dateType === "Daily" && <span>Start Date :</span>}
-                  {dateType === "Yearly" && <span>Start Date :</span>}
-                  {dateType === "Monthly" && <span>Year : </span>}
-
-                  <span
-                    style={{
-                      fontSize: "15px",
-                      marginLeft: "5px",
-                      color: `${
-                        theme === "light"
-                          ? "rgb(102, 103, 115)"
-                          : "rgba(255, 255, 255, 0.596)"
-                      }`,
+                      color: `${theme === "light" ? "black" : "#fff"}`,
                     }}
                   >
-                    {dateType === "Daily" && <strong>{startDateToShow}</strong>}
-                    {dateType === "Weekly" && (
-                      <strong>{startDateToShow}</strong>
-                    )}
-                    {dateType === "Yearly" && (
-                      <strong>{startDateToShow}</strong>
-                    )}
-                    {dateType === "Monthly" && <strong>{yearToShow}</strong>}
-                  </span>
-                </div>
+                    <FontAwesomeIcon
+                      icon={faCalendarDays}
+                      style={{
+                        color: `${theme === "light" ? "#4d4dff" : "#9f8e23"}`,
+                        marginRight: "10px",
+                      }}
+                    />
+                    {dateType === "Daily" && <span>Start Date :</span>}
+                    {dateType === "Yearly" && <span>Start Date :</span>}
+                    {dateType === "Monthly" && <span>Year : </span>}
+
+                    <span
+                      style={{
+                        fontSize: "15px",
+                        marginLeft: "5px",
+                        color: `${
+                          theme === "light"
+                            ? "rgb(102, 103, 115)"
+                            : "rgba(255, 255, 255, 0.596)"
+                        }`,
+                      }}
+                    >
+                      {dateType === "Daily" && (
+                        <strong>{startDateToShow}</strong>
+                      )}
+                      {dateType === "Weekly" && (
+                        <strong>{startDateToShow}</strong>
+                      )}
+                      {dateType === "Yearly" && (
+                        <strong>{startDateToShow}</strong>
+                      )}
+                      {dateType === "Monthly" && <strong>{yearToShow}</strong>}
+                    </span>
+                  </div>
+                )}
               </div>
               <Bar data={data1} options={chartOptions} />
             </div>
@@ -894,7 +901,7 @@ const ChartComponent = (props) => {
                 className="row ms-1 "
                 style={{ maxHeight: "6vh", height: "4vh" }}
               >
-                {(dateType === "Daily" || dateType === "Yearly") && (
+                {dateType === "Daily" && (
                   <div
                     // className="col-md-6"
                     style={{
@@ -1053,7 +1060,6 @@ const ChartComponent = (props) => {
                         {dataTypeForPie === "Weekly" && (
                           <strong>{endDateToShowForPie}</strong>
                         )}
-                        
                       </span>
                     </div>
                   )}
