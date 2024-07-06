@@ -34,28 +34,27 @@ Setting and achieving financial goals has never been easier. Our platform empowe
 
 
 ## Screenshots:
-<p>
-<img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/0f222a65-b9d1-4c72-aba2-9c46bc3f5905" width="700" height="500" hspace="10"> 
-<img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/daaa57a5-a5c1-4aa2-ad03-3ac3b7bf6d65" width="700" height="500" hspace="10"> 
-</p>
 
 
-<p>
- <img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/3f2bfb40-58ca-4f05-b329-2d7abd476d74" width="700" height="500" hspace="10"> 
-<img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/4df31281-9f5f-4aa7-a532-3d8656936767" width="700" height="500" hspace="10">   
-</p>
+
+![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/4ce91e00-248e-4e58-9a1b-cfb063497589)
+
+![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/c1a8ff34-030b-4b9b-bcff-1c8aa3cf9984)
+
+![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/750ccfb4-eb95-49e2-8082-272ebd676d0d)
+
+![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/2dfb8b80-c10e-4c86-bc6e-0bbd82a5cf10)
+
+![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/0a6e4f8f-59a0-4afd-8ea0-e83a0d6df312)
+
+![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/d7f76a7d-4007-4c36-80aa-c17d8e93c32e)
+
+![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/c1afff76-7a87-49dc-88ce-dc71faffb299)
+
+![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/947d0031-5f46-4372-b4d9-7a3d55f41512)
 
 
-<p>
-<img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/3df35138-72f7-4f0e-bf21-b8e3efe16e84" width="700" height="500" hspace="10"> 
- <img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/5cbcdc87-8906-43ff-b6c8-1b9a3b9400a0" width="700" height="500" hspace="10"> 
-</p>
 
-
-<p>
-<img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/9298a68f-0d35-4967-82e0-00708c1ac976" width="700" height="500" hspace="10"> 
-<img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/dfe08b3a-f63b-4b58-ac3d-121d3e6b9980" width="700" height="500" hspace="10"> 
-</p>
 
 
 
@@ -74,4 +73,4 @@ Team Name: WebSquad
 
 
 ### Made at:
-<a href="https://sac.mnnit.ac.in/codesangam"> <img src="https://github.com/nmn-singh/Expense-Tracker/assets/97545310/8ab40b26-fbab-4dd9-98fc-cf06b213023b" height=770px> </a>
+<a href="https://sac.mnnit.ac.in/codesangam"> <img src="https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/40b80875-f6f3-4948-891c-dc2c443085de" height=770px> </a>
