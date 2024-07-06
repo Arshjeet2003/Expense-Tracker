@@ -18,7 +18,7 @@ Setting and achieving financial goals has never been easier. Our platform empowe
   1) React
   2) MonogoDB
   3) Express
-  4) Node ja
+  4) Node js
   5) CSS
   6) Material UI
   7) Bootstrap
