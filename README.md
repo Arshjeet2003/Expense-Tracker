@@ -45,13 +45,13 @@ Setting and achieving financial goals has never been easier. Our platform empowe
 
 ![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/2dfb8b80-c10e-4c86-bc6e-0bbd82a5cf10)
 
-![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/0a6e4f8f-59a0-4afd-8ea0-e83a0d6df312)
+![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/96a9f45f-7add-4ee6-99b6-a8da6819f150)
 
 ![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/d7f76a7d-4007-4c36-80aa-c17d8e93c32e)
 
 ![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/c1afff76-7a87-49dc-88ce-dc71faffb299)
 
-![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/947d0031-5f46-4372-b4d9-7a3d55f41512)
+![image](https://github.com/Arshjeet2003/Expense-Tracker/assets/97545310/5ac6c4d6-429f-46b9-a7a7-6108c9fa00e3)
 
 
 
